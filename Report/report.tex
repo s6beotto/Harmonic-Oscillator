@@ -34,43 +34,7 @@ K(b,a)=\lim_{\tau \to 0} A(\tau) \int....\int exp \bigg[\frac{-1}{h} \int_{b}^{a
 \noindent
 In the place of the Hamiltonian this can be recognised as the partition function for lattice of N-1 sites and h replacing by $k_BT$.
 
-\subsection{Oscillator}
-In this report we study both harmonic and anharmonic oscillators with action,
-\begin{equation}
-S= \tau\sum_{i=0}^{N}\bigg( \frac{ m(x_{i+1} -x_i)^2}{2\tau^2} + \frac {1}{2}\mu^2x_i^2 +\lambda x_i^4\bigg)
-\end{equation}
-Here, for harmonic oscillator: $\mu^2>0,  \lambda=0$, and for the anharmonic oscillator: $\mu^2$ is arbitrary,  $\lambda>0$
 
-\subsection{Measuring observables}
-In our imaginary time formalism, paths are distributed according to the Boltzmann probability distribution.
-\begin{equation}
-P[x(t)]D_x(t)=\frac{exp(-S/h)D_x(t)}{\int exp(-S/h)D_x(t))}
-\end{equation}
-We used the Metropilis algorithm to randomly generate paths, which mush follow the same distribution.When the paths are being generated according to the Boltzmann probability distribution, they are in thermal equilibrium. We calculate, in such a way, the mean square position $<x^2>$, the ground state probability and the energies of the lowest two energy levels.
-
-The mean square position of harmonic oscillator, as a function of the lattice spacing was measured as,
-\begin{equation}
-<x^2> = \frac {1}{2\mu(1+a²\mu^2/4)^{1/2}} \bigg( \frac {1+R^N}{1-R^N}\bigg)
-\end{equation}{\normalsize {\normalsize }}
-Where,  $R= 1+a²\mu^2-a\mu(1+a^2\mu^2/4)^{1/2}$
-
-\subsection{The Metropolis algorithm}
-In order to generate our quantum mechanical paths and use many iterations of the Metropolis algorithm to generate new ones. The Metropolis algorithm is a Markov chain Monte Carlo method using important sampling. In one iteration of this method a given point on the path with value x has a probability $W(x, x^\prime)$ to be replaced with a new point $x^\prime$ has a probability. Where $W(x, x^\prime)$ is called the transition matrix. In the Metropolis algorithm, the transition matrix is given by:
-
-$W(x, x^\prime)= A\bigg(\theta[S(x_j)-S(x_j^\prime)]+ exp[-\Delta  S(x_j^\prime)]\theta[S(x_j^\prime)- S(x_j)]+ $
-
-$\int d x^\prime(1-exp[-\Delta S(x_j^\prime , x_j)])\thita [S(x^\prime)- S(x_j)] \delta (x_j ^\prime-x_j) \bigg)$
-
-Where A is the normalizing constant, 
-$\Delta S(x_j^\prime,x_j) = S(x_j^\prime) - S(x_j)$, and $\thita$ is the Heaviside function. Note here we use $h=1$
-
-This means that for a given lattice site j, a new point $x_j^\prime$ is chosen at random with uniform probability. The replacement was occur, if the action of the path is lowered by replacing the value at j with $x_j^\prime$. Otherwise, it only occurs with probability exp($-\Delta S$).
-
-The condition of detailed balance with this choice of the transition matrix is:\\
-$\frac{W(x, x^\prime)}{W(x^\prime , x)}=\frac{P(x^\prime)}{P(x)}$
-Where P(x) is the equilibrium probability density as defined in equation (5).
-
-	
 	\section{Theoretical Basis}
 	\section{Methods}
 	\section{Results}
