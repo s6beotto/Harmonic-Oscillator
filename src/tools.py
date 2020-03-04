@@ -140,6 +140,6 @@ if __name__ == '__main__':
 		print(distanceToParameter(d), 2 * getMinima(distanceToParameter(d)))
 
 	# Test Case bootstrap:
-	values = np.random.normal(loc=0, scale=1, size=1000)
-	bootstrap_values = bootstrap(10000, values)
+	#values = np.random.normal(loc=0, scale=1, size=100)
+	#bootstrap_values = bootstrap(10000, values)
 	#print(bootstrap_values)
