@@ -11,12 +11,12 @@
 		%\blindtext
 	\end{abstract}
 	\section{Introduction}
-%In this report we will make calculations of observables for both the harmonic and anharmonic oscillator. We use the path integral formulation on a discrete Euclidean time lattice. A Monte Carlo simulation method is used to evaluate the Euclidean version of Feynman’s sum over particle history. for example, the mean square position can be determined by measuring the position of the particle at each point on the time lattice.
+In this report we will make calculations of observables for both harmonic and anharmonic oscillator. We use the path integral formulation on a discrete Euclidean time lattice. A Monte Carlo simulation method is used to evaluate the Euclidean version of Feynman’s sum over particle history. for example, the mean square position can be determined by measuring the position of the particle at each point on the time lattice.
 
 \subsection{Path Integrals}
-The amplitude to go from an initial position ($x_a, t_a$) to ($x_b, t_b$) for a particle is given by,
+The amplitude go from initial position ($x_a, t_a$) to ($x_b, t_b$) for a particle is given by,
 \begin{equation}
-K(b,a)= \int\limits_{a}^{b} e^{iS/\hbar} \mathcal{D}x(t)
+K(b,a)= \int\limits_{a}^{b} e^iS/h D-x(t)
 \end{equation}
 where, S is the path action and $D_x(t)$ means that the takes place over all possible paths. 
 This shows that the particle only travelling along one trajectory as in classical mechanics. All possible paths must be considered and summered over with a phase factor $e^{iS/h}$. We split the time interval ($t_a, t_b$) into N segments of length $\tau$ to, define a path. Then, the position of the particle at start of each segment defined the path.In between these two times:initial and final the particle can be assumed to be travelling in straight line.In 4 space-time dimension this transformation leads to the metric diag(1, 1, 1, 1).
@@ -50,19 +50,19 @@ We used the Metropilis algorithm to randomly generate paths, which mush follow t
 
 The mean square position of harmonic oscillator, as a function of the lattice spacing was measured as,
 \begin{equation}
-<x^2> = \frac {1}{2\mu(1+a^2\mu^2/4)^{1/2}} \bigg( \frac {1+R^N}{1-R^N}\bigg)
+<x^2> = \frac {1}{2\mu(1+a²\mu^2/4)^{1/2}} \bigg( \frac {1+R^N}{1-R^N}\bigg)
 \end{equation}{\normalsize {\normalsize }}
-Where,  $R= 1+a^2\mu^2-a\mu(1+a^2\mu^2/4)^{1/2}$
+Where,  $R= 1+a²\mu^2-a\mu(1+a^2\mu^2/4)^{1/2}$
 
 \subsection{The Metropolis algorithm}
 In order to generate our quantum mechanical paths and use many iterations of the Metropolis algorithm to generate new ones. The Metropolis algorithm is a Markov chain Monte Carlo method using important sampling. In one iteration of this method a given point on the path with value x has a probability $W(x, x^\prime)$ to be replaced with a new point $x^\prime$ has a probability. Where $W(x, x^\prime)$ is called the transition matrix. In the Metropolis algorithm, the transition matrix is given by:
 
 $W(x, x^\prime)= A\bigg(\theta[S(x_j)-S(x_j^\prime)]+ exp[-\Delta  S(x_j^\prime)]\theta[S(x_j^\prime)- S(x_j)]+ $
 
-$\int d x^\prime(1-\exp[-\Delta S(x_j^\prime , x_j)])\theta [S(x^\prime)- S(x_j)] \delta (x_j ^\prime-x_j) \bigg)$
+$\int d x^\prime(1-exp[-\Delta S(x_j^\prime , x_j)])\thita [S(x^\prime)- S(x_j)] \delta (x_j ^\prime-x_j) \bigg)$
 
 Where A is the normalizing constant, 
-$\Delta S(x_j^\prime,x_j) = S(x_j^\prime) - S(x_j)$, and $\theta$ is the Heaviside function. Note here we use $h=1$
+$\Delta S(x_j^\prime,x_j) = S(x_j^\prime) - S(x_j)$, and $\thita$ is the Heaviside function. Note here we use $h=1$
 
 This means that for a given lattice site j, a new point $x_j^\prime$ is chosen at random with uniform probability. The replacement was occur, if the action of the path is lowered by replacing the value at j with $x_j^\prime$. Otherwise, it only occurs with probability exp($-\Delta S$).
 
