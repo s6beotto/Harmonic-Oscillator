@@ -11,30 +11,7 @@
 		%\blindtext
 	\end{abstract}
 	\section{Introduction}
-In this report we will make calculations of observables for both harmonic and anharmonic oscillator. We use the path integral formulation on a discrete Euclidean time lattice. A Monte Carlo simulation method is used to evaluate the Euclidean version of Feynman’s sum over particle history. for example, the mean square position can be determined by measuring the position of the particle at each point on the time lattice.
-
-\subsection{Path Integrals}
-The amplitude go from initial position ($x_a, t_a$) to ($x_b, t_b$) for a particle is given by,
-\begin{equation}
-K(b,a)= \int\limits_{a}^{b} e^iS/h D-x(t)
-\end{equation}
-where, S is the path action and $D_x(t)$ means that the takes place over all possible paths. 
-This shows that the particle only travelling along one trajectory as in classical mechanics. All possible paths must be considered and summered over with a phase factor $e^{iS/h}$. We split the time interval ($t_a, t_b$) into N segments of length $\tau$ to, define a path. Then, the position of the particle at start of each segment defined the path.In between these two times:initial and final the particle can be assumed to be travelling in straight line.In 4 space-time dimension this transformation leads to the metric diag(1, 1, 1, 1).
-We choose to use a different method to discretize the derivation, so the action become
-
-\begin{equation}
-S= \tau\sum_{i=0}^{N}\bigg( \frac{ m(x_{i+1} -x_i)^2}{2\tau^2} + V(x_i)\bigg)
-\end{equation} 
- and so the amplitude becomes
-
-\begin{equation}
-K(b,a)=\lim_{\tau \to 0} A(\tau) \int....\int exp \bigg[\frac{-1}{h} \int_{b}^{a} \tau \sum_{i=0}^{N-1} \bigg( \frac{m(x_{i+1} - x_i)^2}{2\tau^2} +V(x_i)\bigg)dt \bigg]dx_1 dx_2....dx_{N-1}
-\end{equation}
-
-\noindent
-In the place of the Hamiltonian this can be recognised as the partition function for lattice of N-1 sites and h replacing by $k_BT$.
-
-
+In this report we will make calculations of observables for both harmonic and anharmonic oscillator. We use the path integral formulation on a discrete Euclidean time lattice. A Monte simulation Carlo method is used to evaluate the Euclidean version of Feynman’s sum over particle history.
 	\section{Theoretical Basis}
 	\section{Methods}
 	\section{Results}
