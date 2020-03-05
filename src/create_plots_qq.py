@@ -16,13 +16,13 @@ color_iterator = getColorIterator()
 
 
 parser = argparse.ArgumentParser(description='Check distribution via a qq plot.')
-parser.add_argument('filenames', nargs='*')
+parser.add_argument('filenames', type=argparse.FileType('r'), nargs='+')
 parser.add_argument('-i', '--iteration', type=int, default=1)
 args = parser.parse_args()
 
 iteration = args.iteration
 
-filenames = list(flatten([glob(arg) for arg in args.filenames]))
+filenames = [file.name for file in args.filenames]
 
 root_path = getRootDirectory()
 

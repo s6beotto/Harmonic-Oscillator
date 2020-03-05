@@ -11,11 +11,11 @@ import itertools
 flatten = itertools.chain.from_iterable
 
 parser = argparse.ArgumentParser(description='Fit gaussian curves to the distribution.')
-parser.add_argument('filenames', nargs='*')
+parser.add_argument('filenames', type=argparse.FileType('r'), nargs='+')
 args = parser.parse_args()
 root_path = getRootDirectory()
 
-filenames = list(flatten([glob(arg) for arg in args.filenames]))
+filenames = [file.name for file in args.filenames]
 
 root_path = getRootDirectory()
 

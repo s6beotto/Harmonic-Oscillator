@@ -10,13 +10,13 @@ import itertools
 flatten = itertools.chain.from_iterable
 
 parser = argparse.ArgumentParser(description='Plot the path of a particle at different metropolis states shifted.')
-parser.add_argument("filenames", nargs='*')
+parser.add_argument('filenames', type=argparse.FileType('r'), nargs='+')
 parser.add_argument('-i', "--iterations", nargs='+')
 args = parser.parse_args()
 
 iterations_used = args.iterations
 
-filenames = list(flatten([glob(arg) for arg in args.filenames]))
+filenames = [file.name for file in args.filenames]
 
 root_path = getRootDirectory()
 

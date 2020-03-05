@@ -18,14 +18,14 @@ def gauss(x, *p):
 	return A * np.exp(-(x - mu) ** 2/(2. * sigma ** 2))
 
 parser = argparse.ArgumentParser(description='Fit gaussian curves to the distribution.')
-parser.add_argument('filenames', nargs='*')
+parser.add_argument('filenames', type=argparse.FileType('r'), nargs='+')
 parser.add_argument('-i', '--iterations', nargs='+')
 parser.add_argument('-f', '--fit', action='store_true')
 args = parser.parse_args()
 
 iterations_used = [int(i) for i in args.iterations]
 
-filenames = list(flatten([glob(arg) for arg in args.filenames]))
+filenames = [file.name for file in args.filenames]
 
 root_path = getRootDirectory()
 
