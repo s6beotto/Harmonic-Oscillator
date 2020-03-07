@@ -98,6 +98,7 @@ imgs/%_track_shifted_2.pdf: data/%.csv
 	@python3 src/create_plots_track_shifted.py data/$*.csv -i 1 3 5 7 9 11 13 15 -o $@
 
 
+# harmonic oscillator
 PRE := data/harmonic_oscillator_track/
 $(PRE)track_100100.csv: data/harmonic_oscillator_track
 	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 100 -N 100 -o $@
@@ -112,6 +113,7 @@ $(PRE)track_10010000.csv: data/harmonic_oscillator_track
 	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 100 -N 10000 -o $@
 
 
+# anharmonic oscillator
 PRE := data/anharmonic_oscillator_track/
 $(PRE)track_100100.csv: data/anharmonic_oscillator_track
 	@python3 src/anharmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 100 -N 100 -o $@
