@@ -55,5 +55,5 @@ if args.output:
 	out_filename = args.output
 out_filename.parent.mkdir(parents=True, exist_ok=True)
 
-plt.savefig(out_filename + '.pdf')
+plt.savefig(out_filename)
 print('done')
