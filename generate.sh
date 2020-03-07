@@ -32,7 +32,7 @@ fi
 FILE=data/harmonic_oscillator_track/N100i100init5.0000m0.2500.csv
 if [ ! -f $FILE ] || [ "$force" = true ]; then
     echo "Generating file $FILE"
-    $PYTHON src/harmonic_oscillator.py -m 0.25 -init 5 -ir 1 -i 100 -N 100
+    $PYTHON src/harmonic_oscillator.py -m 0.25 -init 5 -ir 1 -i 100 -N 100 -o $FILE
 else
     echo "Not generating file $FILE"
 fi
@@ -46,7 +46,7 @@ echo
 FILE=data/harmonic_oscillator_track/N1000i100init5.0000m0.2500.csv
 if [ ! -f $FILE ] || [ "$force" = true ]; then
     echo "Generating file $FILE"
-    $PYTHON src/harmonic_oscillator.py -m 0.25 -init 5 -ir 1 -i 100 -N 1000
+    $PYTHON src/harmonic_oscillator.py -m 0.25 -init 5 -ir 1 -i 100 -N 1000 -o $FILE
 else
     echo "Not generating file $FILE"
 fi
@@ -60,7 +60,7 @@ echo
 FILE=data/harmonic_oscillator_track/N10000i100init5.0000m0.2500.csv
 if [ ! -f $FILE ] || [ "$force" = true ]; then
     echo "Generating file $FILE"
-    $PYTHON src/harmonic_oscillator.py -m 0.25 -init 5 -ir 1 -i 100 -N 10000
+    $PYTHON src/harmonic_oscillator.py -m 0.25 -init 5 -ir 1 -i 100 -N 10000 -o $FILE
 else
     echo "Not generating file $FILE"
 fi
@@ -86,7 +86,7 @@ echo
 FILE=data/harmonic_oscillator_track/N1000i1000init5.0000m0.2500.csv
 if [ ! -f $FILE ] || [ "$force" = true ]; then
     echo "Generating file $FILE"
-    $PYTHON src/harmonic_oscillator.py -m 0.25 -init 5 -ir 1 -i 1000 -N 1000
+    $PYTHON src/harmonic_oscillator.py -m 0.25 -init 5 -ir 1 -i 1000 -N 1000 -o $FILE
 else
     echo "Not generating file $FILE"
 fi
@@ -100,7 +100,7 @@ echo
 FILE=data/harmonic_oscillator_track/N100i100initstepm0.2500step.csv
 if [ ! -f $FILE ] || [ "$force" = true ]; then
     echo "Generating file $FILE"
-    $PYTHON src/harmonic_oscillator.py -m 0.25 -i 100 -N 100 --step
+    $PYTHON src/harmonic_oscillator.py -m 0.25 -i 100 -N 100 --step -o $FILE
 else
     echo "Not generating file $FILE"
 fi
@@ -123,7 +123,7 @@ echo
 FILE=data/anharmonic_oscillator_track/N100i1000init0.0m0.2500l-0.0200d10.0000.csv
 if [ ! -f $FILE ] || [ "$force" = true ]; then
     echo "Generating file $FILE"
-    $PYTHON src/anharmonic_oscillator.py -m 0.25 -init 0 -ir 10 -i 1000 -N 100
+    $PYTHON src/anharmonic_oscillator.py -m 0.25 -init 0 -ir 10 -i 1000 -N 100 -o $FILE
 else
     echo "Not generating file $FILE"
 fi
@@ -135,7 +135,7 @@ echo
 FILE=data/anharmonic_oscillator_track/N1000i1000init0.0m0.2500l-0.0200d10.0000.csv
 if [ ! -f $FILE ] || [ "$force" = true ]; then
     echo "Generating file $FILE"
-    $PYTHON src/anharmonic_oscillator.py -m 0.25 -init 0 -ir 10 -i 1000 -N 1000
+    $PYTHON src/anharmonic_oscillator.py -m 0.25 -init 0 -ir 10 -i 1000 -N 1000 -o $FILE
 else
     echo "Not generating file $FILE"
 fi
@@ -146,7 +146,7 @@ echo
 FILE=data/anharmonic_oscillator_track/N100i10000init0.0m0.2500l-0.0200d10.0000.csv
 if [ ! -f $FILE ] || [ "$force" = true ]; then
     echo "Generating file $FILE"
-    $PYTHON src/anharmonic_oscillator.py -m 0.25 -init 0 -ir 10 -i 10000 -N 100
+    $PYTHON src/anharmonic_oscillator.py -m 0.25 -init 0 -ir 10 -i 10000 -N 100 -o $FILE
 else
     echo "Not generating file $FILE"
 fi
@@ -157,7 +157,7 @@ echo
 FILE=data/anharmonic_oscillator_track/N200i10000init0.0m0.2500l-0.0200d10.0000.csv
 if [ ! -f $FILE ] || [ "$force" = true ]; then
     echo "Generating file $FILE"
-    $PYTHON src/anharmonic_oscillator.py -m 0.25 -init 0 -ir 10 -i 10000 -N 200
+    $PYTHON src/anharmonic_oscillator.py -m 0.25 -init 0 -ir 10 -i 10000 -N 200 -o $FILE
 else
     echo "Not generating file $FILE"
 fi
@@ -169,7 +169,7 @@ echo
 FILE=data/harmonic_oscillator_classical_limit/h0.00-2.00-0.0100_-5.00-5.00-0.10-N1000.csv
 if [ ! -f $FILE ] || [ "$force" = true ]; then
     echo "Generating file $FILE"
-    $PYTHON src/harmonic_oscillator_classical_limit.py -N 1000
+    $PYTHON src/harmonic_oscillator_classical_limit.py -N 1000 -o $FILE
 else
     echo "Not generating file $FILE"
 fi
@@ -180,7 +180,7 @@ echo
 FILE=data/harmonic_oscillator_classical_limit/h0.00-2.00-0.0100_-3.00-3.00-0.05-N1000.csv
 if [ ! -f $FILE ] || [ "$force" = true ]; then
     echo "Generating file $FILE"
-    $PYTHON src/harmonic_oscillator_classical_limit.py -N 1000 -b " -3:3:0.05"
+    $PYTHON src/harmonic_oscillator_classical_limit.py -N 1000 -b " -3:3:0.05" -o $FILE
 else
     echo "Not generating file $FILE"
 fi
@@ -192,7 +192,7 @@ echo
 FILE=data/anharmonic_oscillator_classical_limit/h0.00-2.00-0.0100_-5.00-5.00-0.05-N1000d4.0000.csv
 if [ ! -f $FILE ] || [ "$force" = true ]; then
     echo "Generating file $FILE"
-    $PYTHON src/anharmonic_oscillator_classical_limit.py -N 1000 -b " -5:5:0.05" -init -5 -ir 2 -i 1000 -d 4
+    $PYTHON src/anharmonic_oscillator_classical_limit.py -N 1000 -b " -5:5:0.05" -init -5 -ir 2 -i 1000 -d 4 -o $FILE
 else
     echo "Not generating file $FILE"
 fi
@@ -204,7 +204,7 @@ echo
 FILE=data/anharmonic_oscillator_lambda_parameter/d0.00-10.00-0.10s-5.00-5.00-0.10-N1000-i100.csv
 if [ ! -f $FILE ] || [ "$force" = true ]; then
     echo "Generating file $FILE"
-    $PYTHON src/anharmonic_oscillator_lambda_parameter.py -init 0 -ir 10 -i 100 -N 1000
+    $PYTHON src/anharmonic_oscillator_lambda_parameter.py -init 0 -ir 10 -i 100 -N 1000 -o $FILE
 else
     echo "Not generating file $FILE"
 fi
