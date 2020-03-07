@@ -1,12 +1,11 @@
 from tools import Potential, Kinetic, deltaEnergy, Metropolis, getRootDirectory
 import numpy as np
 from multiprocessing import Pool
-from pathlib import Path
 import csv
 from itertools import islice
 from configparser import ConfigParser
-
 import argparse
+import pathlib
 
 parser = argparse.ArgumentParser(description='Create samples for the harmonic oscillator, vary hbar')
 parser.add_argument("-i", "--iterations", type=int, default=100,
@@ -29,8 +28,8 @@ parser.add_argument("-ir", "--initial-random", type=float, default=0,
                     help="Use random distribution around initial value")
 parser.add_argument("-s", "--step", action='store_true',
                     help="Use a step function as initial state")
-parser.add_argument("-o", "--output", type=str, default='',
-                    help="Output filename")
+parser.add_argument('-o', '--output', type=pathlib.Path,
+					help="Output filename")
 args = parser.parse_args()
 
 
@@ -57,8 +56,9 @@ dir_ = root_path / 'data' / 'harmonic_oscillator_classical_limit'
 dir_.mkdir(exist_ok=True)
 file_ = dir_ / ('h%0.2f-%0.2f-%0.4f_%0.2f-%0.2f-%0.2f-N%d.csv' % (hbar_min, hbar_max, hbar_step, bins_min, bins_max, bins_step, N))
 
-if output != '':
-	file_ = dir_ / output
+if output != None:
+	file_ = output
+
 config_filename = file_.with_suffix('.cfg')
 config = ConfigParser()
 config['DEFAULT'] = {p: eval(p) for p in parameters}
