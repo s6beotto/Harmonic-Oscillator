@@ -12,6 +12,9 @@ tex := Report/report.tex
 tex_ := $(build)/report.tex
 out := $(build)/report.pdf
 
+tex_report := Report/report.tex
+tex_report_ := $(build)/report.tex
+out_report := $(build)/report.pdf
 
 plots = imgs/harmonic_oscillator_track/track_10001000_track_1.pdf imgs/harmonic_oscillator_track/track_10001000_gauss_1_fit.pdf \
 		imgs/harmonic_oscillator_track/track_10001000_gauss_2_fit.pdf imgs/harmonic_oscillator_track/track_10001000_gauss_2_fit.pdf \
@@ -115,12 +118,19 @@ $(tex_): $(build)
 $(build)/packages.tex:
 	cp Report/packages.tex $(build)/packages.tex
 
-
 $(out): $(tex_) $(build) $(plots) $(build)/packages.tex
 	cd $$(dirname $@) && $(latexrun) $$(basename $<)
 
+
+$(build)/%.tex: $(build)
+	cp presentation/$*.tex $@
+
+requirements = $(build)/slides.tex $(build)/packages_slides.tex $(build)/template.tex $(build)/tikz_settings.tex
+$(build)/slides.pdf: $(requirements) $(plots)
+	cd $$(dirname $@) && $(latexrun) $$(basename $<)
+
 $(build):
-	@echo "$(on)Creating build directory$(off)"
+	@echo "Creating build directory"
 	mkdir -p $(build)
 
 
