@@ -78,9 +78,9 @@ def Energy(kinetic, potential):
 		return sum([kinetic(x[i], x[i+1]) for i in range(len(x)-1)]) + sum([potential(xx) for xx in x])
 	return wrapper
 
-def deltaEnergy(kinetic, potential):
-	def wrapper(x, x_old, x_new, index, kinetic=kinetic, potential=potential):
-		return potential(x_new) - potential(x_old) + kinetic(x[index - 1], x_new) + kinetic(x_new, x[(index + 1) % len(x)]) - (kinetic(x[index - 1], x_old) + kinetic(x_old, x[(index + 1) % len(x)]))
+def deltaEnergy(potential, m, tau):
+	def wrapper(x, x_old, x_new, index, m=m, tau=tau, potential=potential):
+		return potential(x_new) - potential(x_old) + m / tau ** 2 * (x_new ** 2 - x_old ** 2 - (x[index - 1] + x[(index + 1) % len(x)]) * (x_new - x_old))
 	return wrapper
 
 class Metropolis:

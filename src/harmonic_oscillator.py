@@ -48,9 +48,7 @@ parameters = [
 
 p = Potential(mu, 0)	# harmonic potential -> no x^4 contribution
 
-k = Kinetic(mass, tau)
-
-de = deltaEnergy(k, p)
+de = deltaEnergy(p, mass, tau)
 
 if step:
 	initial = [0.0] * int(N * 0.4) + [5.0] * int(N * 0.2) + [0.0] * int(N * 0.4)

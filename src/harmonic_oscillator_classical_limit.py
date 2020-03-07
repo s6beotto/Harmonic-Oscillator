@@ -71,9 +71,7 @@ def calculatePositionDistribution(hbar):
 	print("calculating for hbar=%0.4f" % hbar)
 	p = Potential(mu, 0)
 
-	k = Kinetic(mass, tau)
-
-	de = deltaEnergy(k, p)
+	de = deltaEnergy(p, mass, tau)
 
 	m = Metropolis(de, init=initial, valWidth=1, initValWidth=initial_random, hbar=hbar, tau=tau, N=N)
 
