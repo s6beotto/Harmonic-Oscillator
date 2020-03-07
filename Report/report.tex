@@ -16,6 +16,18 @@
 	\end{abstract}
 	\section{Introduction}
 	\section{Theoretical Basis}
+		To evaluate the behaviour of a quantum particle in a certain potential the path-integral method is used.
+		At first the positions of the particle at every time step is initialised to a constant value or a random distribution.
+		Then for every time step a new position is drawn from a random distribution, in this case a gaussian distribution.
+		If this change lowers the total action, calculated over all the time lattice points, the change is accepted.
+		Otherwise, a linearly distributed random value is drawn in the range from 0 to 1 and compared to the exponent of the difference in the Action, divided by a $\hbar$.
+		If the random variable is smaller than the exponential function, the value is accepted, otherwise is is rejected and the position at that time step not updated.
+		This behaviour leads to the tendency to thermalise, but takes care of the quantum behaviour of the particle.
+		\\
+		The total action is given by equation \ref{eq:total_action}
+		\begin{equation}
+			S =
+		\end{equation}
 	\section{Methods}
 	\section{Results}
 	\begin{figure}[htbp]
