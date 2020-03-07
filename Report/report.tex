@@ -16,7 +16,14 @@
 	\end{abstract}
 	\section{Introduction}
 	\section{Theoretical Basis}
-		To evaluate the behaviour of a quantum particle in a certain potential the path-integral method is used.
+		To evaluate the behaviour of a quantum particle in a certain potential the path-integral method can be used.
+		It corresponds to the generalisation of the principle of the least action in classical mechanics.
+		%However the solution in quantum mechanics does not yield a defined path, rather 
+		\begin{equation}
+			K(a, b) = \int_a^b e^{iS/\hbar} \mathcal Dx(t)
+			\label{eq:path_integral}
+		\end{equation}
+		In equation \ref{eq:path_integral} the integral is performed over the path from point $a$ to $b$.
 		At first the positions of the particle at every time step is initialised to a constant value or a random distribution.
 		Then for every time step a new position is drawn from a random distribution, in this case a gaussian distribution.
 		If this change lowers the total action, calculated over all the time lattice points, the change is accepted.
