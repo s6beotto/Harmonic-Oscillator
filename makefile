@@ -33,24 +33,6 @@ plots = imgs/harmonic_oscillator_track/track_10001000_track_1.pdf imgs/harmonic_
 
 all: $(out)
 
-data/:
-	mkdir -p data
-
-data/harmonic_oscillator_track: data/
-	mkdir -p data/harmonic_oscillator_track
-
-data/harmonic_oscillator_classical_limit: data/
-	mkdir -p data/harmonic_oscillator_classical_limit
-
-data/anharmonic_oscillator_track: data/
-	mkdir -p data/anharmonic_oscillator_track
-
-data/anharmonic_oscillator_classical_limit: data/
-	mkdir -p data/anharmonic_oscillator_classical_limit
-
-data/anharmonic_oscillator_lambda_parameter: data/
-	mkdir -p data/anharmonic_oscillator_lambda_parameter
-
 
 imgs/%_track_1.pdf: data/%.csv
 	@python3 src/create_plots_track.py data/$*.csv -i 1 10 20 40 80 100 -o $@
@@ -100,34 +82,34 @@ imgs/%_track_shifted_2.pdf: data/%.csv
 
 # harmonic oscillator
 PRE := data/harmonic_oscillator_track/
-$(PRE)%track_100100.csv: data/harmonic_oscillator_track
+$(PRE)%rack_100100.csv:
 	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 100 -N 100 -o $@
 
-$(PRE)%track_10001000.csv: data/harmonic_oscillator_track
+$(PRE)%rack_10001000.csv:
 	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 1000 -N 1000 -o $@
 
-$(PRE)%track_10000100.csv: data/harmonic_oscillator_track
+$(PRE)%rack_10000100.csv:
 	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 10000 -N 100 -o $@
 
-$(PRE)%track_10010000.csv: data/harmonic_oscillator_track
+$(PRE)%rack_10010000.csv:
 	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 100 -N 10000 -o $@
 
 # step function as initialisation
-$(PRE)track_100100_step.csv: data/harmonic_oscillator_track
+$(PRE)track_100100_step.csv:
 	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 100 -N 100 --step -o $@
 
 # anharmonic oscillator
 PRE := data/anharmonic_oscillator_track/
-$(PRE)track_100100.csv: data/anharmonic_oscillator_track
+$(PRE)%rack_100100.csv:
 	@python3 src/anharmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 100 -N 100 -o $@
 
-$(PRE)track_10001000.csv: data/anharmonic_oscillator_track
+$(PRE)%rack_10001000.csv:
 	@python3 src/anharmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 1000 -N 1000 -o $@
 
-$(PRE)track_10000100.csv: data/anharmonic_oscillator_track
+$(PRE)%rack_10000100.csv:
 	@python3 src/anharmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 10000 -N 100 -o $@
 
-$(PRE)track_10010000.csv: data/anharmonic_oscillator_track
+$(PRE)%rack_10010000.csv:
 	@python3 src/anharmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 100 -N 10000 -o $@
 
 .PHONY: $(tex_) $(build)/packages.tex
