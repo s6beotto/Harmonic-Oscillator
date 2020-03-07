@@ -105,8 +105,12 @@ class Metropolis:
 		start = 1 if self.periodic else 0
 		stop = self.N
 		accepted = 0
+
+		# precalculate random variables
+		rand_vals = np.random.rand(self.N)
+		newvalues = np.random.normal(size=self.N, loc=0, scale=self.valWidth)
 		for i in range(start, stop):
-			newvalue = np.random.normal(loc=self.values[i], scale=self.valWidth)
+			newvalue = newvalues[i] + self.values[i]
 			deltaEnergy = self.deltaEnergy(self.values, self.values[i], newvalue, i)
 			if deltaEnergy < 0:
 				self.values[i] = newvalue
@@ -114,7 +118,7 @@ class Metropolis:
 				# accept it
 
 			else:
-				if np.exp(- self.tau * deltaEnergy / self.hbar) > np.random.rand():
+				if np.exp(- self.tau * deltaEnergy / self.hbar) > rand_vals[i]:
 					self.values[i] = newvalue
 					accepted += 1
 					# accept it
@@ -122,7 +126,7 @@ class Metropolis:
 				# reject
 		if self.periodic:
 			self.values[0] = self.values[-1]
-		return self.values, accepted / (stop / start)
+		return self.values, accepted / (stop - start)
 
 	def __iter__(self):
 		return self
