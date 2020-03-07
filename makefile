@@ -100,16 +100,16 @@ imgs/%_track_shifted_2.pdf: data/%.csv
 
 # harmonic oscillator
 PRE := data/harmonic_oscillator_track/
-$(PRE)track_100100.csv: data/harmonic_oscillator_track
+$(PRE)%track_100100.csv: data/harmonic_oscillator_track
 	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 100 -N 100 -o $@
 
-$(PRE)track_10001000.csv: data/harmonic_oscillator_track
+$(PRE)%track_10001000.csv: data/harmonic_oscillator_track
 	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 1000 -N 1000 -o $@
 
-$(PRE)track_10000100.csv: data/harmonic_oscillator_track
+$(PRE)%track_10000100.csv: data/harmonic_oscillator_track
 	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 10000 -N 100 -o $@
 
-$(PRE)track_10010000.csv: data/harmonic_oscillator_track
+$(PRE)%track_10010000.csv: data/harmonic_oscillator_track
 	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 100 -N 10000 -o $@
 
 # step function as initialisation
