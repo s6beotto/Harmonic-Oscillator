@@ -33,9 +33,11 @@
 		\\
 		The total action is given by equation \ref{eq:total_action}.
 		\begin{equation}
-			S = \epsilon \sum_{i=0}^N \left(\frac{m(x_{i+1} - x_i)^2}{2\tau^2} + V(x_i)\right)
+			S = \epsilon \sum_{i=0}^{N - 1} \left(\frac{m(x_{i+1} - x_i)^2}{2\tau^2} + V(x_i)\right)
 			\label{eq:total_action}
 		\end{equation}
+		Because the analysis is more convenient, often periodic boundary conditions are used.
+		In this case one can define $x_0 = x_N$, so the right neighbour of $x_{N-1}$ is $x_0$.
 		The left part of the equation corresponds to the kinetic energy.
 		The velocity used is the average velocity, when the particle moves from site $x_i$ to $x_{i+1}$.
 		Because every change only affects three terms, it is not necessary to recalculate the complete action for every change.
