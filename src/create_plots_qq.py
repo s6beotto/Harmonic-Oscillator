@@ -7,60 +7,57 @@ import scipy.optimize as op
 #import scipy.stats as stats
 import statsmodels.api as sm
 import argparse
-from glob import glob
-
-import itertools
-flatten = itertools.chain.from_iterable
+import pathlib
 
 color_iterator = getColorIterator()
 
 
 parser = argparse.ArgumentParser(description='Check distribution via a qq plot.')
-parser.add_argument('filenames', type=argparse.FileType('r'), nargs='+')
-parser.add_argument('-i', '--iteration', type=int, default=1)
+parser.add_argument('filename', type=pathlib.Path, help="Input filename")
+parser.add_argument('-i', "--iteration", type=int)
+parser.add_argument('-o', '--output', type=pathlib.Path, help="Output filename")
 args = parser.parse_args()
 
 iteration = args.iteration
 
-filenames = [file.name for file in args.filenames]
-
 root_path = getRootDirectory()
 
-for file in filenames:
-	full_path = (root_path / file)
-	if not full_path.exists() or full_path.is_dir():
-		continue
 
-	relative_path = full_path.relative_to(root_path / 'data')
+full_path = (root_path / args.filename)
+if not full_path.exists() or full_path.is_dir():
+	exit(-1)
 
-	print('[QQ] Computing file %s ... ' %relative_path, end='')
+relative_path = full_path.relative_to(root_path / 'data')
 
-	data = {}
+print('[QQ] Computing file %s ... ' %relative_path, end='')
 
-	with full_path.open('r') as csvfile:
-		reader = csv.reader(csvfile)
-		for i, row in enumerate(reader):
-			if i == 0:
-				numbers = np.array([int(r) for r in row[1:]])
-				pass
-			else:
-				num = int(row[0])
-				positions = np.array([float(r) for r in row[1:]])
-				data[num] = positions
+data = {}
 
-	plt.figure()
+with full_path.open('r') as csvfile:
+	reader = csv.reader(csvfile)
+	for i, row in enumerate(reader):
+		if i == 0:
+			numbers = np.array([int(r) for r in row[1:]])
+			pass
+		else:
+			num = int(row[0])
+			positions = np.array([float(r) for r in row[1:]])
+			data[num] = positions
 
-	d = data[iteration - 1]
+plt.figure()
 
-	#stats.probplot(d, dist="norm", plot=plt) #, plottype='qq'
-	sm.qqplot(d, dist='norm')
+d = data[iteration - 1]
 
-	out_filename = root_path / 'imgs' / relative_path
-	out_filename.parent.mkdir(parents=True, exist_ok=True)
+sm.qqplot(d, dist='norm')
 
-	out_filename = out_filename.with_suffix('')
-	out_filename = '%s_qq_%d' %(out_filename, iteration)
+out_filename = root_path / 'imgs' / relative_path
+out_filename.parent.mkdir(parents=True, exist_ok=True)
 
-	plt.savefig(out_filename + '.png')
-	print('done')
-	#plt.savefig(out_filename + '.pdf')
+out_filename = out_filename.with_suffix('')
+out_filename = pathlib.Path('%s_qq_%d' %(out_filename, iteration))
+if args.output:
+	out_filename = args.output
+out_filename.parent.mkdir(parents=True, exist_ok=True)
+
+plt.savefig(out_filename)
+print('done')
