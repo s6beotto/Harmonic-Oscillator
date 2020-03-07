@@ -24,10 +24,23 @@
 		If the random variable is smaller than the exponential function, the value is accepted, otherwise is is rejected and the position at that time step not updated.
 		This behaviour leads to the tendency to thermalise, but takes care of the quantum behaviour of the particle.
 		\\
-		The total action is given by equation \ref{eq:total_action}
+		The total action is given by equation \ref{eq:total_action}.
 		\begin{equation}
-			S =
+			S = \epsilon \sum_{i=0}^N \left(\frac{m(x_{i+1} - x_i)^2}{2\tau^2} + V(x_i)\right)
+			\label{eq:total_action}
 		\end{equation}
+		The left part of the equation corresponds to the kinetic energy.
+		The velocity used is the average velocity, when the particle moves from site $x_i$ to $x_{i+1}$.
+		Because every change only affects three terms, it is not necessary to recalculate the complete action for every change.
+		\begin{equation}
+			\begin{split}
+				\Delta S(x_{i-1}, x_i, x'_i, x_{i+1}) =\\
+				\tau\left(V(x_i) - V(x'_i) + m\frac{(x_{i-1} - x_i)^2 + (x_i - x_{i+1})^2 - (x_{i-1} - x'_i)^2 - (x'_i - x_{i+1})^2}{2\tau^2}\right)
+			\end{split}
+			\label{eq:delta_total_action}
+		\end{equation}
+		This rewrite reduces the complexity of the problem and improves performance.
+		The time complexity per Metropolis iteration is thus reduced from $\mathcal O(n^2)$ to $\mathcal O(n)$, where n corresponds to the number of lattice cites.
 	\section{Methods}
 	\section{Results}
 	\begin{figure}[htbp]
