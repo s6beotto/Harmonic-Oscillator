@@ -28,7 +28,11 @@ plots = imgs/harmonic_oscillator_track/track_10001000_track_1.pdf imgs/harmonic_
 		imgs/harmonic_oscillator_track/track_10010000_qq_80.pdf imgs/harmonic_oscillator_track/track_10010000_qq_100.pdf \
 		imgs/harmonic_oscillator_track/track_10000100_track_shifted_1.pdf imgs/harmonic_oscillator_track/track_10000100_track_shifted_2.pdf \
 		imgs/harmonic_oscillator_track/track_10000100_track_shifted_5.pdf imgs/harmonic_oscillator_track/track_10000100_track_shifted_double.pdf \
-		imgs/anharmonic_oscillator_track/track_100100_track_1.pdf
+		imgs/anharmonic_oscillator_track/track_100100_track_1.pdf \
+		imgs/harmonic_oscillator_track/track_100100_step_track_shifted_1.pdf \
+		imgs/harmonic_oscillator_track/track_100100_step_track_shifted_2.pdf \
+		imgs/harmonic_oscillator_track/track_100100_step_track_shifted_5.pdf \
+		imgs/harmonic_oscillator_track/track_100100_step_track_shifted_double.pdf
 
 
 all: $(out)
