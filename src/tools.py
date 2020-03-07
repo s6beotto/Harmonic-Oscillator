@@ -117,11 +117,10 @@ class Metropolis:
 				accepted += 1
 				# accept it
 
-			else:
-				if np.exp(- self.tau * deltaEnergy / self.hbar) > rand_vals[i]:
-					self.values[i] = newvalue
-					accepted += 1
-					# accept it
+			elif np.exp(- self.tau * deltaEnergy / self.hbar) > rand_vals[i]:
+				self.values[i] = newvalue
+				accepted += 1
+				# accept it
 
 				# reject
 		if self.periodic:
