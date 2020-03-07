@@ -112,6 +112,9 @@ $(PRE)track_10000100.csv: data/harmonic_oscillator_track
 $(PRE)track_10010000.csv: data/harmonic_oscillator_track
 	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 100 -N 10000 -o $@
 
+# step function as initialisation
+$(PRE)track_100100_step.csv: data/harmonic_oscillator_track
+	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 100 -N 100 --step -o $@
 
 # anharmonic oscillator
 PRE := data/anharmonic_oscillator_track/
