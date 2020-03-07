@@ -39,12 +39,11 @@ with full_path.open('r') as csvfile:
 			positions = np.array([float(r) for r in row[1:]])
 			data[num] = positions
 plt.figure()
-sep = 0.5
 for num, iteration in enumerate(iterations_used):
 	iteration = int(iteration)
 	plt.errorbar(numbers, data[iteration - 1] - num, label='path after %d iteration%s' %(iteration, 's' if iteration > 1 else ''))
 	plt.xlabel('Number')
-	plt.ylabel('Position $- 0.5 \cdot n$')
+	plt.ylabel('Position $- n$')
 plt.legend()
 
 out_filename = root_path / 'imgs' / relative_path
