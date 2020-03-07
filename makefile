@@ -12,9 +12,7 @@ tex := Report/report.tex
 tex_ := $(build)/report.tex
 out := $(build)/report.pdf
 
-tex_report := Report/report.tex
-tex_report_ := $(build)/report.tex
-out_report := $(build)/report.pdf
+out_slides := $(build)/slides.pdf
 
 plots = imgs/harmonic_oscillator_track/track_10001000_track_1.pdf imgs/harmonic_oscillator_track/track_10001000_gauss_1_fit.pdf \
 		imgs/harmonic_oscillator_track/track_10001000_gauss_2_fit.pdf imgs/harmonic_oscillator_track/track_10001000_gauss_2_fit.pdf \
@@ -35,7 +33,8 @@ plots = imgs/harmonic_oscillator_track/track_10001000_track_1.pdf imgs/harmonic_
 		imgs/harmonic_oscillator_track/track_100100_step_track_shifted_double.pdf
 
 
-all: $(out)
+all: $(out) $(out_slides)
+	@echo $(out) $(out_slides)
 
 
 imgs/%_track_1.pdf: data/%.csv
