@@ -8,10 +8,11 @@ import pathlib
 
 parser = argparse.ArgumentParser(description='Plot the path of a particle at different metropolis states shifted.')
 parser.add_argument('filename', type=pathlib.Path, help="Input filename")
-parser.add_argument('-i', "--iteration", nargs=1)
+parser.add_argument('-i', "--iterations", nargs='+')
 parser.add_argument('-o', '--output', type=pathlib.Path, help="Output filename")
 args = parser.parse_args()
 
+iterations_used = [int(i) for i in args.iterations]
 iterations_used = args.iterations
 
 
