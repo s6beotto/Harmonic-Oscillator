@@ -134,7 +134,8 @@ $(PRE)%rack_10010000.csv:
 # classical limit
 PRE := data/anharmonic_oscillator_classical_limit/
 $(PRE)%.csv:
-	@python3 src/anharmonic_oscillator_classical_limit.py  -m 0.25 -init -2 -ir 2 -d 4 -i 1000 -N 1000 -b " -5:5:0.05" -o $@
+	@python3 src/anharmonic_oscillator_classical_limit.py  -m 0.01 -init -5 -ir 2 -d 4 -i 200 -N 1000 -b " -5:5:0.05" -o $@
+
 .PHONY: $(tex_) $(build)/packages.tex
 
 $(tex_): $(build)
