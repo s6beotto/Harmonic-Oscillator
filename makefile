@@ -5,7 +5,9 @@ build = _build
 latexrun := python3 ../latexrun.py --bibtex-cmd biber
 
 
-.PRECIOUS: %.tex %.pdf build/page/%.pdf data/%/%.csv data/%/%.cfg
+# prevent all intermediate files from being deleted
+.SECONDARY:
+.PRECIOUS:
 
 
 tex := Report/report.tex
