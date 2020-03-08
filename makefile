@@ -106,16 +106,19 @@ $(PRE)track_100100_step.csv:
 # anharmonic oscillator
 PRE := data/anharmonic_oscillator_track/
 $(PRE)%rack_100100.csv:
-	@python3 src/anharmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 100 -N 100 -o $@
+	@python3 src/anharmonic_oscillator.py  -m 0.25 -init 0 -ir 10 -i 100 -N 100 -o $@
+
+$(PRE)%rack_100200.csv:
+	@python3 src/anharmonic_oscillator.py  -m 0.25 -init 0 -ir 10 -i 100 -N 200 -o $@
 
 $(PRE)%rack_10001000.csv:
-	@python3 src/anharmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 1000 -N 1000 -o $@
+	@python3 src/anharmonic_oscillator.py  -m 0.25 -init 0 -ir 10 -i 1000 -N 1000 -o $@
 
 $(PRE)%rack_10000100.csv:
-	@python3 src/anharmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 10000 -N 100 -o $@
+	@python3 src/anharmonic_oscillator.py  -m 0.25 -init 0 -ir 10 -i 10000 -N 100 -o $@
 
 $(PRE)%rack_10010000.csv:
-	@python3 src/anharmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 100 -N 10000 -o $@
+	@python3 src/anharmonic_oscillator.py  -m 0.25 -init 0 -ir 10 -i 100 -N 10000 -o $@
 
 .PHONY: $(tex_) $(build)/packages.tex
 
