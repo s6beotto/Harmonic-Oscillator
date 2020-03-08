@@ -31,7 +31,9 @@ plots = imgs/harmonic_oscillator_track/track_10001000_track_1.pdf imgs/harmonic_
 		imgs/harmonic_oscillator_track/track_100100_step_track_shifted_1.pdf \
 		imgs/harmonic_oscillator_track/track_100100_step_track_shifted_2.pdf \
 		imgs/harmonic_oscillator_track/track_100100_step_track_shifted_5.pdf \
-		imgs/harmonic_oscillator_track/track_100100_step_track_shifted_double.pdf
+		imgs/harmonic_oscillator_track/track_100100_step_track_shifted_double.pdf \
+		imgs/harmonic_oscillator_classical_limit/harmonic_oscillator_classical_limit.pdf \
+		imgs/anharmonic_oscillator_classical_limit/anharmonic_oscillator_classical_limit.pdf
 
 
 all: $(out) $(out_slides)
@@ -84,6 +86,10 @@ imgs/%_track_shifted_2.pdf: data/%.csv
 	@python3 src/create_plots_track_shifted.py data/$*.csv -i 1 3 5 7 9 11 13 15 -o $@
 
 
+imgs/%_classical_limit.pdf: data/%.csv
+	@python3 src/create_plots_classical_limit.py data/$*.csv -o $@
+
+
 # harmonic oscillator
 PRE := data/harmonic_oscillator_track/
 $(PRE)%rack_100100.csv:
@@ -102,6 +108,11 @@ $(PRE)%rack_10010000.csv:
 $(PRE)track_100100_step.csv:
 	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 100 -N 100 --step -o $@
 
+# classical limit
+PRE := data/harmonic_oscillator_classical_limit/
+$(PRE)%.csv:
+	@python3 src/harmonic_oscillator_classical_limit.py  -m 0.25 -init 0 -ir 5 -i 100 -N 1000 -o $@
+
 # anharmonic oscillator
 PRE := data/anharmonic_oscillator_track/
 $(PRE)%rack_100100.csv:
@@ -119,6 +130,11 @@ $(PRE)%rack_10000100.csv:
 $(PRE)%rack_10010000.csv:
 	@python3 src/anharmonic_oscillator.py  -m 0.25 -init 0 -ir 10 -i 100 -N 10000 -o $@
 
+
+# classical limit
+PRE := data/anharmonic_oscillator_classical_limit/
+$(PRE)%.csv:
+	@python3 src/anharmonic_oscillator_classical_limit.py  -m 0.25 -init -2 -ir 2 -d 4 -i 1000 -N 1000 -b " -5:5:0.05" -o $@
 .PHONY: $(tex_) $(build)/packages.tex
 
 $(tex_): $(build)
