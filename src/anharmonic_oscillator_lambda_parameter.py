@@ -86,7 +86,7 @@ def calculatePositionDistribution(distance):
 
 	de = deltaEnergy(p, mass, tau)
 
-	m = Metropolis(de, init=initial, valWidth=1, initValWidth=initial_random, hbar=hbar, tau=tau, N=N)
+	m = Metropolis(de, init=-distance, valWidth=1, initValWidth=initial_random, hbar=hbar, tau=tau, N=N)
 
 	vals = next(islice(m, iteration, iteration + 1))			# get iterations th metropolis iteration
 	transitions = countTransitions(vals[0])
