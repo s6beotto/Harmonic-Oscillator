@@ -1,5 +1,7 @@
+#!/usr/bin/env python3
+
+# import modules
 from matplotlib import pyplot as plt
-import matplotlib
 from tools import getRootDirectory, getColorIterator
 import csv
 import numpy as np
@@ -14,6 +16,7 @@ def gauss(x, *p):
 	A, mu, sigma = p
 	return A * np.exp(-(x - mu) ** 2/(2. * sigma ** 2))
 
+# parse CLI arguments
 parser = argparse.ArgumentParser(description='Fit gaussian curves to the distribution.')
 parser.add_argument('filename', type=pathlib.Path, help="Input filename")
 parser.add_argument('-i', '--iterations', nargs='+')
@@ -21,10 +24,10 @@ parser.add_argument('-f', '--fit', action='store_true')
 parser.add_argument('-o', '--output', type=pathlib.Path, help="Output filename")
 args = parser.parse_args()
 
-
 iterations_used = [int(i) for i in args.iterations]
-root_path = getRootDirectory()
 
+# filesystem stuff
+root_path = getRootDirectory()
 
 full_path = (root_path / args.filename)
 if not full_path.exists() or full_path.is_dir():
@@ -36,6 +39,7 @@ print('[Gauss] Computing file %s ... ' %relative_path, end='')
 
 data = {}
 
+# read csv file
 with full_path.open('r') as csvfile:
 	reader = csv.reader(csvfile)
 	for i, row in enumerate(reader):
@@ -60,17 +64,16 @@ for iteration in iterations_used:
 	color_plot, color_fit = next(color_iterator)['color']
 	hits = np.histogram(data[iteration - 1], bins)[0]
 	bins_mid = (bins[1:] + bins[:-1]) / 2
+	# plot
 	plt.errorbar(bins_mid, hits, label='path after %d iteration%s' %(iteration, 's' if iteration > 1 else ''), fmt='.', color=color_plot)
 
+	# fit
 	if args.fit:
-		try:
-			parameters, parameters_error = op.curve_fit(gauss, bins_mid, hits, p0=[1, 1, 1])
-			parameters_error = np.sqrt(np.diag(parameters_error))
-			xdata_fit = np.linspace(min(bins), max(bins), 1000)
-			ydata_fit = gauss(xdata_fit, *parameters)
-			plt.plot(xdata_fit, ydata_fit, color=color_fit)
-		except:
-			pass
+		parameters, parameters_error = op.curve_fit(gauss, bins_mid, hits, p0=[1, 1, 1])
+		parameters_error = np.sqrt(np.diag(parameters_error))
+		xdata_fit = np.linspace(min(bins), max(bins), 1000)
+		ydata_fit = gauss(xdata_fit, *parameters)
+		plt.plot(xdata_fit, ydata_fit, color=color_fit)
 
 plt.xlabel('Position')
 plt.ylabel('Number')
@@ -84,5 +87,6 @@ if args.output:
 	out_filename = args.output
 out_filename.parent.mkdir(parents=True, exist_ok=True)
 
+# write to disk
 plt.savefig(out_filename)
 print('done')

@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+
+# import modules
 from matplotlib import pyplot as plt
 from tools import getRootDirectory, Energy, Kinetic, Potential, bootstrap
 import csv
@@ -7,17 +10,18 @@ import argparse
 import pathlib
 import configparser
 
-
-parser = argparse.ArgumentParser(description='Plot the path of a particle at different metropolis states.')
+# parse CLI arguments
+parser = argparse.ArgumentParser(description='Plot the energy depending on the metropolis sample.')
 parser.add_argument('filename', type=pathlib.Path, help="Input filename")
 parser.add_argument('-i', '--max_iteration', type=int)
 parser.add_argument('-l', '--log', action='store_true')
 parser.add_argument('-o', '--output', type=pathlib.Path, help="Output filename")
 args = parser.parse_args()
 
+# filesystem stuff
 root_path = getRootDirectory()
-max_iteration = args.max_iteration
 
+max_iteration = args.max_iteration
 
 full_path = (root_path / args.filename)
 if not full_path.exists() or full_path.is_dir():
@@ -29,6 +33,7 @@ print("[Track] Computing file %s ... " %relative_path, end='')
 
 data = {}
 
+# read csv file
 with full_path.open('r') as csvfile:
 	reader = csv.reader(csvfile)
 	for i, row in enumerate(reader):
@@ -54,6 +59,7 @@ lambda_ = config['DEFAULT'].getfloat('lambda_', fallback=0)
 
 xdata = list(data.keys())
 
+# generate objects to measure the energy
 k = Kinetic(m, tau)
 
 p = Potential(mu, lambda_)
@@ -61,6 +67,7 @@ p = Potential(mu, lambda_)
 e = Energy(k, p)
 ydata = np.array([e(data[x]) for x in xdata])
 
+# calculate mean energy
 def running_mean(x, N):
     cumsum = np.cumsum(np.insert(x, 0, 0))
     return (cumsum[N:] - cumsum[:-N]) / float(N)
@@ -79,7 +86,7 @@ bootstrap_values = bootstrap(1000, to_use)
 
 energy, denergy = np.mean(bootstrap_values), np.std(bootstrap_values)
 
-
+# plot
 plt.errorbar(xdata[:max_iteration], ydata[:max_iteration], label=r'energy $\bar{E} = (%.2f \pm %.2f) \cdot 10^3$' %(energy / 1000, denergy / 1000))
 plt.xlabel('Number')
 plt.ylabel('Energy')
@@ -96,5 +103,6 @@ if args.output:
 	out_filename = args.output
 out_filename.parent.mkdir(parents=True, exist_ok=True)
 
+# write to disk
 plt.savefig(out_filename)
 print('done')

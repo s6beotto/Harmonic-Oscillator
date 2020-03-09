@@ -1,26 +1,24 @@
+#!/usr/bin/env python3
+
+# import modules
 from matplotlib import pyplot as plt
-import matplotlib
 from tools import getRootDirectory, getColorIterator, autoCorrelationNormalized
 import csv
 import numpy as np
-import scipy.optimize as op
 
 import argparse
 import pathlib
 
 color_iterator = getColorIterator()
 
-def linear(x, *p):
-	a, b = p
-	return a * x + b
-
+# parse CLI arguments
 parser = argparse.ArgumentParser(description='Calculate the autorelation function.')
 parser.add_argument('filename', type=pathlib.Path, help="Input filename")
 parser.add_argument('-i', '--iterations', nargs='+')
-parser.add_argument('-f', '--fit', action='store_true')
 parser.add_argument('-o', '--output', type=pathlib.Path, help="Output filename")
 args = parser.parse_args()
 
+# filesystem stuff
 root_path = getRootDirectory()
 
 iterations_used = [int(i) for i in args.iterations]
@@ -36,6 +34,7 @@ print('[Autocorrelation] Computing file %s ... ' %relative_path, end='')
 
 data = {}
 
+# read csv file
 with full_path.open('r') as csvfile:
 	reader = csv.reader(csvfile)
 	for i, row in enumerate(reader):
@@ -52,11 +51,13 @@ min_ = 100
 max_ = -100
 
 for iteration in iterations_used:
+	# get fitting color pair
 	color_plot, color_fit = next(color_iterator)['color']
 	ydata_sum = np.zeros(len(numbers))
 	for i in range(iteration, iteration + 10):
 		xdata = numbers
 		positions = data[iteration]
+		# calculate autocorrelation
 		ydata = autoCorrelationNormalized(positions * positions, xdata)
 		xdata_times = xdata * 0.1
 
@@ -64,15 +65,7 @@ for iteration in iterations_used:
 
 	ydata_mean = ydata_sum / len(ydata_sum)
 	plt.errorbar(xdata_times, ydata_mean, label='autocorrelation after %d iteration%s' %(iteration, 's' if iteration > 1 else ''), fmt='.', color=color_plot)
-if args.fit:
-	try:
-		parameters, parameters_error = op.curve_fit(gauss, bins_mid, hits, p0=[1, 1, 1])
-		parameters_error = np.sqrt(np.diag(parameters_error))
-		xdata_fit = np.linspace(min(bins), max(bins), 1000)
-		ydata_fit = gauss(xdata_fit, *parameters)
-		plt.plot(xdata_fit, ydata_fit, color=color_fit)
-	except:
-		pass
+	# plot and fit
 
 plt.xlabel('Time t')
 plt.ylabel('$\Gamma(t)$')
@@ -90,5 +83,6 @@ if args.output:
 	out_filename = args.output
 out_filename.parent.mkdir(parents=True, exist_ok=True)
 
+# write to disk
 plt.savefig(out_filename)
 print('done')

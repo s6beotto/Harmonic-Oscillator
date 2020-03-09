@@ -1,20 +1,22 @@
+#!/usr/bin/env python3
+
+# import modules
 from matplotlib import pyplot as plt
 from matplotlib.colors import LogNorm
-import sys
 from tools import getRootDirectory
 import csv
-
 
 import argparse
 import pathlib
 
-parser = argparse.ArgumentParser(description='Fit gaussian curves to the distribution.')
+# parse CLI arguments
+parser = argparse.ArgumentParser(description='Create a plot showing the distribution depending on the distance of the minima.')
 parser.add_argument('filename', type=pathlib.Path, help="Input filename")
 parser.add_argument('-o', '--output', type=pathlib.Path, help="Output filename")
 args = parser.parse_args()
 
+# filesystem stuff
 root_path = getRootDirectory()
-
 
 full_path = (root_path / args.filename)
 if not full_path.exists() or full_path.is_dir():
@@ -24,6 +26,7 @@ relative_path = full_path.relative_to(root_path / 'data')
 
 print('[Lambda parameter] Computing file %s ... ' %relative_path, end='')
 
+# read csv file
 with full_path.open('r') as csvfile:
 	reader = csv.reader(csvfile)
 	distances = []
@@ -46,6 +49,7 @@ cs = ax.imshow(datas, extent=[min(header_min), max(header_max), max(distances), 
 cbar = fig.colorbar(cs)
 cbar.ax.minorticks_off()
 
+# plot
 plt.plot([+d / 2 for d in distances], distances, color='black', label='Classical Minima')
 plt.plot([-d / 2 for d in distances], distances, color='black')
 
@@ -67,5 +71,6 @@ if args.output:
 	out_filename = args.output
 out_filename.parent.mkdir(parents=True, exist_ok=True)
 
+# write to disk
 plt.savefig(out_filename)
 print('done')
