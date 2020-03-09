@@ -31,16 +31,18 @@ with full_path.open('r') as csvfile:
 	reader = csv.reader(csvfile)
 	distances = []
 	datas = []
+	transitions = []
 	for i, row in enumerate(reader):
 		if i == 0:
-			header_min = [float(v) for v in row[1:]]
+			header_min = [float(v) for v in row[1:-1]]
 		elif i == 1:
-			header_max = [float(v) for v in row[1:]]
+			header_max = [float(v) for v in row[1:-1]]
 		else:
 			distance = float(row[0])
-			data = [int(v) for v in row[1:]]
+			data = [int(v) for v in row[1:-1]]
 			distances.append(distance)
 			datas.append(data)
+			transitions.append(int(row[-1]))
 
 
 fig, ax = plt.subplots(figsize=(6,6))

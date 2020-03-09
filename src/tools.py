@@ -42,23 +42,8 @@ def bootstrap(num, values, func=np.mean):
 def meanSquare(values):
 	return np.mean(values * values)
 
-STATE_INIT, STATE_LEFT, STATE_RIGHT = None, 1, 2
-
-class TransitionCounter:
-	def __init__(self):
-		self.transitions = -1
-		self.lastState = STATE_INIT
-
-	def registerValue(self, value):
-		state = STATE_LEFT
-		if value > 0:
-			state = STATE_RIGHT
-		if state != self.lastState:
-			self.lastState = state
-			self.transitions += 1
-
-	def getTransitions(self):
-		return self.transitions
+def countTransitions(values):
+	return sum(values[1:] / values[:-1] < 0)
 
 def Potential(mu, lambda_):
 	# Potential Energy with parameters

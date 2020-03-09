@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # import modules
-from tools import Potential, Kinetic, deltaEnergy, Metropolis, getRootDirectory, distanceToParameter
+from tools import Potential, Kinetic, deltaEnergy, Metropolis, getRootDirectory, distanceToParameter, countTransitions
 import os
 import numpy as np
 from multiprocessing import Pool
@@ -89,7 +89,8 @@ def calculatePositionDistribution(distance):
 	m = Metropolis(de, init=initial, valWidth=1, initValWidth=initial_random, hbar=hbar, tau=tau, N=N)
 
 	vals = next(islice(m, iteration, iteration + 1))			# get iterations th metropolis iteration
-	return list(np.histogram(vals[0], bins)[0]), vals[1]
+	transitions = countTransitions(vals[0])
+	return list(np.histogram(vals[0], bins)[0]), vals[1], transitions
 
 # use a multiprocessing pool to generate data in a parallel manner
 p = Pool()
@@ -99,10 +100,10 @@ accept_ratio = np.mean([r[1] for r in results])
 # save csv
 with file_.open('w', newline='') as file:
 	writer = csv.writer(file)
-	writer.writerow(['distance'] + list(bins[:-1]))
-	writer.writerow(['distance'] + list(bins[1:]))
+	writer.writerow(['distance'] + list(bins[:-1]) + ['transitions'])
+	writer.writerow(['distance'] + list(bins[1:]) + ['transitions'])
 	for i, distance in enumerate(distances):
-		writer.writerow([distance] + results[i][0])
+		writer.writerow([distance] + results[i][0] + [results[i][2]])
 
 config['DEFAULT']['accept_ratio'] = str(accept_ratio)
 

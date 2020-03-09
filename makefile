@@ -38,6 +38,8 @@ plots = imgs/harmonic_oscillator_track/track_10001000_track_1.pdf imgs/harmonic_
 		imgs/harmonic_oscillator_track/track_100100_step_thermalisation_log.pdf \
 		imgs/anharmonic_oscillator_track/track_100100_thermalisation.pdf \
 		imgs/anharmonic_oscillator_track/track_100100_thermalisation_log.pdf \
+		imgs/anharmonic_oscillator_lambda_parameter/track_1001000_lambda_parameter.pdf \
+		imgs/anharmonic_oscillator_lambda_parameter/track_1001000_tunneling_current.pdf \
 
 
 all: $(out) $(out_slides)
@@ -99,6 +101,12 @@ imgs/%_thermalisation.pdf: data/%.csv
 imgs/%_thermalisation_log.pdf: data/%.csv
 	@python3 src/create_plots_thermalisation.py data/$*.csv --log -o $@
 
+imgs/%_lambda_parameter.pdf: data/%.csv
+	@python3 src/create_plots_lambda_parameter.py data/$*.csv -o $@
+
+imgs/%_tunneling_current.pdf: data/%.csv
+	@python3 src/create_plots_tunneling_current.py data/$*.csv -o $@
+
 
 # harmonic oscillator
 PRE := data/harmonic_oscillator_track/
@@ -114,11 +122,11 @@ $(PRE)%rack_10000100.csv:
 $(PRE)%rack_10010000.csv:
 	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 100 -N 10000 -o $@
 
-# step function as initialisation
+# harmonic oscillator step function as initialisation
 $(PRE)track_100100_step.csv:
 	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 100 -N 100 --step -o $@
 
-# classical limit
+# harmonic oscillator classical limit
 PRE := data/harmonic_oscillator_classical_limit/
 $(PRE)%.csv:
 	@python3 src/harmonic_oscillator_classical_limit.py  -m 0.25 -init 0 -ir 5 -i 100 -N 1000 -o $@
@@ -141,10 +149,15 @@ $(PRE)%rack_10010000.csv:
 	@python3 src/anharmonic_oscillator.py  -m 0.25 -init 0 -ir 10 -i 100 -N 10000 -o $@
 
 
-# classical limit
+# anharmonic oscillator classical limit
 PRE := data/anharmonic_oscillator_classical_limit/
 $(PRE)%.csv:
 	@python3 src/anharmonic_oscillator_classical_limit.py  -m 0.01 -init -5 -ir 2 -d 4 -i 200 -N 1000 -b " -5:5:0.05" -o $@
+
+# anharmonic oscillator lambda parameter
+PRE := data/anharmonic_oscillator_lambda_parameter/
+$(PRE)%1001000.csv:
+	@python3 src/anharmonic_oscillator_lambda_parameter.py -init 0 -ir 10 -i 100 -N 1000 -o $@
 
 .PHONY: $(tex_) $(build)/packages.tex
 
