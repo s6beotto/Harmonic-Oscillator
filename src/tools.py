@@ -71,7 +71,7 @@ def deltaEnergy(potential, m, tau):
 class Metropolis:
 	# Metropolis algorithm
 	def __init__(self, deltaEnergy, init=0, initValWidth=1, valWidth=1, periodic=True, N=100, hbar=1, tau=0.1):
-		if type(init) in [float, int]:
+		if type(init) in [float, int, np.float64]:
 			self.values = np.random.normal(size=N, loc=init, scale=initValWidth)
 		else:
 			self.values = np.array(init)
