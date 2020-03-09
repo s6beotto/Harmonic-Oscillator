@@ -33,7 +33,11 @@ plots = imgs/harmonic_oscillator_track/track_10001000_track_1.pdf imgs/harmonic_
 		imgs/harmonic_oscillator_track/track_100100_step_track_shifted_5.pdf \
 		imgs/harmonic_oscillator_track/track_100100_step_track_shifted_double.pdf \
 		imgs/harmonic_oscillator_classical_limit/harmonic_oscillator_classical_limit.pdf \
-		imgs/anharmonic_oscillator_classical_limit/anharmonic_oscillator_classical_limit.pdf
+		imgs/anharmonic_oscillator_classical_limit/anharmonic_oscillator_classical_limit.pdf \
+		imgs/harmonic_oscillator_track/track_100100_step_thermalisation.pdf \
+		imgs/harmonic_oscillator_track/track_100100_step_thermalisation_log.pdf \
+		imgs/anharmonic_oscillator_track/track_100100_thermalisation.pdf \
+		imgs/anharmonic_oscillator_track/track_100100_thermalisation_log.pdf \
 
 
 all: $(out) $(out_slides)
@@ -88,6 +92,12 @@ imgs/%_track_shifted_2.pdf: data/%.csv
 
 imgs/%_classical_limit.pdf: data/%.csv
 	@python3 src/create_plots_classical_limit.py data/$*.csv -o $@
+
+imgs/%_thermalisation.pdf: data/%.csv
+	@python3 src/create_plots_thermalisation.py data/$*.csv -o $@
+
+imgs/%_thermalisation_log.pdf: data/%.csv
+	@python3 src/create_plots_thermalisation.py data/$*.csv --log -o $@
 
 
 # harmonic oscillator
