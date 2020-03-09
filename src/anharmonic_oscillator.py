@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+
+# import modules
 from tools import Potential, Energy, deltaEnergy, Kinetic, Metropolis, getRootDirectory, distanceToParameter
 import numpy as np
 import csv
@@ -5,7 +8,8 @@ from configparser import ConfigParser
 import argparse
 import pathlib
 
-parser = argparse.ArgumentParser(description='Create samples for the harmonic oscillator')
+# parse CLI arguments
+parser = argparse.ArgumentParser(description='Create samples for the anharmonic oscillator')
 parser.add_argument("-i", "--iterations", type=int, default=100,
                     help="Number of Metropolis iterations")
 parser.add_argument("-N", "--number", type=int, default=100,
@@ -29,7 +33,7 @@ parser.add_argument('-o', '--output', type=pathlib.Path,
 args = parser.parse_args()
 
 
-# parameters
+# extract parameters
 iterations = args.iterations
 N = args.number
 mass = args.mass
@@ -47,12 +51,14 @@ parameters = [
             'distance', 'lambda_',
 			]
 
+# generate objects related to metropolis
 p = Potential(-mu, lambda_)
 
 de = deltaEnergy(p, mass, tau)
 
 m = Metropolis(de, init=initial, valWidth=1, initValWidth=initial_random, hbar=hbar, tau=tau, N=N)
 
+# filesystem stuff
 root_path = getRootDirectory()
 dir_ = root_path / 'data' / 'anharmonic_oscillator_track'
 dir_.mkdir(parents=True, exist_ok=True)
@@ -62,11 +68,13 @@ file_ = dir_ / ('N%di%dinit%sm%0.4fl%0.4fd%0.4f.csv' % (N, iterations, 'rand' if
 if output != None:
 	file_ = output
 
+# config output
 config_filename = file_.with_suffix('.cfg')
 config = ConfigParser()
 config['DEFAULT'] = {p: eval(p) for p in parameters}
 config['DEFAULT']['type'] = 'anharmonic_oscillator'
 
+# save csv
 accept_ratios = []
 with file_.open('w', newline='') as file:
 	writer = csv.writer(file)

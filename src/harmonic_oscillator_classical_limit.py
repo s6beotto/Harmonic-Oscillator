@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+
+# import modules
 from tools import Potential, Kinetic, deltaEnergy, Metropolis, getRootDirectory
 import numpy as np
 from multiprocessing import Pool
@@ -7,6 +10,7 @@ from configparser import ConfigParser
 import argparse
 import pathlib
 
+# parse CLI arguments
 parser = argparse.ArgumentParser(description='Create samples for the harmonic oscillator, vary hbar')
 parser.add_argument("-i", "--iterations", type=int, default=100,
                     help="Number of Metropolis iterations")
@@ -33,7 +37,7 @@ parser.add_argument('-o', '--output', type=pathlib.Path,
 args = parser.parse_args()
 
 
-# parameters
+# extract parameters
 iterations = args.iterations
 N = args.number
 mass = args.mass
@@ -51,6 +55,7 @@ parameters = [
 			'bins_min', 'bins_max', 'bins_step', 'initial', 'initial_random', 'step',
 			]
 
+# filesystem stuff
 root_path = getRootDirectory()
 dir_ = root_path / 'data' / 'harmonic_oscillator_classical_limit'
 dir_.mkdir(exist_ok=True)
@@ -59,6 +64,7 @@ file_ = dir_ / ('h%0.2f-%0.2f-%0.4f_%0.2f-%0.2f-%0.2f-N%d.csv' % (hbar_min, hbar
 if output != None:
 	file_ = output
 
+# config output
 config_filename = file_.with_suffix('.cfg')
 config = ConfigParser()
 config['DEFAULT'] = {p: eval(p) for p in parameters}
@@ -69,6 +75,7 @@ bins = np.arange(bins_min, bins_max + bins_step, bins_step)
 
 def calculatePositionDistribution(hbar):
 	print("calculating for hbar=%0.4f" % hbar)
+	# generate objects related to metropolis
 	p = Potential(mu, 0)
 
 	de = deltaEnergy(p, mass, tau)
@@ -78,10 +85,12 @@ def calculatePositionDistribution(hbar):
 	vals = next(islice(m, iterations, iterations + 1))			# get iterations th metropolis iteration
 	return list(np.histogram(vals[0], bins)[0]), vals[1]
 
+# use a multiprocessing pool to generate data in a parallel manner
 p = Pool()
 results = p.map(calculatePositionDistribution, hbars)
 accept_ratio = np.mean([r[1] for r in results])
 
+# save csv
 with file_.open('w', newline='') as file:
 	writer = csv.writer(file)
 	writer.writerow(['hbar'] + list(bins[:-1]))

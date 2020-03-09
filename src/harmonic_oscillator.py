@@ -1,10 +1,14 @@
+#!/usr/bin/env python3
+
+# import modules
 from tools import Potential, Energy, deltaEnergy, Kinetic, Metropolis, getRootDirectory
 import numpy as np
 import csv
-import argparse
 from configparser import ConfigParser
+import argparse
 import pathlib
 
+# parse CLI arguments
 parser = argparse.ArgumentParser(description='Create samples for the harmonic oscillator')
 parser.add_argument("-i", "--iterations", type=int, default=100,
                     help="Number of Metropolis iterations")
@@ -29,7 +33,7 @@ parser.add_argument('-o', '--output', type=pathlib.Path,
 args = parser.parse_args()
 
 
-# parameters
+# extract parameters
 iterations = args.iterations
 N = args.number
 mass = args.mass
@@ -46,6 +50,7 @@ parameters = [
             'step',
 			]
 
+# generate objects related to metropolis
 p = Potential(mu, 0)	# harmonic potential -> no x^4 contribution
 
 de = deltaEnergy(p, mass, tau)
@@ -55,6 +60,7 @@ if step:
 
 m = Metropolis(de, init=initial, valWidth=1, initValWidth=initial_random, hbar=hbar, tau=tau, N=N)
 
+# filesystem stuff
 root_path = getRootDirectory()
 dir_ = root_path / 'data' / 'harmonic_oscillator_track'
 dir_.mkdir(parents=True, exist_ok=True)
@@ -62,11 +68,14 @@ dir_.mkdir(parents=True, exist_ok=True)
 file_ = dir_ / ('N%di%dinit%sm%0.4f%s.csv' % (N, iterations, ('step' if type(initial) != float else '%0.4f' %initial), mass, ('step' if step else '')))
 if output != None:
 	file_ = output
+
+# config output
 config_filename = file_.with_suffix('.cfg')
 config = ConfigParser()
 config['DEFAULT'] = {p: eval(p) for p in parameters}
 config['DEFAULT']['type'] = 'harmonic_oscillator'
 
+# save csv
 accept_ratios = []
 with file_.open('w', newline='') as file:
 	writer = csv.writer(file)

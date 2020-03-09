@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+
+# import modules
 from tools import Potential, Kinetic, deltaEnergy, Metropolis, getRootDirectory, distanceToParameter
 import os
 import numpy as np
@@ -8,7 +11,8 @@ from configparser import ConfigParser
 import argparse
 import pathlib
 
-parser = argparse.ArgumentParser(description='Create samples for the harmonic oscillator, vary hbar')
+# parse CLI arguments
+parser = argparse.ArgumentParser(description='Create samples for the anharmonic oscillator, vary distance of minima of the potential')
 parser.add_argument("-i", "--iteration", type=int, default=100,
                     help="Number of Metropolis iteration used")
 parser.add_argument("-N", "--number", type=int, default=100,
@@ -35,7 +39,7 @@ parser.add_argument('-o', '--output', type=pathlib.Path,
 					help="Output filename")
 args = parser.parse_args()
 
-# parameters
+# extract parameters
 iteration = args.iteration
 N = args.number
 mass = args.mass
@@ -56,6 +60,7 @@ parameters = [
 			'distance_min', 'distance_max', 'distance_step',
 			]
 
+# filesystem stuff
 root_path = getRootDirectory()
 dir_ = root_path / 'data' / 'anharmonic_oscillator_lambda_parameter'
 dir_.mkdir(exist_ok=True)
@@ -64,6 +69,7 @@ file_ = dir_ / ('d%0.2f-%0.2f-%0.2fs%0.2f-%0.2f-%0.2f-N%d-i%d.csv' % (distance_m
 if output != None:
 	file_ = output
 
+# config output
 config_filename = file_.with_suffix('.cfg')
 config = ConfigParser()
 config['DEFAULT'] = {p: eval(p) for p in parameters}
@@ -75,6 +81,7 @@ bins = np.arange(bins_min, bins_max + bins_step, bins_step)
 def calculatePositionDistribution(distance):
 	print("calculating for distance=%0.2f" % distance)
 	lambda_ = distanceToParameter(distance)
+	# generate objects related to metropolis
 	p = Potential(-mu, lambda_)
 
 	de = deltaEnergy(p, mass, tau)
@@ -84,10 +91,12 @@ def calculatePositionDistribution(distance):
 	vals = next(islice(m, iteration, iteration + 1))			# get iterations th metropolis iteration
 	return list(np.histogram(vals[0], bins)[0]), vals[1]
 
+# use a multiprocessing pool to generate data in a parallel manner
 p = Pool()
 results = p.map(calculatePositionDistribution, distances)
 accept_ratio = np.mean([r[1] for r in results])
 
+# save csv
 with file_.open('w', newline='') as file:
 	writer = csv.writer(file)
 	writer.writerow(['distance'] + list(bins[:-1]))
