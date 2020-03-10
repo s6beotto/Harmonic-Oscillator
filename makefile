@@ -27,7 +27,10 @@ plots = imgs/harmonic_oscillator_track/track_10001000_track_1.pdf imgs/harmonic_
 		imgs/harmonic_oscillator_track/track_10010000_qq_80.pdf imgs/harmonic_oscillator_track/track_10010000_qq_100.pdf \
 		imgs/harmonic_oscillator_track/track_10000100_track_shifted_1.pdf imgs/harmonic_oscillator_track/track_10000100_track_shifted_2.pdf \
 		imgs/harmonic_oscillator_track/track_10000100_track_shifted_5.pdf imgs/harmonic_oscillator_track/track_10000100_track_shifted_double.pdf \
-		imgs/anharmonic_oscillator_track/track_100100_track_1.pdf \
+		imgs/anharmonic_oscillator_track/track_10010010_track_1.pdf \
+		imgs/anharmonic_oscillator_track/track_1001005_track_1.pdf \
+		imgs/anharmonic_oscillator_track/track_1001003_track_1.pdf \
+		imgs/anharmonic_oscillator_track/track_1001002_track_1.pdf \
 		imgs/harmonic_oscillator_track/track_100100_step_track_shifted_1.pdf \
 		imgs/harmonic_oscillator_track/track_100100_step_track_shifted_2.pdf \
 		imgs/harmonic_oscillator_track/track_100100_step_track_shifted_5.pdf \
@@ -36,8 +39,8 @@ plots = imgs/harmonic_oscillator_track/track_10001000_track_1.pdf imgs/harmonic_
 		imgs/anharmonic_oscillator_classical_limit/anharmonic_oscillator_classical_limit.pdf \
 		imgs/harmonic_oscillator_track/track_100100_step_thermalisation.pdf \
 		imgs/harmonic_oscillator_track/track_100100_step_thermalisation_log.pdf \
-		imgs/anharmonic_oscillator_track/track_100100_thermalisation.pdf \
-		imgs/anharmonic_oscillator_track/track_100100_thermalisation_log.pdf \
+		imgs/anharmonic_oscillator_track/track_10010010_thermalisation.pdf \
+		imgs/anharmonic_oscillator_track/track_10010010_thermalisation_log.pdf \
 		imgs/anharmonic_oscillator_lambda_parameter/track_1001000_lambda_parameter.pdf \
 		imgs/anharmonic_oscillator_lambda_parameter/track_1001000_tunneling_current.pdf \
 
@@ -133,20 +136,29 @@ $(PRE)%.csv:
 
 # anharmonic oscillator
 PRE := data/anharmonic_oscillator_track/
-$(PRE)%rack_100100.csv:
-	@python3 src/anharmonic_oscillator.py  -m 0.25 -init 0 -ir 10 -i 100 -N 100 -o $@
+$(PRE)%rack_10010010.csv:
+	@python3 src/anharmonic_oscillator.py  -m 0.25 -init -5 -ir 5 -i 100 -N 100 -d 10 -o $@
 
-$(PRE)%rack_100200.csv:
-	@python3 src/anharmonic_oscillator.py  -m 0.25 -init 0 -ir 10 -i 100 -N 200 -o $@
+$(PRE)%rack_1001005.csv:
+	@python3 src/anharmonic_oscillator.py  -m 0.25 -init -2.5 -ir 5 -i 100 -N 100 -d 5 -o $@
 
-$(PRE)%rack_10001000.csv:
-	@python3 src/anharmonic_oscillator.py  -m 0.25 -init 0 -ir 10 -i 1000 -N 1000 -o $@
+$(PRE)%rack_1001003.csv:
+	@python3 src/anharmonic_oscillator.py  -m 0.25 -init -1.5 -ir 5 -i 100 -N 100 -d 3 -o $@
 
-$(PRE)%rack_10000100.csv:
-	@python3 src/anharmonic_oscillator.py  -m 0.25 -init 0 -ir 10 -i 10000 -N 100 -o $@
+$(PRE)%rack_1001002.csv:
+	@python3 src/anharmonic_oscillator.py  -m 0.25 -init -1 -ir 5 -i 100 -N 100 -d 2 -o $@
 
-$(PRE)%rack_10010000.csv:
-	@python3 src/anharmonic_oscillator.py  -m 0.25 -init 0 -ir 10 -i 100 -N 10000 -o $@
+$(PRE)%rack_10020010.csv:
+	@python3 src/anharmonic_oscillator.py  -m 0.25 -init -5 -ir 10 -i 100 -N 200 -d 10 -o $@
+
+$(PRE)%rack_1000100010.csv:
+	@python3 src/anharmonic_oscillator.py  -m 0.25 -init -5 -ir 10 -i 1000 -N 1000 -d 10 -o $@
+
+$(PRE)%rack_1000010010.csv:
+	@python3 src/anharmonic_oscillator.py  -m 0.25 -init -5 -ir 10 -i 10000 -N 100 -d 10 -o $@
+
+$(PRE)%rack_1001000010.csv:
+	@python3 src/anharmonic_oscillator.py  -m 0.25 -init -5 -ir 10 -i 100 -N 10000 -d 10 -o $@
 
 
 # anharmonic oscillator classical limit
