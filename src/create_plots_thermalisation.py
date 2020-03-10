@@ -2,7 +2,7 @@
 
 # import modules
 from matplotlib import pyplot as plt
-from tools import getRootDirectory, Energy, Kinetic, Potential, bootstrap
+from tools import getRootDirectory, Energy, Kinetic, Potential, autoCorrelationNormalized
 import csv
 import numpy as np
 
@@ -44,7 +44,6 @@ with full_path.open('r') as csvfile:
 			num = int(row[0])
 			positions = np.array([float(r) for r in row[1:]])
 			data[num] = positions
-plt.figure()
 
 config = configparser.ConfigParser()
 config.read(full_path.with_suffix('.cfg'))
@@ -79,14 +78,31 @@ if da[0] > 0:
 else:
 	start = np.argmax(da > 0) + 10
 
-to_use = ydata[start:]
+to_use = ydata[start::30]
 
+# filesystem stuff
+out_filename = root_path / 'imgs' / relative_path
+out_filename = out_filename.with_suffix('')
+out_filename = pathlib.Path('%s_thermalisation.pdf' %(out_filename))
+if args.output:
+	out_filename = args.output
+out_filename_autocorrelation = pathlib.Path('%s_autocorrelation.pdf' %out_filename.with_suffix(''))
 
-bootstrap_values = bootstrap(1000, to_use)
+# calculate energy
+energy, denergy = np.mean(to_use), np.std(to_use)
 
-energy, denergy = np.mean(bootstrap_values), np.std(bootstrap_values)
+xdata_cut = xdata[start::30]
+ydata_cut = autoCorrelationNormalized(ydata[start::30], np.arange(len(xdata_cut)))
+
+# create autocorrelation plot
+plt.figure()
+plt.errorbar(xdata_cut, ydata_cut)
+plt.xlabel('Sample')
+plt.ylabel('Autocorrelation')
+plt.savefig(out_filename_autocorrelation)
 
 # plot
+plt.figure()
 plt.errorbar(xdata[:max_iteration], ydata[:max_iteration], label=r'energy $\bar{E} = (%.2f \pm %.2f) \cdot 10^3$' %(energy / 1000, denergy / 1000))
 plt.xlabel('Number')
 plt.ylabel('Energy')
@@ -94,13 +110,6 @@ if args.log:
 	plt.yscale('log')
 plt.legend()
 
-
-out_filename = root_path / 'imgs' / relative_path
-
-out_filename = out_filename.with_suffix('')
-out_filename = pathlib.Path('%s_thermalisation.pdf' %(out_filename))
-if args.output:
-	out_filename = args.output
 out_filename.parent.mkdir(parents=True, exist_ok=True)
 
 # write to disk
