@@ -2,7 +2,6 @@
 
 # import modules
 from tools import Potential, Kinetic, deltaEnergy, Metropolis, getRootDirectory, distanceToParameter, countTransitions
-import os
 import numpy as np
 from multiprocessing import Pool
 import csv
