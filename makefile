@@ -39,6 +39,8 @@ plots = imgs/harmonic_oscillator_track/track_10001000_track_1.pdf imgs/harmonic_
 		imgs/anharmonic_oscillator_classical_limit/anharmonic_oscillator_classical_limit.pdf \
 		imgs/harmonic_oscillator_track/track_100100_step_thermalisation.pdf \
 		imgs/harmonic_oscillator_track/track_100100_step_thermalisation_log.pdf \
+		imgs/harmonic_oscillator_track/track_10001000_thermalisation.pdf \
+		imgs/harmonic_oscillator_track/track_10001000_thermalisation_log.pdf \
 		imgs/anharmonic_oscillator_track/track_10010010_thermalisation.pdf \
 		imgs/anharmonic_oscillator_track/track_10010010_thermalisation_log.pdf \
 		imgs/anharmonic_oscillator_lambda_parameter/track_1001000_lambda_parameter.pdf \
