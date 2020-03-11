@@ -18,6 +18,7 @@ root_path = getRootDirectory()
 mu = 10 if args.harmonic else -1
 d = 0 if args.harmonic else args.distance
 
+print('[Potential] Computing ... ', end='')
 
 xvalues = np.arange(-5-d / 2, 5+d / 2, 0.01)
 if args.anharmonic:
@@ -39,3 +40,4 @@ if args.output:
 out_filename.parent.mkdir(parents=True, exist_ok=True)
 
 plt.savefig(out_filename)
+print('done')
