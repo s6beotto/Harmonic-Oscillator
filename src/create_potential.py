@@ -1,29 +1,43 @@
 from matplotlib import pyplot as plt
-from tools import Potential, distanceToParameter
+from tools import Potential, distanceToParameter, getRootDirectory
 import numpy as np
+import argparse
+import pathlib
 
-# number of distances evaluated
-min_distance = 1
-max_distance = 16
-step_distance = 1
+# parse CLI arguments
+parser = argparse.ArgumentParser(description='Calculate the autorelation function between the metropolis samples.')
+parser.add_argument('-H', '--harmonic', action='store_true')
+parser.add_argument('-a', '--anharmonic', action='store_true')
+parser.add_argument('-d', '--distance', type=float, default=1)
+parser.add_argument('-o', '--output', type=pathlib.Path, help="Output filename")
+args = parser.parse_args()
 
-params = [
-	(10, 0, 'harm', 0)
-]
+root_path = getRootDirectory()
 
-distances = np.arange(min_distance, max_distance, step_distance)
+mu = 10 if args.harmonic else -1
+d = 0 if args.harmonic else args.distance
 
-params += [
-	(-10, distanceToParameter(d), 'anharm: %0.2f' %d, d) for d in distances
-]
+if args.harmonic == args.anharmonic:
+	print('choose exactly one of harmonic or anharmonic')
+	exit(-1)
 
-for mu, lambda_, name, d in params:
-	xvalues = np.arange(-5-d / 2, 5+d / 2, 0.01)
-	p = Potential(mu, lambda_)
-	yvalues = p(xvalues)
-	plt.figure()
-	plt.errorbar(xvalues, yvalues)
-	plt.xlabel('Distance')
-	plt.ylabel('Tunneling rate')
-	plt.savefig('imgs/d_%s.pdf' %name)
-	plt.close()
+xvalues = np.arange(-5-d / 2, 5+d / 2, 0.01)
+if args.anharmonic:
+	lambda_ = distanceToParameter(d)
+else:
+	lambda_ = 0
+p = Potential(mu, lambda_)
+yvalues = p(xvalues)
+plt.figure()
+plt.errorbar(xvalues, yvalues)
+plt.xlabel('Distance')
+plt.ylabel('Potential energy')
+
+out_filename = root_path / ('imgs/potential/%s_%f.pdf' %('harm' if args.harmonic else 'anharm', d))
+out_filename.parent.mkdir(parents=True, exist_ok=True)
+
+if args.output:
+	out_filename = args.output
+out_filename.parent.mkdir(parents=True, exist_ok=True)
+
+plt.savefig(out_filename)
