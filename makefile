@@ -44,7 +44,12 @@ plots = imgs/harmonic_oscillator_track/track_10001000_track_1.pdf imgs/harmonic_
 		imgs/anharmonic_oscillator_track/track_10010010_thermalisation.pdf \
 		imgs/anharmonic_oscillator_track/track_10010010_thermalisation_log.pdf \
 		imgs/anharmonic_oscillator_lambda_parameter/track_1001000_lambda_parameter.pdf \
+		imgs/anharmonic_oscillator_lambda_parameter/track_1001000_bad_tunneling_current.pdf \
 		imgs/anharmonic_oscillator_lambda_parameter/track_1001000_tunneling_current.pdf \
+		imgs/anharmonic_oscillator_lambda_parameter/track_10010000_lambda_parameter.pdf \
+		imgs/anharmonic_oscillator_lambda_parameter/track_10010000_tunneling_current.pdf \
+		imgs/anharmonic_oscillator_lambda_parameter/track_10020000_lambda_parameter.pdf \
+		imgs/anharmonic_oscillator_lambda_parameter/track_10020000_tunneling_current.pdf \
 
 
 all: $(out) $(out_slides)
@@ -171,6 +176,15 @@ $(PRE)%.csv:
 # anharmonic oscillator lambda parameter
 PRE := data/anharmonic_oscillator_lambda_parameter/
 $(PRE)%1001000.csv:
+	@python3 src/anharmonic_oscillator_lambda_parameter.py -ir 2 -i 100 -N 1000 -o $@
+
+$(PRE)%10010000.csv:
+	@python3 src/anharmonic_oscillator_lambda_parameter.py -ir 2 -i 100 -N 10000 -o $@
+
+$(PRE)%10020000.csv:
+	@python3 src/anharmonic_oscillator_lambda_parameter.py -ir 2 -i 100 -N 20000 -d '0:7:0.1' -o $@
+
+$(PRE)%1001000_bad.csv:
 	@python3 src/anharmonic_oscillator_lambda_parameter.py -init 0 -ir 10 -i 100 -N 1000 -o $@
 
 .PHONY: $(tex_) $(build)/packages.tex
