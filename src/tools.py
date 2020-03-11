@@ -24,6 +24,15 @@ def autoCorrelationNormalized(data, xdata):
 	correlation = autoCorrelation(data, xdata)
 	return correlation / correlation[0]
 
+def getIntegratedCorrelationTime(data, factor = 5):
+	tint = data[0]
+	num = 0
+	while num < factor * tint and not num >= len(data):
+		num += 1
+		tint += data[num]
+
+	return tint / 2
+
 colors_raw = ['1f77b4', 'ff7f0e', '2ca02c', 'd62728', '9467bd', '8c564b', 'e377c2', '7f7f7f', 'bcbd22', '17becf']
 
 def getColorIterator():
