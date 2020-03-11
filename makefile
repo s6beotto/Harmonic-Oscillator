@@ -44,6 +44,8 @@ plots = imgs/harmonic_oscillator_track/track_10001000_track_1.pdf imgs/harmonic_
 		imgs/anharmonic_oscillator_track/track_10010010_thermalisation.pdf \
 		imgs/anharmonic_oscillator_track/track_10010010_thermalisation_log.pdf \
 		imgs/anharmonic_oscillator_lambda_parameter/track_1001000_lambda_parameter.pdf \
+		imgs/anharmonic_oscillator_lambda_parameter/track_1001000_tunneling_current.pdf \
+		imgs/anharmonic_oscillator_lambda_parameter/track_1001000_bad_lambda_parameter.pdf \
 		imgs/anharmonic_oscillator_lambda_parameter/track_1001000_bad_tunneling_current.pdf \
 		imgs/anharmonic_oscillator_lambda_parameter/track_1001000_tunneling_current.pdf \
 		imgs/anharmonic_oscillator_lambda_parameter/track_10010000_lambda_parameter.pdf \
