@@ -6,10 +6,11 @@ import pathlib
 
 # parse CLI arguments
 parser = argparse.ArgumentParser(description='Calculate the autorelation function between the metropolis samples.')
-parser.add_argument('-H', '--harmonic', action='store_true')
-parser.add_argument('-a', '--anharmonic', action='store_true')
+group = parser.add_mutually_exclusive_group(required=True)
+group.add_argument('-H', '--harmonic', action='store_true', help='Use the harmonic potential')
+group.add_argument('-a', '--anharmonic', action='store_true', help='Use the anharmonic potential')
 parser.add_argument('-d', '--distance', type=float, default=1)
-parser.add_argument('-o', '--output', type=pathlib.Path, help="Output filename")
+parser.add_argument('-o', '--output', type=pathlib.Path, help='Output filename')
 args = parser.parse_args()
 
 root_path = getRootDirectory()
@@ -17,9 +18,6 @@ root_path = getRootDirectory()
 mu = 10 if args.harmonic else -1
 d = 0 if args.harmonic else args.distance
 
-if args.harmonic == args.anharmonic:
-	print('choose exactly one of harmonic or anharmonic')
-	exit(-1)
 
 xvalues = np.arange(-5-d / 2, 5+d / 2, 0.01)
 if args.anharmonic:
