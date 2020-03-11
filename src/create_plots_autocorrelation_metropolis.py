@@ -9,6 +9,7 @@ import scipy.optimize as op
 
 import argparse
 import pathlib
+import configparser
 
 color_iterator = getColorIterator()
 
@@ -66,8 +67,14 @@ for i in range(data.shape[1]):
 
 	ydata_sum += ydata
 
+config = configparser.ConfigParser()
+config.read(full_path.with_suffix('.cfg'))
+
+# read config from respective file
+tau = config['DEFAULT'].getfloat('tau', fallback=0.1)
+
 # calculate integrated autocorrelation time
-tint = getIntegratedCorrelationTime(ydata_sum, factor=8)
+tint = getIntegratedCorrelationTime(ydata_sum, factor=8) * tau
 
 # plot and fit
 ydata_mean = ydata_sum / data.shape[1]
