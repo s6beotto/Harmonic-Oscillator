@@ -26,7 +26,7 @@ parser.add_argument("-hb", "--hbar", type=float, default=1,
                     help="Values of the reduces Plancks constant")
 parser.add_argument("-b", "--bins", type=str, default='-5:5:0.1',
                     help="Range of the used bins")
-parser.add_argument("-init", "--initial", type=float, default=0,
+parser.add_argument("-init", "--initial", type=float, default=None,
                     help="Initial values for the path")
 parser.add_argument("-ir", "--initial-random", type=float, default=0,
                     help="Use random distribution around initial value")
@@ -71,7 +71,7 @@ if output != None:
 # config output
 config_filename = file_.with_suffix('.cfg')
 config = ConfigParser()
-config['DEFAULT'] = {p: eval(p) for p in parameters}
+config['DEFAULT'] = {p: str(eval(p)) for p in parameters}
 config['DEFAULT']['type'] = 'anharmonic_oscillator_lambda_parameter'
 
 distances = np.arange(distance_min + distance_step, distance_max + distance_step, distance_step)
@@ -85,7 +85,9 @@ def calculatePositionDistribution(distance):
 
 	de = deltaEnergy(p, mass, tau)
 
-	m = Metropolis(de, init=-distance, valWidth=1, initValWidth=initial_random, hbar=hbar, tau=tau, N=N)
+	init = initial if initial != None else -distance
+
+	m = Metropolis(de, init=init, valWidth=1, initValWidth=initial_random, hbar=hbar, tau=tau, N=N)
 
 	vals = next(islice(m, iteration, iteration + 1))			# get iterations th metropolis iteration
 	transitions = countTransitions(vals[0])
