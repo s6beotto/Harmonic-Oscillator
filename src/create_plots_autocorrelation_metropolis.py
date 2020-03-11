@@ -2,7 +2,7 @@
 
 # import modules
 from matplotlib import pyplot as plt
-from tools import getRootDirectory, getColorIterator, autoCorrelationNormalized
+from tools import getRootDirectory, getColorIterator, autoCorrelationNormalized, getIntegratedCorrelationTime
 import csv
 import numpy as np
 import scipy.optimize as op
@@ -66,9 +66,12 @@ for i in range(data.shape[1]):
 
 	ydata_sum += ydata
 
+# calculate integrated autocorrelation time
+tint = getIntegratedCorrelationTime(ydata_sum, factor=8)
+
 # plot and fit
 ydata_mean = ydata_sum / data.shape[1]
-plt.errorbar(xdata, ydata_mean, label='Autocorrelation function', fmt='.', color=color_plot)
+plt.errorbar(xdata, ydata_mean, label='Autocorrelation function, $\tau_{int} = $' %(tint), fmt='.', color=color_plot)
 if args.fit:
 	xdata, ydata_mean = xdata[xdata < 50], ydata_mean[xdata < 50]
 	xdata, ydata_mean = xdata[ydata_mean > 0], ydata_mean[ydata_mean > 0]
@@ -95,6 +98,6 @@ if args.output:
 	out_filename = args.output
 out_filename.parent.mkdir(parents=True, exist_ok=True)
 
-# write to disk
+# write to diskydata_sum
 plt.savefig(out_filename)
 print('done')
