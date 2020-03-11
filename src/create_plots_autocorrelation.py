@@ -47,8 +47,6 @@ with full_path.open('r') as csvfile:
 			data[num] = positions
 
 plt.figure()
-min_ = 100
-max_ = -100
 
 for iteration in iterations_used:
 	# get fitting color pair
