@@ -18,7 +18,7 @@ def autoCorrelation(data, xdata):
 	mean = np.mean(data)
 	d = np.concatenate((data, data))
 	l = len(data)
-	return [np.mean((data - mean) * (d[i:i + l] - mean)) for i in list(xdata)]
+	return [1 / (l - i) * np.mean((data - mean) * (d[i:i + l] - mean)) for i in list(xdata)]
 
 def autoCorrelationNormalized(data, xdata):
 	correlation = autoCorrelation(data, xdata)
