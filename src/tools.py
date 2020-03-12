@@ -9,7 +9,7 @@ from ctypes import cdll
 def getRootDirectory():
 	return Path(os.path.dirname(os.path.realpath(__file__))).parent
 
-libmetropolis = cdll.LoadLibrary(getRootDirectory() / 'src' / 'libmetropolis.so')
+libmetropolis = cdll.LoadLibrary(getRootDirectory() / 'bin' / 'libmetropolis.so')
 libmetropolis.metropolis.argtypes = (ctypes.c_int, ctypes.POINTER(ctypes.c_double), ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double)
 libmetropolis.metropolis.restype = ctypes.POINTER(ctypes.c_double)
 

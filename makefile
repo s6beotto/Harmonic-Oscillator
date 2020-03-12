@@ -212,6 +212,18 @@ $(build):
 	@echo "Creating build directory"
 	mkdir -p $(build)
 
+# create bin directory
+bin:
+	mkdir -p bin
+
+# compile c library
+bin/libmetropolis.so: bin src/metropolis.cpp
+	g++ -c -fPIC src/metropolis.cpp -o bin/metropolis.o
+	g++ -shared -Wl,-soname,libmetropolis.so -o bin/libmetropolis.so bin/metropolis.o -lm
+
+
+.PHONY: compile
+compile: bin/libmetropolis.so
 
 .PHONY: clean
 clean:
@@ -221,6 +233,8 @@ clean:
 	$(RM) -r $(build)/
 	$(RM) -r data/
 	$(RM) -r imgs/
+	$(RM) -r bin/
 
+.PHONY: clean-bib
 clean-bib:
 	$(RM) -r $(build)/*.out
