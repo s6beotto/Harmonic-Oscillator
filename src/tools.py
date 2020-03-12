@@ -88,7 +88,9 @@ def deltaEnergy(potential, m, tau):
 	return wrapper
 
 class MetropolisPython:
-	# Metropolis algorithm
+	'''
+	Metropolis algorithm using the pure python
+	'''
 	def __init__(self, init=0, initValWidth=1, valWidth=1, periodic=True, N=100, hbar=1, tau=0.1, m=1.0, lambda_=0, mu = 1.0):
 		if type(init) in [float, int, np.float64]:
 			self.values = np.random.normal(size=N, loc=init, scale=initValWidth)
@@ -140,7 +142,9 @@ class MetropolisPython:
 		return self
 
 class MetropolisC:
-	# Metropolis algorithm
+	'''
+	Metropolis algorithm using the C function from metropolis.cpp, performance around 10 x that of the python version
+	'''
 	def __init__(self, init=0, initValWidth=1, valWidth=1, periodic=True, N=100, hbar=1, tau=0.1, m=1.0, lambda_=0, mu = 1.0):
 		if type(init) in [float, int, np.float64]:
 			self.values = np.random.normal(size=N, loc=init, scale=initValWidth)
@@ -173,6 +177,7 @@ class MetropolisC:
 	def __iter__(self):
 		return self
 
+# choose one of the implementations
 Metropolis = MetropolisC
 #Metropolis = MetropolisPython
 
