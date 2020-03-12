@@ -58,7 +58,7 @@ de = deltaEnergy(p, mass, tau)
 if step:
 	initial = [0.0] * int(N * 0.4) + [5.0] * int(N * 0.2) + [0.0] * int(N * 0.4)
 
-m = Metropolis(de, init=initial, valWidth=1, initValWidth=initial_random, hbar=hbar, tau=tau, N=N)
+m = Metropolis(init=initial, valWidth=1, initValWidth=initial_random, hbar=hbar, tau=tau, N=N, m=mass, lambda_=0, mu=mu)
 
 # filesystem stuff
 root_path = getRootDirectory()

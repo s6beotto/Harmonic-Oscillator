@@ -81,13 +81,10 @@ def calculatePositionDistribution(distance):
 	print("calculating for distance=%0.2f" % distance)
 	lambda_ = distanceToParameter(distance)
 	# generate objects related to metropolis
-	p = Potential(-mu, lambda_)
-
-	de = deltaEnergy(p, mass, tau)
 
 	init = initial if initial != None else -distance
 
-	m = Metropolis(de, init=init, valWidth=1, initValWidth=initial_random, hbar=hbar, tau=tau, N=N)
+	m = Metropolis(init=init, valWidth=1, initValWidth=initial_random, hbar=hbar, tau=tau, N=N, m=mass, lambda_=lambda_, mu=-mu)
 
 	vals = next(islice(m, iteration, iteration + 1))			# get iterations th metropolis iteration
 	transitions = countTransitions(vals[0])

@@ -81,11 +81,12 @@ bins = np.arange(bins_min, bins_max + bins_step, bins_step)
 def calculatePositionDistribution(hbar):
 	print("calculating for hbar=%0.4f" % hbar)
 	# generate objects related to metropolis
-	p = Potential(-mu, lambda_)
+	#p = Potential(-mu, lambda_)
 
-	de = deltaEnergy(p, mass, tau)
+	#de = deltaEnergy(p, mass, tau)
 
-	m = Metropolis(de, init=initial, valWidth=1, initValWidth=initial_random, hbar=hbar, tau=tau, N=N)
+	#m = Metropolis(de, init=initial, valWidth=1, initValWidth=initial_random, hbar=hbar, tau=tau, N=N)
+	m = Metropolis(init=initial, valWidth=1, initValWidth=initial_random, hbar=hbar, tau=tau, N=N, m=mass, lambda_=lambda_, mu=-mu)
 
 	vals = next(islice(m, iterations, iterations + 1))			# get iterations th metropolis iteration
 	return list(np.histogram(vals[0], bins)[0]), vals[1]

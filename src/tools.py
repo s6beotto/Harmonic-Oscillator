@@ -3,8 +3,18 @@ from pathlib import Path
 import os
 from cycler import cycler
 
+import ctypes
+from ctypes import cdll
+
 def getRootDirectory():
 	return Path(os.path.dirname(os.path.realpath(__file__))).parent
+
+libmetropolis = cdll.LoadLibrary(getRootDirectory() / 'src' / 'libmetropolis.so')
+libmetropolis.metropolis.argtypes = (ctypes.c_int, ctypes.POINTER(ctypes.c_double), ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double)
+libmetropolis.metropolis.restype = ctypes.POINTER(ctypes.c_double)
+
+libmetropolis.get_accept_ratio.argtypes = ()
+libmetropolis.get_accept_ratio.restype = ctypes.c_double
 
 def getMinima(lambda_):
 	# mimina at +/- sqrt(-a/(2b))
@@ -77,9 +87,9 @@ def deltaEnergy(potential, m, tau):
 		return potential(x_new) - potential(x_old) + m / tau ** 2 * (x_new ** 2 - x_old ** 2 - (x[index - 1] + x[(index + 1) % len(x)]) * (x_new - x_old))
 	return wrapper
 
-class Metropolis:
+class MetropolisPython:
 	# Metropolis algorithm
-	def __init__(self, deltaEnergy, init=0, initValWidth=1, valWidth=1, periodic=True, N=100, hbar=1, tau=0.1):
+	def __init__(self, init=0, initValWidth=1, valWidth=1, periodic=True, N=100, hbar=1, tau=0.1, m=1.0, lambda_=0, mu = 1.0):
 		if type(init) in [float, int, np.float64]:
 			self.values = np.random.normal(size=N, loc=init, scale=initValWidth)
 		else:
@@ -88,12 +98,17 @@ class Metropolis:
 		if periodic:
 			self.values[-1] = self.values[0]
 
-		self.deltaEnergy = deltaEnergy
+		self.potential = Potential(mu, lambda_)
+
+		self.deltaEnergy = deltaEnergy(self.potential, m, tau)
 		self.valWidth = valWidth
 		self.periodic = periodic
 		self.N = N
 		self.hbar = hbar
 		self.tau = tau
+		self.mass = m
+		self.mu = mu
+		self.lambda_ = lambda_
 
 	def __next__(self):
 		start = 1 if self.periodic else 0
@@ -123,6 +138,43 @@ class Metropolis:
 
 	def __iter__(self):
 		return self
+
+class MetropolisC:
+	# Metropolis algorithm
+	def __init__(self, init=0, initValWidth=1, valWidth=1, periodic=True, N=100, hbar=1, tau=0.1, m=1.0, lambda_=0, mu = 1.0):
+		if type(init) in [float, int, np.float64]:
+			self.values = np.random.normal(size=N, loc=init, scale=initValWidth)
+		else:
+			self.values = np.array(init)
+			N = len(self.values)
+		if periodic:
+			self.values[0] = self.values[-1]
+
+		self.valWidth = valWidth
+		self.periodic = periodic
+		self.N = N
+		self.hbar = hbar
+		self.tau = tau
+		self.mass = m
+		self.mu = mu
+		self.lambda_ = lambda_
+
+	def __next__(self):
+		num_numbers = len(self.values)
+		array_type = ctypes.c_double * num_numbers
+		result = libmetropolis.metropolis(ctypes.c_int(num_numbers - 1), array_type(*self.values[1:]), ctypes.c_double(self.valWidth), ctypes.c_double(self.mass), ctypes.c_double(self.tau), ctypes.c_double(self.mu), ctypes.c_double(self.lambda_), ctypes.c_double(self.hbar))
+		accept_ratio = libmetropolis.get_accept_ratio()
+		libmetropolis.reset_ratio()
+		self.values = np.ctypeslib.as_array(result, shape=(num_numbers - 1, ))
+		if self.periodic:
+			self.values = np.insert(self.values, 0, self.values[-1])
+		return self.values, accept_ratio
+
+	def __iter__(self):
+		return self
+
+Metropolis = MetropolisC
+#Metropolis = MetropolisPython
 
 if __name__ == '__main__':
 	# Test Case getMinima, distanceToParameter

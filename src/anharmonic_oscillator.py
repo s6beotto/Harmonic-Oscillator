@@ -52,11 +52,9 @@ parameters = [
 			]
 
 # generate objects related to metropolis
-p = Potential(-mu, lambda_)
 
-de = deltaEnergy(p, mass, tau)
-
-m = Metropolis(de, init=initial, valWidth=1, initValWidth=initial_random, hbar=hbar, tau=tau, N=N)
+#m = Metropolis(de, init=initial, valWidth=1, initValWidth=initial_random, hbar=hbar, tau=tau, N=N)
+m = Metropolis(init=initial, valWidth=1, initValWidth=initial_random, hbar=hbar, tau=tau, N=N, m=mass, lambda_=lambda_, mu=-mu)
 
 # filesystem stuff
 root_path = getRootDirectory()
