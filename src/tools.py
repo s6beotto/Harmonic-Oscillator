@@ -125,13 +125,6 @@ class Metropolis:
 		return self
 
 if __name__ == '__main__':
-	# Test Case TransitionCounter
-	tC = TransitionCounter()
-	values = np.random.uniform(-1, 1, 10)
-	for v in values:
-		tC.registerValue(v)
-	print(tC.getTransitions(), values)
-
 	# Test Case getMinima, distanceToParameter
 	for d in range(1, 17):
 		print(distanceToParameter(d), 2 * getMinima(distanceToParameter(d)))
