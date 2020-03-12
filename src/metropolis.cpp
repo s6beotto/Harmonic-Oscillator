@@ -40,6 +40,7 @@ std::default_random_engine generator(seed);
 
 double * result;
 
+// loop function of the metropolis algorithm implemented in C++
 double * metropolis(int num_numbers, double *numbers, double val_width, double m, double tau, double mu, double lambda, double hbar) {
 	std::normal_distribution<double> n_distribution(0, val_width);
 	std::uniform_real_distribution<double> lin_distribution(0, 1);
