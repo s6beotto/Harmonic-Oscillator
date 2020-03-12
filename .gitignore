@@ -16,7 +16,11 @@ Report/report.pdf
 *.snm
 *.synctex.gz
 *.toc
-presentation/slides.pdf
+
+# ignore compiled libraries
+*.o
+*.so
+
 
 data/*
 imgs/*
