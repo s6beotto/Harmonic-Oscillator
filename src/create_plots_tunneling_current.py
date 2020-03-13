@@ -40,6 +40,9 @@ with full_path.open('r') as csvfile:
 		distances.append(float(row[0]))
 		transitions.append(int(row[-1]))
 
+distances = np.array(distances)
+transitions = np.array(transitions)
+
 plt.figure()
 
 config = configparser.ConfigParser()
@@ -47,7 +50,14 @@ config.read(full_path.with_suffix('.cfg'))
 
 
 # plot
-plt.errorbar(distances, transitions, fmt='.')
+config = configparser.ConfigParser()
+config.read(full_path.with_suffix('.cfg'))
+
+
+# read config from respective file
+N = config['DEFAULT'].getfloat('n', fallback=100)
+
+plt.errorbar(distances, transitions / N, fmt='.')
 plt.xlabel('Distance')
 plt.ylabel('Tunneling rate')
 
