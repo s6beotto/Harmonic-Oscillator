@@ -43,19 +43,14 @@ with full_path.open('r') as csvfile:
 distances = np.array(distances)
 transitions = np.array(transitions)
 
-plt.figure()
-
+# read config from respective file
 config = configparser.ConfigParser()
 config.read(full_path.with_suffix('.cfg'))
 
+N = config['DEFAULT'].getfloat('n', fallback=100)
 
 # plot
-config = configparser.ConfigParser()
-config.read(full_path.with_suffix('.cfg'))
-
-
-# read config from respective file
-N = config['DEFAULT'].getfloat('n', fallback=100)
+plt.figure()
 
 plt.errorbar(distances, transitions / N, fmt='.')
 plt.xlabel('Distance')
