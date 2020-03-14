@@ -44,12 +44,11 @@ double * result;
 double * metropolis(int num_numbers, double *numbers, double val_width, double m, double tau, double mu, double lambda, double hbar) {
 	std::normal_distribution<double> n_distribution(0, val_width);
 	std::uniform_real_distribution<double> lin_distribution(0, 1);
-    int i;
 
 	// allocate space to fit the result
 	result = (double *) malloc(num_numbers * sizeof (double));
 
-    for (i = 0; i < num_numbers; i++) {
+    for (int i = 0; i < num_numbers; i++) {
 		double old_x = numbers[i];
 		double new_x = old_x + n_distribution(generator);
 
