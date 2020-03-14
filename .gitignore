@@ -24,4 +24,5 @@ Report/report.pdf
 
 data/*
 imgs/*
+bin/*
 _build
