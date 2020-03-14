@@ -117,3 +117,14 @@ double * metropolis(int num_numbers, double *numbers, double val_width, double m
 	total += num_numbers;
     return result;
 }
+
+// chech
+double * potential_check(int num_numbers, double start, double stop, double mu, double lambda)
+	{
+	result = (double *) malloc(num_numbers * sizeof (double));
+	for (int i=0; i<=num_numbers; i++)
+		{
+		result[i] = potential(start + ((stop - start) * i) / num_numbers, mu, lambda);
+		}
+	return result;
+	}
