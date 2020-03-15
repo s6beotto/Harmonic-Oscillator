@@ -11,6 +11,8 @@ The scripts depend on various libraries, presented below. These have to be insta
 | pathlib      | Library containing convenient classes to handle files and directories  |
 | configparser | Used to handle command line parameters                                 |
 | statsmodels  | Library that contains function for statistical analysis, i.e. qq plots |
+| cycler       | Library used to deal with the color scheme                             |
+| matplotlib   | Library that creates most of the plots                                 |
 
 ## Installation
 The above mentioned libraries can be installed using the following command:
