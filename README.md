@@ -15,10 +15,10 @@ The scripts depend on various libraries, presented below. These have to be insta
 | matplotlib   | Library that creates most of the plots                                 | 3.0.2-2        |
 
 ## Dependencies
-The above mentioned libraries can be installed using the following command. Additionally `make` and `g++` are needed.
+The above mentioned libraries can be installed using the following command. Additionally `make`, `g++` and obviously `python3` are needed.
 ```bash
 pip3 install numpy scipy pathlib configparser statsmodels cycler
-apt install make g++ python3-matplotlib
+apt install make g++ python3 python3-matplotlib
 ```
 `matplotlib` should be installed via a package manager, since the pypy version has some bugs leading to error massages.
 
