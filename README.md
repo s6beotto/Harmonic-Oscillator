@@ -14,7 +14,7 @@ The scripts depend on various libraries, presented below. These have to be insta
 | cycler       | Library used to deal with the color scheme                             | 0.10.0         |
 | matplotlib   | Library that creates most of the plots                                 | 3.0.2-2        |
 
-## Installation
+## Dependencies
 The above mentioned libraries can be installed using the following command:
 ```bash
 pip3 install numpy scipy pathlib configparser statsmodels cycler
