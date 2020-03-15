@@ -4,15 +4,15 @@ This Repository holds everything that was programmed for the project 'Harmonic O
 
 ## Prerequisites
 The scripts depend on various libraries, presented below. These have to be installed for the used Python Version. Python 3 was used for development, which is the recommended version to run these scripts.
-| Library      |     Description                                                        |
-|--------------|------------------------------------------------------------------------|
-| numpy        |  Library containing a lot of function regarding numerical calculations |
-| scipy        |    Library scientific library, contains for example fit algorithms     |
-| pathlib      | Library containing convenient classes to handle files and directories  |
-| configparser | Used to handle command line parameters                                 |
-| statsmodels  | Library that contains function for statistical analysis, i.e. qq plots |
-| cycler       | Library used to deal with the color scheme                             |
-| matplotlib   | Library that creates most of the plots                                 |
+| Library      |     Description                                                        | Tested Version |
+|--------------|------------------------------------------------------------------------|----------------|
+| numpy        |  Library containing a lot of function regarding numerical calculations | 1.16.2         |
+| scipy        |    Library scientific library, contains for example fit algorithms     | 1.1.0          |
+| pathlib      | Library containing convenient classes to handle files and directories  | 1.0.1          |
+| configparser | Used to handle command line parameters                                 | 3.0.2          |
+| statsmodels  | Library that contains function for statistical analysis, i.e. qq plots | 0.11.1         |
+| cycler       | Library used to deal with the color scheme                             | 0.10.0         |
+| matplotlib   | Library that creates most of the plots                                 | 3.0.2-2        |
 
 ## Installation
 The above mentioned libraries can be installed using the following command:
