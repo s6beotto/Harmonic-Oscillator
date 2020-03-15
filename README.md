@@ -3,7 +3,7 @@
 This Repository holds everything that was programmed for the project 'Harmonic Oscillator', part of the module physics760: Computational Physics.
 
 ## Prerequisites
-The scripts depend on various libraries, presented below. These have to be installed for the used Python Version. Python 3 was used for development, which is the recommended version to run these scripts.
+The scripts depend on various libraries, presented below. These have to be installed for the used Python Version. Python 3 (3.7.3 Dec 20 2019) was used for development, which is the recommended version to run these scripts.
 | Library      |     Description                                                        | Tested Version |
 |--------------|------------------------------------------------------------------------|----------------|
 | numpy        |  Library containing a lot of function regarding numerical calculations | 1.16.2         |
