@@ -178,13 +178,3 @@ class MetropolisC:
 # choose one of the implementations
 Metropolis = MetropolisC
 #Metropolis = MetropolisPython
-
-if __name__ == '__main__':
-	# Test Case getMinima, distanceToParameter
-	for d in range(1, 17):
-		print(distanceToParameter(d), 2 * getMinima(distanceToParameter(d)))
-
-	# Test Case bootstrap:
-	#values = np.random.normal(loc=0, scale=1, size=100)
-	#bootstrap_values = bootstrap(10000, values)
-	#print(bootstrap_values)
