@@ -23,3 +23,36 @@ pip3 install numpy scipy pathlib configparser statsmodels cycler
 `matplotlib` should be installed via a package manager, since the pypy version has some bugs leading to error massages.
 
 The libraries basically have corresponding functions in `R`. Every function that is not present in `R` has been programmed manually in `tools.py`.
+
+## Usage
+When all the dependencies are installed one can start the software.
+First of all, the `C` library has to be compiled.
+For this one can use the makefile as following
+```bash
+make compile
+```
+The `C` version of the central algorithm is roughly 8 times faster than the `Python` version.
+To explicitly use the `Python` version, the comment in the last line has to be removed, a compile is thus not necessary.
+
+To run the software simply use
+```bash
+make
+```
+This generates firstly all data file in the `data` directory, then generates plots in the `imgs` directory and finally assembles the final report in the `_build` directory.
+
+Since many of the required steps are independent, one can use the multi processing feature of make as:
+```bash
+make -j
+```
+This causes make to run with many processes in parallel, depending on the number of logical CPU cores. On my quad-core processor (Intel i7-4770) this process took around 2.5 minutes and used a peak of around 7GB of RAM and 100% CPU load.
+To reduce this one can reduce the number of processes by adding an argument as follows:
+
+```bash
+make -j <num_processes>
+```
+This should reduce the CPU load and the peak RAM usage.
+
+To clean up the directory simply type
+```bash
+make clean
+```
