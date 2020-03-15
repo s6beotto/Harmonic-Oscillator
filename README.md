@@ -17,7 +17,9 @@ The scripts depend on various libraries, presented below. These have to be insta
 ## Installation
 The above mentioned libraries can be installed using the following command:
 ```bash
-pip3 install numpy scipy pathlib configparser statsmodels
+pip3 install numpy scipy pathlib configparser statsmodels cycler
+apt install python3-matplotlib
 ```
+`matplotlib` should be installed via a package manager, since the pypy version has some bugs leading to error massages.
 
 The libraries basically have corresponding functions in `R`. Every function that is not present in `R` has been programmed manually in `tools.py`.
