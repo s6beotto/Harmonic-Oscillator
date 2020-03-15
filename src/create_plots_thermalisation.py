@@ -94,6 +94,8 @@ energy, denergy = np.mean(to_use), np.std(to_use)
 xdata_cut = xdata[start::30]
 ydata_cut = autoCorrelationNormalized(ydata[start::30], np.arange(len(xdata_cut)))
 
+out_filename.parent.mkdir(parents=True, exist_ok=True)
+
 # create autocorrelation plot
 plt.figure()
 plt.errorbar(xdata_cut, ydata_cut)
@@ -109,8 +111,6 @@ plt.ylabel('Energy')
 if args.log:
 	plt.yscale('log')
 plt.legend()
-
-out_filename.parent.mkdir(parents=True, exist_ok=True)
 
 # write to disk
 plt.savefig(out_filename)
