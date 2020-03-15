@@ -196,7 +196,7 @@ $(PRE)%1001000_bad.csv:
 $(tex_): $(build)
 	cp $(tex) $(tex_)
 
-$(build)/packages.tex:
+$(build)/packages.tex: $(build)
 	cp Report/packages.tex $(build)/packages.tex
 
 $(out): $(tex_) $(build) $(plots) $(build)/packages.tex
