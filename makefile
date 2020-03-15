@@ -54,8 +54,7 @@ plots = imgs/harmonic_oscillator_track/track_10001000_track_1.pdf imgs/harmonic_
 		imgs/anharmonic_oscillator_lambda_parameter/track_100001000_tunneling_current.pdf \
 
 
-all: $(out) $(out_slides)
-	@echo $(out) $(out_slides)
+all: $(out)# $(out_slides)
 
 
 imgs/%_track_1.pdf: data/%.csv
