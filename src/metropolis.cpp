@@ -41,14 +41,22 @@ std::default_random_engine generator(seed);
 double * result;
 
 // loop function of the metropolis algorithm implemented in C++
-double * metropolis(int num_numbers, double *numbers, double val_width, double m, double tau, double mu, double lambda, double hbar) {
+double * metropolis(int num_numbers, double *numbers, double val_width, double m, double tau, double mu, double lambda, double hbar, bool periodic) {
 	std::normal_distribution<double> n_distribution(0, val_width);
 	std::uniform_real_distribution<double> lin_distribution(0, 1);
 
 	// allocate space to fit the result
 	result = (double *) malloc(num_numbers * sizeof (double));
 
-    for (int i = 0; i < num_numbers; i++) {
+	int start = 0;
+	if (periodic)
+		{
+		int n = num_numbers - 1;
+		numbers[n] = numbers[0];
+		start = 1;
+		}
+
+    for (int i = start; i < num_numbers; i++) {
 		double old_x = numbers[i];
 		double new_x = old_x + n_distribution(generator);
 
@@ -74,10 +82,15 @@ double * metropolis(int num_numbers, double *numbers, double val_width, double m
 				// reject
 				result[i] = old_x;
 			}
+		}
+    }
 
+	if (periodic)
+		{
+		int n = num_numbers - 1;
+		result[0] = result[n];
 		}
 
-    }
 	total += num_numbers;
     return result;
 }

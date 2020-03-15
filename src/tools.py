@@ -166,12 +166,10 @@ class MetropolisC:
 	def __next__(self):
 		num_numbers = len(self.values)
 		array_type = ctypes.c_double * num_numbers
-		result = libmetropolis.metropolis(ctypes.c_int(num_numbers - 1), array_type(*self.values[1:]), ctypes.c_double(self.valWidth), ctypes.c_double(self.mass), ctypes.c_double(self.tau), ctypes.c_double(self.mu), ctypes.c_double(self.lambda_), ctypes.c_double(self.hbar))
+		result = libmetropolis.metropolis(ctypes.c_int(num_numbers), array_type(*self.values), ctypes.c_double(self.valWidth), ctypes.c_double(self.mass), ctypes.c_double(self.tau), ctypes.c_double(self.mu), ctypes.c_double(self.lambda_), ctypes.c_double(self.hbar), ctypes.c_bool(self.periodic))
 		accept_ratio = libmetropolis.get_accept_ratio()
 		libmetropolis.reset_ratio()
-		self.values = np.ctypeslib.as_array(result, shape=(num_numbers - 1, ))
-		if self.periodic:
-			self.values = np.insert(self.values, 0, self.values[-1])
+		self.values = np.ctypeslib.as_array(result, shape=(num_numbers, ))
 		return self.values, accept_ratio
 
 	def __iter__(self):
