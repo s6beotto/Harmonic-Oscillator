@@ -134,6 +134,65 @@ def deltaEnergy(potential, m, tau):
 		return potential(x_new) - potential(x_old) + m / tau ** 2 * (x_new ** 2 - x_old ** 2 - (x[index - 1] + x[(index + 1) % len(x)]) * (x_new - x_old))
 	return wrapper
 
+
+class MetropolisPythonRandom:
+	'''
+	Metropolis algorithm using the pure python
+	'''
+	def __init__(self, random_gauss, random_uniform, init=0, initValWidth=1, valWidth=1, periodic=True, N=100, hbar=1, tau=0.1, m=1.0, lambda_=0, mu = 1.0):
+		if type(init) in [float, int, np.float64]:
+			self.values = np.random.normal(size=N, loc=init, scale=initValWidth)
+		else:
+			self.values = np.array(init)
+			N = len(self.values)
+		if periodic:
+			self.values[-1] = self.values[0]
+
+		self.potential = Potential(mu, lambda_)
+
+		self.deltaEnergy = deltaEnergy(self.potential, m, tau)
+		self.valWidth = valWidth
+		self.periodic = periodic
+		self.N = N
+		self.hbar = hbar
+		self.tau = tau
+		self.mass = m
+		self.mu = mu
+		self.lambda_ = lambda_
+		self.random_gauss = random_gauss
+		self.random_uniform = random_uniform
+
+	def __next__(self):
+		start = 1 if self.periodic else 0
+		stop = self.N
+		accepted = 0
+
+		#for i in range(len(self.values)):
+		#	print(i, self.values[i])
+
+		# precalculate random variables
+		for i in range(start, stop):
+			newvalue = self.random_gauss[i] + self.values[i]
+			deltaEnergy = self.deltaEnergy(self.values, self.values[i], newvalue, i)
+			#print(self.random_gauss[i], self.random_uniform[i], deltaEnergy, self.values[i - 1], self.values[(i + 1) % self.N], i)
+			if deltaEnergy < 0:
+				self.values[i] = newvalue
+				accepted += 1
+				# accept it
+
+			elif np.exp(- self.tau * deltaEnergy / self.hbar) > self.random_uniform[i]:
+				self.values[i] = newvalue
+				accepted += 1
+				# accept it
+
+				# reject
+		if self.periodic:
+			self.values[0] = self.values[-1]
+		return self.values, accepted / (stop - start)
+
+	def __iter__(self):
+		return self
+
 class MetropolisPython:
 	'''
 	Metropolis algorithm using the pure python

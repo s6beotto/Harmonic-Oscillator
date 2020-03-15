@@ -74,7 +74,7 @@ void allocate_memory(int maxlength) {
 }
 
 // loop function of the metropolis algorithm implemented in C++
-double * metropolis(int num_numbers, double *numbers, double val_width, double m, double tau, double mu, double lambda, double hbar) {
+double * metropolis(int num_numbers, double *numbers, double val_width, double m, double tau, double mu, double lambda, double hbar, bool periodic) {
 	std::normal_distribution<double> n_distribution(0, val_width);
 	std::uniform_real_distribution<double> lin_distribution(0, 1);
 
@@ -112,7 +112,67 @@ double * metropolis(int num_numbers, double *numbers, double val_width, double m
 		}
     }
 
-	result[0] = result[num_numbers - 1];
+	if (periodic)
+		{
+		int n = num_numbers - 1;
+		result[0] = result[n];
+		}
+	total += num_numbers;
+    return result;
+}
+
+// loop function of the metropolis algorithm implemented in C++
+double * metropolis_Random(int num_numbers, double *numbers, double *random_gauss, double *random_uniform, double val_width, double m, double tau, double mu, double lambda, double hbar, bool periodic) {
+
+	// allocate space to fit the result
+	result = (double *) malloc(num_numbers * sizeof (double));
+
+	if (periodic)
+		{
+		int n = num_numbers - 1;
+		numbers[n] = numbers[0];
+		}
+
+	int start = 0;
+	if (periodic)
+		start = 1;
+
+    for (int i = start; i < num_numbers; i++) {
+		double old_x = numbers[i];
+		double new_x = old_x + random_gauss[i];
+
+		// energy difference
+		double d_energy = delta_energy(numbers[i - 1], numbers[(i + 1) % num_numbers], new_x, old_x, m, tau, mu, lambda);
+
+		//printf("%f %f %f %f %f %d\n", random_gauss[i], random_uniform[i], d_energy, numbers[i - 1], numbers[(i + 1) % num_numbers], i);
+
+		if (d_energy < 0)
+		{
+			// accept
+			result[i] = new_x;
+			accepted ++;
+		}
+		else
+		{
+			if (exp(- tau * d_energy / hbar) > random_uniform[i])
+			{
+				// accept
+				result[i] = new_x;
+				accepted ++;
+			}
+			else
+			{
+				// reject
+				result[i] = old_x;
+			}
+		}
+    }
+
+	if (periodic)
+		{
+		int n = num_numbers - 1;
+		result[0] = result[n];
+		}
 
 	total += num_numbers;
     return result;

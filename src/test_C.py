@@ -1,4 +1,4 @@
-from tools import getRootDirectory, Potential, deltaEnergy
+from tools import getRootDirectory, Potential, deltaEnergy, MetropolisPythonRandom
 import ctypes
 from ctypes import cdll
 import numpy as np
@@ -6,6 +6,9 @@ import numpy as np
 libmetropolis = cdll.LoadLibrary(getRootDirectory() / 'bin' / 'libmetropolis.so')
 libmetropolis.metropolis.argtypes = (ctypes.c_int, ctypes.POINTER(ctypes.c_double), ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double)
 libmetropolis.metropolis.restype = ctypes.POINTER(ctypes.c_double)
+
+libmetropolis.metropolis_Random.argtypes = (ctypes.c_int, ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_bool)
+libmetropolis.metropolis_Random.restype = ctypes.POINTER(ctypes.c_double)
 
 libmetropolis.get_accept_ratio.argtypes = ()
 libmetropolis.get_accept_ratio.restype = ctypes.c_double
@@ -37,6 +40,7 @@ mass = 1.0
 tau = 0.1
 pot = Potential(mu, lambda_)
 dEnergy = deltaEnergy(pot, mass, tau)
+hbar = 1.0
 
 values_P = []
 values_C = []
@@ -56,3 +60,23 @@ values_C = np.array(values_C)
 
 
 print(min((values_C + 0.00001) / (values_P + 0.00001)), max((values_C + 0.00001) / (values_P + 0.00001)))
+
+values = np.random.normal(loc=0.0, scale=10.0, size=1000)
+
+
+N = 10
+values = np.random.normal(loc=0.0, scale=10.0, size=N)
+random_gauss = np.random.normal(loc=0.0, scale=1.0, size=N)
+random_uniform = np.random.uniform(0, 1, size=N)
+
+m = MetropolisPythonRandom(random_gauss, random_uniform, init=values, valWidth=1, initValWidth=0, hbar=hbar, tau=tau, N=N, m=mass, lambda_=0, mu=mu)
+newvalues_P = np.array(next(m)[0])
+#print(newvalues_P[0])
+
+array_type = ctypes.c_double * N
+result = libmetropolis.metropolis_Random(ctypes.c_int(N), array_type(*values), array_type(*random_gauss), array_type(*random_uniform), ctypes.c_double(1), ctypes.c_double(mass), ctypes.c_double(tau), ctypes.c_double(mu), ctypes.c_double(lambda_), ctypes.c_double(hbar), ctypes.c_bool(True))
+newvalues_C = np.ctypeslib.as_array(result, shape=(N, ))
+#print(newvalues_C)
+
+
+print(min((newvalues_C + 0.00001) / (newvalues_P + 0.00001)), max((newvalues_C + 0.00001) / (newvalues_P + 0.00001)))
