@@ -1,7 +1,0 @@
-- reproduce harmonic oscillator, implemented
-- anharmonic oscillator (tunneling behaviour), implemented
-- classical limit: hbar -> 0, implemented
-- higher energy levels than 1 and 2
-- 2D case
-- 3D case
-- tunneling behaviour in classical limit
