@@ -2,7 +2,7 @@
 
 # import modules
 from matplotlib import pyplot as plt
-from tools import getRootDirectory
+from tools import getRootDirectory, getOutputFilename
 import csv
 import numpy as np
 
@@ -51,14 +51,9 @@ for num, iteration in enumerate(iterations_used):
 	plt.ylabel('Position $- n$')
 plt.legend()
 
-out_filename = root_path / 'imgs' / relative_path
-out_filename.parent.mkdir(parents=True, exist_ok=True)
 
-out_filename = out_filename.with_suffix('')
-out_filename = pathlib.Path('%s_track_shifted_%s' %(out_filename, '-'.join([str(i) for i in iterations_used])))
-if args.output:
-	out_filename = args.output
-out_filename.parent.mkdir(parents=True, exist_ok=True)
+# filesystem stuff
+out_filename = getOutputFilename(relative_path, 'track_shifted_%s' %('-'.join([str(i) for i in iterations_used])), args.output)
 
 # write to disk
 plt.savefig(out_filename)

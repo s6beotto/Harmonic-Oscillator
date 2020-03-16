@@ -2,7 +2,7 @@
 
 # import modules
 from matplotlib import pyplot as plt
-from tools import getRootDirectory, Energy, Kinetic, Potential, autoCorrelationNormalized, countTransitions
+from tools import getRootDirectory, Energy, Kinetic, Potential, autoCorrelationNormalized, countTransitions, getOutputFilename
 import csv
 import numpy as np
 
@@ -74,12 +74,9 @@ print(start)
 
 to_use = ydata[start::30]
 
+
 # filesystem stuff
-out_filename = root_path / 'imgs' / relative_path
-out_filename = out_filename.with_suffix('')
-out_filename = pathlib.Path('%s_tunneling_current_thermalisation.pdf' %(out_filename))
-if args.output:
-	out_filename = args.output
+out_filename = getOutputFilename(relative_path, 'tunneling_current_thermalisation', args.output)
 out_filename_autocorrelation = pathlib.Path('%s_autocorrelation.pdf' %out_filename.with_suffix(''))
 
 # calculate tunneling current

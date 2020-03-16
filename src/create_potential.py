@@ -33,7 +33,6 @@ plt.xlabel('Distance')
 plt.ylabel('Potential energy')
 
 out_filename = root_path / ('imgs/potential/%s_%f.pdf' %('harm' if args.harmonic else 'anharm', d))
-out_filename.parent.mkdir(parents=True, exist_ok=True)
 
 if args.output:
 	out_filename = args.output

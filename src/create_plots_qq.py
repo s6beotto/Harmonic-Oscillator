@@ -2,7 +2,7 @@
 
 # import modules
 from matplotlib import pyplot as plt
-from tools import getRootDirectory, getColorIterator
+from tools import getRootDirectory, getColorIterator, getOutputFilename
 import csv
 import numpy as np
 import statsmodels.api as sm
@@ -52,14 +52,9 @@ d = data[iteration - 1]
 # create qq plot
 sm.qqplot(d, dist='norm')
 
-out_filename = root_path / 'imgs' / relative_path
-out_filename.parent.mkdir(parents=True, exist_ok=True)
 
-out_filename = out_filename.with_suffix('')
-out_filename = pathlib.Path('%s_qq_%d' %(out_filename, iteration))
-if args.output:
-	out_filename = args.output
-out_filename.parent.mkdir(parents=True, exist_ok=True)
+# filesystem stuff
+out_filename = getOutputFilename(relative_path, 'qq_%d' %iteration, args.output)
 
 # write to disk
 plt.savefig(out_filename)

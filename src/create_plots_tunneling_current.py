@@ -2,7 +2,7 @@
 
 # import modules
 from matplotlib import pyplot as plt
-from tools import getRootDirectory, Energy, Kinetic, Potential, bootstrap
+from tools import getRootDirectory, getOutputFilename
 import csv
 import numpy as np
 
@@ -57,13 +57,8 @@ plt.xlabel('Distance')
 plt.ylabel('Tunneling rate')
 
 
-out_filename = root_path / 'imgs' / relative_path
-
-out_filename = out_filename.with_suffix('')
-out_filename = pathlib.Path('%s_tunneling_current.pdf' %(out_filename))
-if args.output:
-	out_filename = args.output
-out_filename.parent.mkdir(parents=True, exist_ok=True)
+# filesystem stuff
+out_filename = getOutputFilename(relative_path, 'tunneling_current', args.output)
 
 # write to disk
 plt.savefig(out_filename)

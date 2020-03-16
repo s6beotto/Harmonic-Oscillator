@@ -2,7 +2,7 @@
 
 # import modules
 from matplotlib import pyplot as plt
-from tools import getRootDirectory, getColorIterator, autoCorrelationNormalized, getIntegratedCorrelationTime
+from tools import getRootDirectory, getColorIterator, autoCorrelationNormalized, getIntegratedCorrelationTime, getOutputFilename
 import csv
 import numpy as np
 
@@ -82,11 +82,8 @@ plt.xlim(-0.1, 1)
 plt.legend()
 
 
-out_filename = root_path / 'imgs' / relative_path
-out_filename.parent.mkdir(parents=True, exist_ok=True)
-
-out_filename = out_filename.with_suffix('')
-out_filename = pathlib.Path('%s_autocorrelation_%s' %(out_filename, '-'.join([str(i) for i in iterations_used])))
+# filesystem stuff
+out_filename = getOutputFilename(relative_path, 'autocorrelation_%s' %('-'.join([str(i) for i in iterations_used])), args.output)
 
 if args.output:
 	out_filename = args.output

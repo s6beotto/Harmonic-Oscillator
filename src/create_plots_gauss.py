@@ -2,7 +2,7 @@
 
 # import modules
 from matplotlib import pyplot as plt
-from tools import getRootDirectory, getColorIterator
+from tools import getRootDirectory, getColorIterator, getOutputFilename
 import csv
 import numpy as np
 import scipy.optimize as op
@@ -79,13 +79,9 @@ plt.xlabel('Position')
 plt.ylabel('Number')
 plt.legend()
 
-out_filename = root_path / 'imgs' / relative_path
 
-out_filename = out_filename.with_suffix('')
-out_filename = pathlib.Path('%s_gauss_%s.pdf' %(out_filename, '-'.join([str(i) for i in iterations_used])))
-if args.output:
-	out_filename = args.output
-out_filename.parent.mkdir(parents=True, exist_ok=True)
+# filesystem stuff
+out_filename = getOutputFilename(relative_path, 'gauss_%s' %('-'.join([str(i) for i in iterations_used])), args.output)
 
 # write to disk
 plt.savefig(out_filename)

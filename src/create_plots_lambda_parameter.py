@@ -3,7 +3,7 @@
 # import modules
 from matplotlib import pyplot as plt
 from matplotlib.colors import LogNorm
-from tools import getRootDirectory
+from tools import getRootDirectory, getOutputFilename
 import csv
 
 import argparse
@@ -64,14 +64,9 @@ plt.ylabel('minima distance')
 
 plt.legend()
 
-out_filename = root_path / 'imgs' / relative_path
-out_filename.parent.mkdir(parents=True, exist_ok=True)
 
-out_filename = out_filename.with_suffix('')
-out_filename = pathlib.Path('%s_lambda' %(out_filename))
-if args.output:
-	out_filename = args.output
-out_filename.parent.mkdir(parents=True, exist_ok=True)
+# filesystem stuff
+out_filename = getOutputFilename(relative_path, 'lambda', args.output)
 
 # write to disk
 plt.savefig(out_filename)

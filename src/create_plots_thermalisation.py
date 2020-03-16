@@ -2,7 +2,7 @@
 
 # import modules
 from matplotlib import pyplot as plt
-from tools import getRootDirectory, Energy, Kinetic, Potential, autoCorrelationNormalized
+from tools import getRootDirectory, Energy, Kinetic, Potential, autoCorrelationNormalized, getOutputFilename
 import csv
 import numpy as np
 
@@ -80,12 +80,9 @@ else:
 
 to_use = ydata[start::30]
 
+
 # filesystem stuff
-out_filename = root_path / 'imgs' / relative_path
-out_filename = out_filename.with_suffix('')
-out_filename = pathlib.Path('%s_thermalisation.pdf' %(out_filename))
-if args.output:
-	out_filename = args.output
+out_filename = getOutputFilename(relative_path, 'thermalisation', args.output)
 out_filename_autocorrelation = pathlib.Path('%s_autocorrelation.pdf' %out_filename.with_suffix(''))
 
 # calculate energy
@@ -93,8 +90,6 @@ energy, denergy = np.mean(to_use), np.std(to_use)
 
 xdata_cut = xdata[start::30]
 ydata_cut = autoCorrelationNormalized(ydata[start::30], np.arange(len(xdata_cut)))
-
-out_filename.parent.mkdir(parents=True, exist_ok=True)
 
 # create autocorrelation plot
 plt.figure()
