@@ -84,11 +84,13 @@
 	\section{Summary and Outlook}
 	\begin{thebibliography}{widestlabel}
 		\bibitem{github} Public Github repository: Harmonic Oscillator, Benedikt Otto (s6beotto), \\\url{https://github.com/s6beotto/Harmonic-Oscillator}.
+		\bibitem{latexrun} Public Github repository: latexrun, Austin Clements (aclements), \\\url{https://github.com/aclements/latexrun}.
 		\bibitem{creutz_freedman} M. Creutz and B. Freedman, \textit{A statistical approach to quantum mechanics}, Annals of Physics, \textbf{132}, 427-462 (1981).
 		\bibitem{rodgers_raes} R. Rodgers and L. Raes, \textit{Monte Carlo simulations of harmonic and anharmonic oscillators in discrete Euclidean time}, DESY Summer Student Programme (2014).
 	\end{thebibliography}
 	\appendix
 	\section{Directory structure}
+	\subsection{Data generation}
 	\begin{figure}[H]
 		\centering
 		\begin{tikzpicture}
@@ -107,7 +109,29 @@
 		\draw [->, very thick, red] (data) -- (imgs) node[midway,above] {plotting};
 		\draw [->, thick, blue] (src.east) + (0,-3mm) -| (4, -3);
 		\end{tikzpicture}
-		\caption{Directory structure of the project}
-		\label{fig:schematic_parasit_capacity}
+		\caption{Directory structure of the project for data generation}
+		\label{fig:scheme_dirs_data_generation}
 	\end{figure}
+	\subsection{Report generation}
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}
+		\draw[color=black, thick]
+		node[draw,minimum width=2cm,minimum height=1cm,label=root,rounded corners=0.25cm] (root) at (0, 0){Harmonic-Oscillator}
+		node[draw,minimum width=2cm,minimum height=1cm,rounded corners=0.25cm] (report) at   (-6,  -3){Report/}
+		node[draw,minimum width=2cm,minimum height=1cm,rounded corners=0.25cm] (imgs) at     (-2, -3){imgs/}
+		node[draw,minimum width=2cm,minimum height=1cm,rounded corners=0.25cm] (latexrun) at (2,  -5){latexrun.py}
+		node[draw,minimum width=2cm,minimum height=1cm,rounded corners=0.25cm] (build) at    (6,  -3){build/};
+		\draw [->] (root) -- (report);
+		\draw [->] (root) -- (imgs);
+		\draw [->] (root) -- (latexrun);
+		\draw [->] (root) -- (build);
+		\draw [<-, thick, blue] (latexrun.west) + (0,-3mm) -| (report.south) node[midway,below] {*.tex};
+		\draw [<-, thick, blue] (latexrun.west) + (0, 3mm) -| (imgs.south)   node[midway,below] {*.pdf};
+		\draw [->, thick, blue] (latexrun) -| (build.south)                  node[midway,below] {report.pdf};
+		\end{tikzpicture}
+		\caption{Directory structure of the project for report generation}
+		\label{fig:scheme_dirs_report_generation}
+	\end{figure}
+	The file \verb!latexrun.py! is taken from \cite{latexrun}.
 \end{document}
