@@ -22,7 +22,7 @@ pip3 install numpy scipy pathlib configparser statsmodels cycler
 ```
 `matplotlib` should be installed via a package manager, since the pypy version has some bugs leading to error massages.
 
-The libraries basically have corresponding functions in `R`. Every function that is not present in `R` has been programmed manually in `tools.py`.
+The libraries basically have corresponding functions in `R`. Every function that is present in `R`, but not in `Python` has been programmed manually in `tools.py`.
 
 ## Usage
 When all the dependencies are installed one can start the software.
