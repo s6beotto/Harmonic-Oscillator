@@ -7,6 +7,7 @@ import ctypes
 from ctypes import cdll
 
 def getRootDirectory():
+	# returns the root directory of the project
 	return Path(os.path.dirname(os.path.realpath(__file__))).parent
 
 libmetropolis = cdll.LoadLibrary(getRootDirectory() / 'bin' / 'libmetropolis.so')
@@ -17,6 +18,7 @@ libmetropolis.get_accept_ratio.argtypes = ()
 libmetropolis.get_accept_ratio.restype = ctypes.c_double
 
 def getOutputFilename(relative_path: Path, suffix: str, args_output = None, subdir: str = 'imgs', filetype: str = 'pdf') -> Path:
+	# returns the output filename based on the relative path and command line arguments
 	if args_output != None:
 		args_output.parent.mkdir(parents=True, exist_ok=True)
 		return args_output
@@ -36,16 +38,19 @@ def distanceToParameter(distance):
 	return -1/2 * (distance / 2)**-2
 
 def autoCorrelation(data, xdata):
+	# compute the autocorrelation
 	mean = np.mean(data)
 	d = np.concatenate((data, data))
 	l = len(data)
 	return [1 / (l - i) * np.mean((data - mean) * (d[i:i + l] - mean)) for i in list(xdata)]
 
 def autoCorrelationNormalized(data, xdata):
+	# returns the normalised autocorrelation
 	correlation = autoCorrelation(data, xdata)
 	return correlation / correlation[0]
 
 def getIntegratedCorrelationTime(data, factor = 5):
+	# computes the integrated correlation time
 	tint = data[0]
 	num = 0
 	while num < factor * tint and not num >= len(data):
@@ -57,7 +62,9 @@ def getIntegratedCorrelationTime(data, factor = 5):
 colors_raw = ['1f77b4', 'ff7f0e', '2ca02c', 'd62728', '9467bd', '8c564b', 'e377c2', '7f7f7f', 'bcbd22', '17becf']
 
 def getColorIterator():
+	# returns an iterator, yielding two matching colors
 	def make_lighter(color):
+		# returns the desaturated version of color
 		r, g, b = (int(color[i:i+2], base=16) for i in [0, 2, 4])
 		r, g, b = (r + 255) // 2, (g + 255) // 2, (b + 255) // 2
 		return '#%02X%02X%02X' %(r, g, b)
@@ -70,9 +77,11 @@ def bootstrap(num, values, func=np.mean):
 	return [func(np.random.choice(values, size = len(values))) for n in range(num)]
 
 def meanSquare(values):
+	# returns the mean square value of values
 	return np.mean(values * values)
 
 def countTransitions(values):
+	# returns the number of transitions from >/< 0 in values
 	return sum(values[1:] / values[:-1] < 0)
 
 def Potential(mu, lambda_):
@@ -94,6 +103,7 @@ def Energy(kinetic, potential):
 	return wrapper
 
 def deltaEnergy(potential, m, tau):
+	# returns the difference in energy if x_old is changed to x_new at index index in array x
 	def wrapper(x, x_old, x_new, index, m=m, tau=tau, potential=potential):
 		return potential(x_new) - potential(x_old) + m / tau ** 2 * (x_new ** 2 - x_old ** 2 - (x[index - 1] + x[(index + 1) % len(x)]) * (x_new - x_old))
 	return wrapper
@@ -124,6 +134,7 @@ class MetropolisPython:
 		self.lambda_ = lambda_
 
 	def __next__(self):
+		# compute the next Metropolis iteration
 		start = 1 if self.periodic else 0
 		stop = self.N
 		accepted = 0
@@ -175,8 +186,10 @@ class MetropolisC:
 		self.lambda_ = lambda_
 
 	def __next__(self):
+		# compute the next Metropolis iteration
 		num_numbers = len(self.values)
 		array_type = ctypes.c_double * num_numbers
+		# use the C++ version of the central metropolis loop
 		result = libmetropolis.metropolis(ctypes.c_int(num_numbers), array_type(*self.values), ctypes.c_double(self.valWidth), ctypes.c_double(self.mass), ctypes.c_double(self.tau), ctypes.c_double(self.mu), ctypes.c_double(self.lambda_), ctypes.c_double(self.hbar), ctypes.c_bool(self.periodic))
 		accept_ratio = libmetropolis.get_accept_ratio()
 		libmetropolis.reset_ratio()
@@ -186,6 +199,6 @@ class MetropolisC:
 	def __iter__(self):
 		return self
 
-# choose one of the implementations
+# choose one of the implementations, MetropolisC is recommended
 Metropolis = MetropolisC
 #Metropolis = MetropolisPython
