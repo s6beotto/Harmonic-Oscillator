@@ -65,7 +65,7 @@ for iteration in iterations_used:
 	hits = np.histogram(data[iteration - 1], bins)[0]
 	bins_mid = (bins[1:] + bins[:-1]) / 2
 	# plot
-	plt.errorbar(bins_mid, hits, label='path after %d iteration%s' %(iteration, 's' if iteration > 1 else ''), fmt='.', color=color_plot)
+	plt.errorbar(bins_mid, hits, label='distribution after %d iteration%s' %(iteration, 's' if iteration > 1 else ''), fmt='.', color=color_plot)
 
 	# fit
 	if args.fit:
