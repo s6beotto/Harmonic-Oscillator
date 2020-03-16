@@ -1,5 +1,5 @@
 
-build = _build
+build = build
 
 latexrun := python3 ../latexrun.py --bibtex-cmd biber
 
