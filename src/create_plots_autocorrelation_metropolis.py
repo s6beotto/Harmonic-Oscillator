@@ -78,7 +78,7 @@ tint = getIntegratedCorrelationTime(ydata_sum, factor=8) * tau
 
 # plot and fit
 ydata_mean = ydata_sum / data.shape[1]
-plt.errorbar(xdata, ydata_mean, label=r'Autocorrelation function, $\tau_{int} = $' %(tint), fmt='.', color=color_plot)
+plt.errorbar(xdata, ydata_mean, label=r'Autocorrelation function, $\tau_{int} = %0.2f$' %(tint), fmt='.', color=color_plot)
 if args.fit:
 	xdata, ydata_mean = xdata[xdata < 50], ydata_mean[xdata < 50]
 	xdata, ydata_mean = xdata[ydata_mean > 0], ydata_mean[ydata_mean > 0]
