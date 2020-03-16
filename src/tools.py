@@ -99,7 +99,7 @@ def Kinetic(m, tau):
 def Energy(kinetic, potential):
 	# Energy function with parameters
 	def wrapper(x, kinetic=kinetic, potential=potential):
-		return sum([kinetic(x[i], x[i+1]) for i in range(len(x)-1)]) + sum([potential(xx) for xx in x])
+		return sum([kinetic(x[i], x[i+1]) for i in range(len(x)-1)]) + sum(potential(x))
 	return wrapper
 
 def deltaEnergy(potential, m, tau):
