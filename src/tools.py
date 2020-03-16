@@ -96,6 +96,14 @@ def Kinetic(m, tau):
 		return m / 2 * (x_i - x_j) ** 2 / tau ** 2
 	return wrapper
 
+def getTotalKineticEnergy(x, kinetic):
+	# returns the total kinetic energy of a state
+	return sum([kinetic(x[i], x[i+1]) for i in range(len(x)-1)])
+
+def getTotalPotentialEnergy(x, potential):
+	# returns the total potential energy of a state
+	return sum(potential(x))
+
 def Energy(kinetic, potential):
 	# Energy function with parameters
 	def wrapper(x, kinetic=kinetic, potential=potential):
