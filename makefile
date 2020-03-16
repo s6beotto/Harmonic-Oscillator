@@ -57,138 +57,138 @@ plots = imgs/harmonic_oscillator_track/track_10001000_track_1.pdf imgs/harmonic_
 all: $(out)# $(out_slides)
 
 
-imgs/%_track_1.pdf: data/%.csv
+imgs/%_track_1.pdf: data/%.csv src/create_plots_track.py
 	@python3 src/create_plots_track.py data/$*.csv -i 1 10 20 40 80 100 -o $@
 
 
-imgs/%_gauss_1.pdf: data/%.csv
+imgs/%_gauss_1.pdf: data/%.csv src/create_plots_gauss.py
 	@python3 src/create_plots_gauss.py data/$*.csv -i 1 10 20 40 80 100 -o $@
 
-imgs/%_gauss_1_fit.pdf: data/%.csv
+imgs/%_gauss_1_fit.pdf: data/%.csv src/create_plots_gauss.py
 	@python3 src/create_plots_gauss.py data/$*.csv -i 1 10 20 40 80 100 -f -o $@
 
-imgs/%_gauss_2_fit.pdf: data/%.csv
+imgs/%_gauss_2_fit.pdf: data/%.csv src/create_plots_gauss.py
 	@python3 src/create_plots_gauss.py data/$*.csv -i 10 20 40 80 100 -f -o $@
 
 
-imgs/%_qq_1.pdf: data/%.csv
+imgs/%_qq_1.pdf: data/%.csv src/create_plots_qq.py
 	@python3 src/create_plots_qq.py data/$*.csv -i 1 -o $@
 
-imgs/%_qq_10.pdf: data/%.csv
+imgs/%_qq_10.pdf: data/%.csv src/create_plots_qq.py
 	@python3 src/create_plots_qq.py data/$*.csv -i 10 -o $@
 
-imgs/%_qq_20.pdf: data/%.csv
+imgs/%_qq_20.pdf: data/%.csv src/create_plots_qq.py
 	@python3 src/create_plots_qq.py data/$*.csv -i 20 -o $@
 
-imgs/%_qq_40.pdf: data/%.csv
+imgs/%_qq_40.pdf: data/%.csv src/create_plots_qq.py
 	@python3 src/create_plots_qq.py data/$*.csv -i 40 -o $@
 
-imgs/%_qq_80.pdf: data/%.csv
+imgs/%_qq_80.pdf: data/%.csv src/create_plots_qq.py
 	@python3 src/create_plots_qq.py data/$*.csv -i 80 -o $@
 
-imgs/%_qq_100.pdf: data/%.csv
+imgs/%_qq_100.pdf: data/%.csv src/create_plots_qq.py
 	@python3 src/create_plots_qq.py data/$*.csv -i 100 -o $@
 
 
-imgs/%_track_shifted_double.pdf: data/%.csv
+imgs/%_track_shifted_double.pdf: data/%.csv src/create_plots_track_shifted.py
 	@python3 src/create_plots_track_shifted.py data/$*.csv -i 1 10 20 40 80 100 -o $@
 
-imgs/%_track_shifted_5.pdf: data/%.csv
+imgs/%_track_shifted_5.pdf: data/%.csv src/create_plots_track_shifted.py
 	@python3 src/create_plots_track_shifted.py data/$*.csv -i 1 5 10 15 20 25 -o $@
 
-imgs/%_track_shifted_1.pdf: data/%.csv
+imgs/%_track_shifted_1.pdf: data/%.csv src/create_plots_track_shifted.py
 	@python3 src/create_plots_track_shifted.py data/$*.csv -i 1 2 3 4 5 6 7 8 9 10 -o $@
 
-imgs/%_track_shifted_2.pdf: data/%.csv
+imgs/%_track_shifted_2.pdf: data/%.csv src/create_plots_track_shifted.py
 	@python3 src/create_plots_track_shifted.py data/$*.csv -i 1 3 5 7 9 11 13 15 -o $@
 
 
-imgs/%_classical_limit.pdf: data/%.csv
+imgs/%_classical_limit.pdf: data/%.csv src/create_plots_classical_limit.py
 	@python3 src/create_plots_classical_limit.py data/$*.csv -o $@
 
-imgs/%_thermalisation.pdf: data/%.csv
+imgs/%_thermalisation.pdf: data/%.csv src/create_plots_thermalisation.py
 	@python3 src/create_plots_thermalisation.py data/$*.csv -o $@
 
-imgs/%_thermalisation_log.pdf: data/%.csv
+imgs/%_thermalisation_log.pdf: data/%.csv src/create_plots_thermalisation.py
 	@python3 src/create_plots_thermalisation.py data/$*.csv --log -o $@
 
-imgs/%_lambda_parameter.pdf: data/%.csv
+imgs/%_lambda_parameter.pdf: data/%.csv src/create_plots_lambda_parameter.py
 	@python3 src/create_plots_lambda_parameter.py data/$*.csv -o $@
 
-imgs/%_tunneling_current.pdf: data/%.csv
+imgs/%_tunneling_current.pdf: data/%.csv src/create_plots_tunneling_current.py
 	@python3 src/create_plots_tunneling_current.py data/$*.csv -o $@
 
 
 # harmonic oscillator
 PRE := data/harmonic_oscillator_track/
-$(PRE)%rack_100100.csv:
+$(PRE)%rack_100100.csv: src/harmonic_oscillator.py
 	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 100 -N 100 -o $@
 
-$(PRE)%rack_10001000.csv:
+$(PRE)%rack_10001000.csv: src/harmonic_oscillator.py
 	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 1000 -N 1000 -o $@
 
-$(PRE)%rack_10000100.csv:
+$(PRE)%rack_10000100.csv: src/harmonic_oscillator.py
 	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 10000 -N 100 -o $@
 
-$(PRE)%rack_10010000.csv:
+$(PRE)%rack_10010000.csv: src/harmonic_oscillator.py
 	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 100 -N 10000 -o $@
 
 # harmonic oscillator step function as initialisation
-$(PRE)track_100100_step.csv:
+$(PRE)track_100100_step.csv: src/harmonic_oscillator.py
 	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 100 -N 100 --step -o $@
 
 # harmonic oscillator classical limit
 PRE := data/harmonic_oscillator_classical_limit/
-$(PRE)%.csv:
+$(PRE)%.csv: src/harmonic_oscillator_classical_limit.py
 	@python3 src/harmonic_oscillator_classical_limit.py  -m 0.25 -init 0 -ir 5 -i 100 -N 1000 -o $@
 
 # anharmonic oscillator
 PRE := data/anharmonic_oscillator_track/
-$(PRE)%rack_10010010.csv:
+$(PRE)%rack_10010010.csv: src/anharmonic_oscillator.py
 	@python3 src/anharmonic_oscillator.py  -m 0.25 -init -5 -ir 5 -i 100 -N 100 -d 10 -o $@
 
-$(PRE)%rack_1001005.csv:
+$(PRE)%rack_1001005.csv: src/anharmonic_oscillator.py
 	@python3 src/anharmonic_oscillator.py  -m 0.25 -init -2.5 -ir 5 -i 100 -N 100 -d 5 -o $@
 
-$(PRE)%rack_1001003.csv:
+$(PRE)%rack_1001003.csv: src/anharmonic_oscillator.py
 	@python3 src/anharmonic_oscillator.py  -m 0.25 -init -1.5 -ir 5 -i 100 -N 100 -d 3 -o $@
 
-$(PRE)%rack_1001002.csv:
+$(PRE)%rack_1001002.csv: src/anharmonic_oscillator.py
 	@python3 src/anharmonic_oscillator.py  -m 0.25 -init -1 -ir 5 -i 100 -N 100 -d 2 -o $@
 
-$(PRE)%rack_10020010.csv:
+$(PRE)%rack_10020010.csv: src/anharmonic_oscillator.py
 	@python3 src/anharmonic_oscillator.py  -m 0.25 -init -5 -ir 10 -i 100 -N 200 -d 10 -o $@
 
-$(PRE)%rack_1000100010.csv:
+$(PRE)%rack_1000100010.csv: src/anharmonic_oscillator.py
 	@python3 src/anharmonic_oscillator.py  -m 0.25 -init -5 -ir 10 -i 1000 -N 1000 -d 10 -o $@
 
-$(PRE)%rack_1000010010.csv:
+$(PRE)%rack_1000010010.csv: src/anharmonic_oscillator.py
 	@python3 src/anharmonic_oscillator.py  -m 0.25 -init -5 -ir 10 -i 10000 -N 100 -d 10 -o $@
 
-$(PRE)%rack_1001000010.csv:
+$(PRE)%rack_1001000010.csv: src/anharmonic_oscillator.py
 	@python3 src/anharmonic_oscillator.py  -m 0.25 -init -5 -ir 10 -i 100 -N 10000 -d 10 -o $@
 
 
 # anharmonic oscillator classical limit
 PRE := data/anharmonic_oscillator_classical_limit/
-$(PRE)%.csv:
+$(PRE)%.csv: src/anharmonic_oscillator_classical_limit.py
 	@python3 src/anharmonic_oscillator_classical_limit.py  -m 0.01 -init -5 -ir 2 -d 4 -i 200 -N 1000 -b " -5:5:0.05" -o $@
 
 # anharmonic oscillator lambda parameter
 PRE := data/anharmonic_oscillator_lambda_parameter/
-$(PRE)%1001000.csv:
+$(PRE)%1001000.csv: src/anharmonic_oscillator_lambda_parameter.py
 	@python3 src/anharmonic_oscillator_lambda_parameter.py -ir 2 -i 100 -N 1000 -o $@
 
-$(PRE)%10010000.csv:
+$(PRE)%10010000.csv: src/anharmonic_oscillator_lambda_parameter.py
 	@python3 src/anharmonic_oscillator_lambda_parameter.py -ir 2 -i 100 -N 10000 -o $@
 
-$(PRE)%100001000.csv:
+$(PRE)%100001000.csv: src/anharmonic_oscillator_lambda_parameter.py
 	@python3 src/anharmonic_oscillator_lambda_parameter.py -ir 2 -i 10000 -N 1000 -o $@
 
-$(PRE)%10020000.csv:
+$(PRE)%10020000.csv: src/anharmonic_oscillator_lambda_parameter.py
 	@python3 src/anharmonic_oscillator_lambda_parameter.py -ir 2 -i 100 -N 20000 -d '0:7:0.1' -o $@
 
-$(PRE)%1001000_bad.csv:
+$(PRE)%1001000_bad.csv: src/anharmonic_oscillator_lambda_parameter.py
 	@python3 src/anharmonic_oscillator_lambda_parameter.py -init 0 -ir 10 -i 100 -N 1000 -o $@
 
 .PHONY: $(tex_) $(build)/packages.tex
