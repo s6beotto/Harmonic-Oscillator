@@ -87,4 +87,27 @@
 		\bibitem{creutz_freedman} M. Creutz and B. Freedman, \textit{A statistical approach to quantum mechanics}, Annals of Physics, \textbf{132}, 427-462 (1981).
 		\bibitem{rodgers_raes} R. Rodgers and L. Raes, \textit{Monte Carlo simulations of harmonic and anharmonic oscillators in discrete Euclidean time}, DESY Summer Student Programme (2014).
 	\end{thebibliography}
+	\appendix
+	\section{Directory structure}
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}
+		\draw[color=black, thick]
+		node[draw,minimum width=2cm,minimum height=1cm,label=root,rounded corners=0.25cm] (root) at (0, 0){Harmonic-Oscillator}
+		node[draw,minimum width=2cm,minimum height=1cm,rounded corners=0.25cm] (bin) at (-3, -2){bin/}
+		node[draw,minimum width=2cm,minimum height=1cm,rounded corners=0.25cm] (src) at (-3, -4){src/}
+		node[draw,minimum width=2cm,minimum height=1cm,rounded corners=0.25cm] (data) at (2, -3){data/}
+		node[draw,minimum width=2cm,minimum height=1cm,rounded corners=0.25cm] (imgs) at (6, -3){imgs/};
+		\draw [->] (root) -- (bin);
+		\draw [->] (root) -- (src);
+		\draw [->] (root) -- (data);
+		\draw [->] (root) -- (imgs);
+		\draw [<->, thick, blue] (bin) -- (src) node[midway,left] {C++ library};
+		\draw [->, very thick, red] (src.east) + (0,3mm) -| (data) node[midway,below] {metropolis generation};
+		\draw [->, very thick, red] (data) -- (imgs) node[midway,above] {plotting};
+		\draw [->, thick, blue] (src.east) + (0,-3mm) -| (4, -3);
+		\end{tikzpicture}
+		\caption{Directory structure of the project}
+		\label{fig:schematic_parasit_capacity}
+	\end{figure}
 \end{document}
