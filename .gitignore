@@ -1,3 +1,4 @@
+# ignore tex related temporary files
 *.aux
 *.log
 *.nav
@@ -5,24 +6,19 @@
 *.snm
 *.synctex.gz
 *.toc
-Report/report.pdf
+
+# ignore python related temporary files
 */__pycache__/*
 *.pyc
+
+# ignore all test files
 **/test*.py
-*.aux
-*.log
-*.nav
-*.out
-*.snm
-*.synctex.gz
-*.toc
 
 # ignore compiled libraries
 *.o
 *.so
 
-
+# ignore 
 data/*
 imgs/*
 bin/*
-_build
