@@ -56,3 +56,9 @@ To clean up the directory simply type
 ```bash
 make clean
 ```
+
+## Acknowledgement
+Note:
+Commits done by my former project partner have been undone, I only use content that I created myself and code that I reference.
+
+I use the latexrun.py file provided by Austin Clements, from https://github.com/aclements/latexrun.
