@@ -18,7 +18,9 @@ libmetropolis.get_accept_ratio.restype = ctypes.c_double
 
 def getOutputFilename(relative_path: Path, suffix: str, args_output = None, subdir: str = 'imgs', filetype: str = 'pdf') -> Path:
 	if args_output != None:
+		args_output.parent.mkdir(parents=True, exist_ok=True)
 		return args_output
+
 	out_filename = getRootDirectory() / subdir / relative_path
 	out_filename.parent.mkdir(parents=True, exist_ok=True)
 
