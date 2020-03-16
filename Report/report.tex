@@ -63,6 +63,10 @@
 		This reduced the execution time of around 35\%.
 		Since this is still a poor performance, I implemented the main Metropolis algorithm loop in \textbf{C++}, the higher level computation is still done in \textbf{Python}.
 		For the interfacing the library \verb!ctypes! is used.
+		This change improved the total performance, including the still in Python performed generation of the plots, by a factor of around 8.
+		This leads to an improvement of data quality due to the higher output rate of around one order of magnitude.
+		The complete source code, including all files related to this project are available under the public github repository \cite{github}.
+		To verify that the \textbf{C++} code behaves exactly like the Python version, I created some tests, stored in the branch \verb!verify_C!.
 	\section{Results}
 	\begin{figure}[htbp]
 		\centering
