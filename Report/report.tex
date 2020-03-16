@@ -56,6 +56,13 @@
 		Otherwise, a linearly distributed random value is drawn in the range from 0 to 1 and compared to the exponent of the difference in the \textbf{action}, divided by $\hbar$.
 		If the random variable is smaller than the exponential function, the value is accepted, otherwise is is rejected and the position at that time step not updated.
 		This behaviour leads to the tendency to thermalise, but takes care of the quantum behaviour of the particle.
+	\section{Implementation}
+		At first I implemented the complete algorithm in \textbf{Python}, which leads to a fairly poor performance.
+		This could mean that one can only get a bad data quality in a given time.
+		Thus I optimised the code for performance by simplifying the energy term and precalculating the random variables.
+		This reduced the execution time of around 35\%.
+		Since this is still a poor performance, I implemented the main Metropolis algorithm loop in \textbf{C++}, the higher level computation is still done in \textbf{Python}.
+		For the interfacing the library \verb!ctypes! is used.
 	\section{Results}
 	\begin{figure}[htbp]
 		\centering
