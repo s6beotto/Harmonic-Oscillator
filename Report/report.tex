@@ -53,7 +53,7 @@
 		At first the positions of the particle at every time step is initialised to a random distribution.
 		Then for every time step a new position is drawn from a random distribution, in this case from a gaussian distribution.
 		If this change lowers the total \textbf{action}, calculated over all the time lattice points, the change is accepted.
-		Otherwise, a linearly distributed random value is drawn in the range from 0 to 1 and compared to the exponent of the difference in the \textbf{action}, divided by a $\hbar$.
+		Otherwise, a linearly distributed random value is drawn in the range from 0 to 1 and compared to the exponent of the difference in the \textbf{action}, divided by $\hbar$.
 		If the random variable is smaller than the exponential function, the value is accepted, otherwise is is rejected and the position at that time step not updated.
 		This behaviour leads to the tendency to thermalise, but takes care of the quantum behaviour of the particle.
 	\section{Results}
