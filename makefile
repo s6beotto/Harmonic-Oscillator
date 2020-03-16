@@ -15,7 +15,9 @@ out := $(build)/report.pdf
 
 out_slides := $(build)/slides.pdf
 
-plots = imgs/harmonic_oscillator_track/track_10001000_track_1.pdf \
+plots = imgs/harmonic_oscillator_track/track_100100_track_1.pdf \
+		imgs/harmonic_oscillator_track/track_100100_track_100.pdf \
+		imgs/harmonic_oscillator_track/track_10001000_track_1.pdf \
 		imgs/harmonic_oscillator_track/track_10001000_gauss_1_fit.pdf \
 		imgs/harmonic_oscillator_track/track_10001000_gauss_2_fit.pdf \
 		imgs/harmonic_oscillator_track/track_10001000_gauss_2_fit.pdf \
@@ -72,6 +74,8 @@ all: $(out)# $(out_slides)
 imgs/%_track_1.pdf: data/%.csv src/create_plots_track.py
 	@python3 src/create_plots_track.py data/$*.csv -i 1 10 20 40 80 100 -o $@
 
+imgs/%_track_100.pdf: data/%.csv src/create_plots_track.py
+	@python3 src/create_plots_track.py data/$*.csv -i 100 -o $@
 
 imgs/%_gauss_1.pdf: data/%.csv src/create_plots_gauss.py
 	@python3 src/create_plots_gauss.py data/$*.csv -i 1 10 20 40 80 100 -o $@
