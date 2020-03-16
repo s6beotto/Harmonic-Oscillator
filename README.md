@@ -38,7 +38,7 @@ To run the software simply use
 ```bash
 make
 ```
-This generates firstly all data file in the `data` directory, then generates plots in the `imgs` directory and finally assembles the final report in the `_build` directory.
+This generates firstly all data file in the `data` directory, then generates plots in the `imgs` directory and finally assembles the final report in the `build` directory.
 
 Since many of the required steps are independent, one can use the multi processing feature of make as:
 ```bash
