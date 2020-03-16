@@ -41,10 +41,14 @@ plots = imgs/harmonic_oscillator_track/track_100100_track_1.pdf \
 		imgs/harmonic_oscillator_track/track_10000100_track_shifted_2.pdf \
 		imgs/harmonic_oscillator_track/track_10000100_track_shifted_5.pdf \
 		imgs/harmonic_oscillator_track/track_10000100_track_shifted_double.pdf \
-		imgs/anharmonic_oscillator_track/track_10010010_track_1.pdf \
-		imgs/anharmonic_oscillator_track/track_1001005_track_1.pdf \
-		imgs/anharmonic_oscillator_track/track_1001003_track_1.pdf \
 		imgs/anharmonic_oscillator_track/track_1001002_track_1.pdf \
+		imgs/anharmonic_oscillator_track/track_1001003_track_1.pdf \
+		imgs/anharmonic_oscillator_track/track_1001005_track_1.pdf \
+		imgs/anharmonic_oscillator_track/track_10010010_track_1.pdf \
+		imgs/anharmonic_oscillator_track/track_1001002_track_100.pdf \
+		imgs/anharmonic_oscillator_track/track_1001003_track_100.pdf \
+		imgs/anharmonic_oscillator_track/track_1001005_track_100.pdf \
+		imgs/anharmonic_oscillator_track/track_10010010_track_100.pdf \
 		imgs/harmonic_oscillator_track/track_100100_step_track_shifted_1.pdf \
 		imgs/harmonic_oscillator_track/track_100100_step_track_shifted_2.pdf \
 		imgs/harmonic_oscillator_track/track_100100_step_track_shifted_5.pdf \
