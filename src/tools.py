@@ -84,6 +84,10 @@ def countTransitions(values):
 	# returns the number of transitions from >/< 0 in values
 	return sum(values[1:] / values[:-1] < 0)
 
+def running_mean(x, N):
+    cumsum = np.cumsum(np.insert(x, 0, 0))
+    return (cumsum[N:] - cumsum[:-N]) / float(N)
+
 def Potential(mu, lambda_):
 	# Potential Energy with parameters
 	def wrapper(x, mu=mu, lambda_=lambda_):
