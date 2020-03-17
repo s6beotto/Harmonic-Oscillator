@@ -50,8 +50,9 @@ plt.figure()
 d = data[iteration - 1]
 
 # create qq plot
-sm.qqplot(d, dist='norm')
+sm.qqplot(d, dist='norm', label='qq plot after %d iteration%s' %(iteration, 's' if iteration > 1 else ''))
 
+plt.legend()
 
 # filesystem stuff
 out_filename = getOutputFilename(relative_path, 'qq_%d' %iteration, args.output)
