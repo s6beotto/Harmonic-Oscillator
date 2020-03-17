@@ -93,6 +93,15 @@
 		The parameter range for the Heisenberg parameter is the same as for the harmonic oscillator.
 		The initial state has been prepared into the left minimum.
 	\subsubsection{Probability density}
+		Another test I performed is to check the shape of the probability density of the harmonic oscillator.
+		\begin{figure}[H]
+			\centering
+				\includegraphics[width=0.6\textwidth]{../imgs/harmonic_oscillator_track/track_10010000_gauss_1_fit.pdf}
+			\caption{Probability density for different Metropolis iterations of the harmonic oscillator.}
+			\label{fig:harmonic_oscillator_track_10010000_gauss_1_fit}
+		\end{figure}
+		The parameters used for the plot in figure \ref{fig:harmonic_oscillator_track_10010000_gauss_1_fit} were $i=100$, $N=10000$, $m=0.25$, $\mu = 10.0$, $\hbar = 1$.
+		The fits are gaussian distribution functions.
 	\subsection{Measurements}
 	\subsubsection{Ground state energy}
 	\subsubsection{Tunnelling current}
@@ -118,6 +127,12 @@
 		A classical particle in the ground state in potentials used here should state at one of the minima.
 		Additionally one would expect that the probability for tunnelling tends to zero, which is observable too.
 	\subsubsection{Probability density}
+		As shown in figure \ref{fig:harmonic_oscillator_track_10010000_gauss_1_fit}, the initial setup was a gaussian shape, centered around the value 5 with a width of 1, visible in the blue curve.
+		This corresponds to an exited state, which then thermalises into the ground state.
+		The minimum of the potential is centered around 0.
+		The distribution then moves towards this minimum, leading to a deviation from the gaussian shape for iterations 10 and 20.
+		After 40 iterations the distribution has nearly reached the center of the potential and the distribution becomes again gaussian shaped.
+		The difference between iterations 80 and 100 is negligible, this indicates that the thermalisation of the center of mass is done after 80 metropolis iterations.
 	\subsection{Measurements}
 	\subsubsection{Ground state energy}
 	\subsubsection{Tunnelling current}
