@@ -16,7 +16,7 @@ parser.add_argument('-N', '--number', type=int, default=100,
                     help='Number of lattice sites')
 parser.add_argument('-m', '--mass', type=float, default=0.01,
                     help='Mass of the particle')
-parser.add_argument('-u', '--mu', type=float, default=10,
+parser.add_argument('-u', '--mu', type=float, default=-10,
                     help='Depth of the potential')
 parser.add_argument('-t', '--tau', type=float, default=0.1,
                     help='Time step size')
@@ -53,7 +53,7 @@ parameters = [
 
 # generate objects related to metropolis
 
-m = Metropolis(init=initial, valWidth=1, initValWidth=initial_random, hbar=hbar, tau=tau, N=N, m=mass, lambda_=lambda_, mu=-mu)
+m = Metropolis(init=initial, valWidth=1, initValWidth=initial_random, hbar=hbar, tau=tau, N=N, m=mass, lambda_=lambda_, mu=mu)
 
 # filesystem stuff
 root_path = getRootDirectory()
