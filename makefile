@@ -42,6 +42,10 @@ plots = imgs/harmonic_oscillator_track/track_100100_track_1.pdf \
 		imgs/harmonic_oscillator_track/track_10000100_track_shifted_5.pdf \
 		imgs/harmonic_oscillator_track/track_10000100_track_shifted_double.pdf \
 		imgs/anharmonic_oscillator_track/track_1001002_track_1.pdf \
+		imgs/anharmonic_oscillator_track/track_100010005_track_1.pdf \
+		imgs/anharmonic_oscillator_track/track_100010005_track_pretty_1.pdf \
+		imgs/anharmonic_oscillator_track/track_100010005_track_pretty_100.pdf \
+		imgs/anharmonic_oscillator_track/track_100010005_track_pretty_1000.pdf \
 		imgs/anharmonic_oscillator_track/track_1001003_track_1.pdf \
 		imgs/anharmonic_oscillator_track/track_1001005_track_1.pdf \
 		imgs/anharmonic_oscillator_track/track_10010010_track_1.pdf \
@@ -80,6 +84,16 @@ imgs/%_track_1.pdf: data/%.csv src/create_plots_track.py
 
 imgs/%_track_100.pdf: data/%.csv src/create_plots_track.py
 	@python3 src/create_plots_track.py data/$*.csv -i 100 -o $@
+
+
+imgs/%_track_pretty_1.pdf: data/%.csv src/create_plots_track_pretty.py
+	@python3 src/create_plots_track_pretty.py data/$*.csv -i 1 10 20 40 80 100 -o $@
+
+imgs/%_track_pretty_100.pdf: data/%.csv src/create_plots_track_pretty.py
+	@python3 src/create_plots_track_pretty.py data/$*.csv -i 100 -o $@
+
+imgs/%_track_pretty_1000.pdf: data/%.csv src/create_plots_track_pretty.py
+	@python3 src/create_plots_track_pretty.py data/$*.csv -i 1000 -o $@
 
 imgs/%_gauss_1.pdf: data/%.csv src/create_plots_gauss.py
 	@python3 src/create_plots_gauss.py data/$*.csv -i 1 10 20 40 80 100 -o $@
@@ -178,6 +192,15 @@ $(PRE)%rack_1001002.csv: src/anharmonic_oscillator.py
 
 $(PRE)%rack_10020010.csv: src/anharmonic_oscillator.py
 	@python3 src/anharmonic_oscillator.py  -m 0.25 -init -5 -ir 10 -i 100 -N 200 -d 10 -o $@
+
+$(PRE)%rack_100010002.csv: src/anharmonic_oscillator.py
+	@python3 src/anharmonic_oscillator.py  -m 0.25 -init -5 -ir 10 -i 1000 -N 1000 -d 2 -o $@
+
+$(PRE)%rack_100010003.csv: src/anharmonic_oscillator.py
+	@python3 src/anharmonic_oscillator.py  -m 0.25 -init -5 -ir 10 -i 1000 -N 1000 -d 3 -o $@
+
+$(PRE)%rack_100010005.csv: src/anharmonic_oscillator.py
+	@python3 src/anharmonic_oscillator.py  -m 0.25 -init -5 -ir 10 -i 1000 -N 1000 -d 5 -o $@
 
 $(PRE)%rack_1000100010.csv: src/anharmonic_oscillator.py
 	@python3 src/anharmonic_oscillator.py  -m 0.25 -init -5 -ir 10 -i 1000 -N 1000 -d 10 -o $@
