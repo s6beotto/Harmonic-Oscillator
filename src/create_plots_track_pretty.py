@@ -11,11 +11,11 @@ import pathlib
 
 # parse CLI arguments
 parser = argparse.ArgumentParser(description='Plot an interesting part of the path of a particle at different metropolis states.')
-parser.add_argument('filename', type=pathlib.Path, help="Input filename")
-parser.add_argument('-i', "--iterations", nargs='+', help='Metropolis iterations to use')
-parser.add_argument('-ic', "--iteration_count", default=None, help='Metropolis iteration to use to measure the number of transitions')
-parser.add_argument('-n', "--number", type=int, default=100, help='Number of time positions to show')
-parser.add_argument('-o', '--output', type=pathlib.Path, help="Output filename")
+parser.add_argument('filename', type=pathlib.Path, help='Input filename')
+parser.add_argument('-i', '--iterations', nargs='+', help='Metropolis iterations to use')
+parser.add_argument('-ic', '--iteration_count', default=None, help='Metropolis iteration to use to measure the number of transitions')
+parser.add_argument('-n', '--number', type=int, default=100, help='Number of time positions to show')
+parser.add_argument('-o', '--output', type=pathlib.Path, help='Output filename')
 args = parser.parse_args()
 
 iterations_used = [int(i) for i in args.iterations]
@@ -35,7 +35,7 @@ if not full_path.exists() or full_path.is_dir():
 
 relative_path = full_path.relative_to(root_path / 'data')
 
-print("[Track pretty] Computing file %s ... " %relative_path, end='')
+print('[Track pretty] Computing file %s ... ' %relative_path, end='')
 
 data = {}
 

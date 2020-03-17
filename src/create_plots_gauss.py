@@ -18,10 +18,10 @@ def gauss(x, *p):
 
 # parse CLI arguments
 parser = argparse.ArgumentParser(description='Fit gaussian curves to the distribution.')
-parser.add_argument('filename', type=pathlib.Path, help="Input filename")
+parser.add_argument('filename', type=pathlib.Path, help='Input filename')
 parser.add_argument('-i', '--iterations', nargs='+')
 parser.add_argument('-f', '--fit', action='store_true')
-parser.add_argument('-o', '--output', type=pathlib.Path, help="Output filename")
+parser.add_argument('-o', '--output', type=pathlib.Path, help='Output filename')
 args = parser.parse_args()
 
 iterations_used = [int(i) for i in args.iterations]

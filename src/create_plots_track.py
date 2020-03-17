@@ -11,9 +11,9 @@ import pathlib
 
 # parse CLI arguments
 parser = argparse.ArgumentParser(description='Plot the path of a particle at different metropolis states.')
-parser.add_argument('filename', type=pathlib.Path, help="Input filename")
-parser.add_argument('-i', "--iterations", nargs='+')
-parser.add_argument('-o', '--output', type=pathlib.Path, help="Output filename")
+parser.add_argument('filename', type=pathlib.Path, help='Input filename')
+parser.add_argument('-i', '--iterations', nargs='+')
+parser.add_argument('-o', '--output', type=pathlib.Path, help='Output filename')
 args = parser.parse_args()
 
 iterations_used = [int(i) for i in args.iterations]
@@ -27,7 +27,7 @@ if not full_path.exists() or full_path.is_dir():
 
 relative_path = full_path.relative_to(root_path / 'data')
 
-print("[Track] Computing file %s ... " %relative_path, end='')
+print('[Track] Computing file %s ... ' %relative_path, end='')
 
 data = {}
 

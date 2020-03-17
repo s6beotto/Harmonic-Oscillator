@@ -19,9 +19,9 @@ def linear(x, *p):
 
 # parse CLI arguments
 parser = argparse.ArgumentParser(description='Calculate the autorelation function between the metropolis samples.')
-parser.add_argument('filename', type=pathlib.Path, help="Input filename")
+parser.add_argument('filename', type=pathlib.Path, help='Input filename')
 parser.add_argument('-f', '--fit', action='store_true')
-parser.add_argument('-o', '--output', type=pathlib.Path, help="Output filename")
+parser.add_argument('-o', '--output', type=pathlib.Path, help='Output filename')
 args = parser.parse_args()
 
 # filesystem stuff

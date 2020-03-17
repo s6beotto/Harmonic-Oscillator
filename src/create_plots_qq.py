@@ -13,9 +13,9 @@ color_iterator = getColorIterator()
 
 # parse CLI arguments
 parser = argparse.ArgumentParser(description='Check distribution via a qq plot.')
-parser.add_argument('filename', type=pathlib.Path, help="Input filename")
-parser.add_argument('-i', "--iteration", type=int)
-parser.add_argument('-o', '--output', type=pathlib.Path, help="Output filename")
+parser.add_argument('filename', type=pathlib.Path, help='Input filename')
+parser.add_argument('-i', '--iteration', type=int)
+parser.add_argument('-o', '--output', type=pathlib.Path, help='Output filename')
 args = parser.parse_args()
 
 iteration = args.iteration

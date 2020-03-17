@@ -12,8 +12,8 @@ import configparser
 
 # parse CLI arguments
 parser = argparse.ArgumentParser(description='Plot the energy depending on the metropolis sample.')
-parser.add_argument('filename', type=pathlib.Path, help="Input filename")
-parser.add_argument('-o', '--output', type=pathlib.Path, help="Output filename")
+parser.add_argument('filename', type=pathlib.Path, help='Input filename')
+parser.add_argument('-o', '--output', type=pathlib.Path, help='Output filename')
 args = parser.parse_args()
 
 # filesystem stuff
@@ -26,7 +26,7 @@ if not full_path.exists() or full_path.is_dir():
 
 relative_path = full_path.relative_to(root_path / 'data')
 
-print("[Tunneling current] Computing file %s ... " %relative_path, end='')
+print('[Tunneling current] Computing file %s ... ' %relative_path, end='')
 
 distances = []
 transitions = []

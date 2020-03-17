@@ -14,9 +14,9 @@ color_iterator = getColorIterator()
 
 # parse CLI arguments
 parser = argparse.ArgumentParser(description='Calculate the autorelation function.')
-parser.add_argument('filename', type=pathlib.Path, help="Input filename")
+parser.add_argument('filename', type=pathlib.Path, help='Input filename')
 parser.add_argument('-i', '--iterations', nargs='+')
-parser.add_argument('-o', '--output', type=pathlib.Path, help="Output filename")
+parser.add_argument('-o', '--output', type=pathlib.Path, help='Output filename')
 args = parser.parse_args()
 
 # filesystem stuff

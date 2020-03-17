@@ -11,8 +11,8 @@ import pathlib
 
 # parse CLI arguments
 parser = argparse.ArgumentParser(description='Create a plot showing the classical limit.')
-parser.add_argument('filename', type=pathlib.Path, help="Input filename")
-parser.add_argument('-o', '--output', type=pathlib.Path, help="Output filename")
+parser.add_argument('filename', type=pathlib.Path, help='Input filename')
+parser.add_argument('-o', '--output', type=pathlib.Path, help='Output filename')
 args = parser.parse_args()
 
 # filesystem stuff

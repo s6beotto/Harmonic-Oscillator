@@ -12,30 +12,30 @@ import pathlib
 
 # parse CLI arguments
 parser = argparse.ArgumentParser(description='Create samples for the anharmonic oscillator, vary distance of minima of the potential')
-parser.add_argument("-i", "--iteration", type=int, default=100,
-                    help="Number of Metropolis iteration used")
-parser.add_argument("-N", "--number", type=int, default=100,
-                    help="Number of lattice sites")
-parser.add_argument("-m", "--mass", type=float, default=0.01,
-                    help="Mass of the particle")
-parser.add_argument("-u", "--mu", type=float, default=10,
-                    help="Depth of the potential")
-parser.add_argument("-t", "--tau", type=float, default=0.1,
-                    help="Time step size")
-parser.add_argument("-hb", "--hbar", type=float, default=1,
-                    help="Values of the reduces Plancks constant")
-parser.add_argument("-b", "--bins", type=str, default='-5:5:0.1',
-                    help="Range of the used bins")
-parser.add_argument("-init", "--initial", type=float, default=None,
-                    help="Initial values for the path")
-parser.add_argument("-ir", "--initial-random", type=float, default=0,
-                    help="Use random distribution around initial value")
-parser.add_argument("-s", "--step", action='store_true',
-                    help="Use a step function as initial state")
-parser.add_argument("-d", "--distance", type=str, default='0:10:0.1',
-                    help="Distance of the minima")
+parser.add_argument('-i', '--iteration', type=int, default=100,
+                    help='Number of Metropolis iteration used')
+parser.add_argument('-N', '--number', type=int, default=100,
+                    help='Number of lattice sites')
+parser.add_argument('-m', '--mass', type=float, default=0.01,
+                    help='Mass of the particle')
+parser.add_argument('-u', '--mu', type=float, default=10,
+                    help='Depth of the potential')
+parser.add_argument('-t', '--tau', type=float, default=0.1,
+                    help='Time step size')
+parser.add_argument('-hb', '--hbar', type=float, default=1,
+                    help='Values of the reduces Plancks constant')
+parser.add_argument('-b', '--bins', type=str, default='-5:5:0.1',
+                    help='Range of the used bins')
+parser.add_argument('-init', '--initial', type=float, default=None,
+                    help='Initial values for the path')
+parser.add_argument('-ir', '--initial-random', type=float, default=0,
+                    help='Use random distribution around initial value')
+parser.add_argument('-s', '--step', action='store_true',
+                    help='Use a step function as initial state')
+parser.add_argument('-d', '--distance', type=str, default='0:10:0.1',
+                    help='Distance of the minima')
 parser.add_argument('-o', '--output', type=pathlib.Path,
-					help="Output filename")
+					help='Output filename')
 args = parser.parse_args()
 
 # extract parameters
@@ -78,7 +78,7 @@ distances = np.arange(distance_min + distance_step, distance_max + distance_step
 bins = np.arange(bins_min, bins_max + bins_step, bins_step)
 
 def calculatePositionDistribution(distance):
-	print("calculating for distance=%0.2f" % distance)
+	print('calculating for distance=%0.2f' % distance)
 	lambda_ = distanceToParameter(distance)
 	# generate objects related to metropolis
 

@@ -12,28 +12,28 @@ import pathlib
 
 # parse CLI arguments
 parser = argparse.ArgumentParser(description='Create samples for the harmonic oscillator, vary hbar')
-parser.add_argument("-i", "--iterations", type=int, default=100,
-                    help="Number of Metropolis iterations")
-parser.add_argument("-N", "--number", type=int, default=100,
-                    help="Number of lattice sites")
-parser.add_argument("-m", "--mass", type=float, default=0.01,
-                    help="Mass of the particle")
-parser.add_argument("-u", "--mu", type=float, default=10,
-                    help="Depth of the potential")
-parser.add_argument("-t", "--tau", type=float, default=0.1,
-                    help="Time step size")
-parser.add_argument("-hb", "--hbar", type=str, default='0:2:0.01',
-                    help="Values of the reduces Plancks constant")
-parser.add_argument("-b", "--bins", type=str, default='-5:5:0.1',
-                    help="Range of the used bins")
-parser.add_argument("-init", "--initial", type=float, default=0,
-                    help="Initial values for the path")
-parser.add_argument("-ir", "--initial-random", type=float, default=0,
-                    help="Use random distribution around initial value")
-parser.add_argument("-s", "--step", action='store_true',
-                    help="Use a step function as initial state")
+parser.add_argument('-i', '--iterations', type=int, default=100,
+                    help='Number of Metropolis iterations')
+parser.add_argument('-N', '--number', type=int, default=100,
+                    help='Number of lattice sites')
+parser.add_argument('-m', '--mass', type=float, default=0.01,
+                    help='Mass of the particle')
+parser.add_argument('-u', '--mu', type=float, default=10,
+                    help='Depth of the potential')
+parser.add_argument('-t', '--tau', type=float, default=0.1,
+                    help='Time step size')
+parser.add_argument('-hb', '--hbar', type=str, default='0:2:0.01',
+                    help='Values of the reduces Plancks constant')
+parser.add_argument('-b', '--bins', type=str, default='-5:5:0.1',
+                    help='Range of the used bins')
+parser.add_argument('-init', '--initial', type=float, default=0,
+                    help='Initial values for the path')
+parser.add_argument('-ir', '--initial-random', type=float, default=0,
+                    help='Use random distribution around initial value')
+parser.add_argument('-s', '--step', action='store_true',
+                    help='Use a step function as initial state')
 parser.add_argument('-o', '--output', type=pathlib.Path,
-					help="Output filename")
+					help='Output filename')
 args = parser.parse_args()
 
 
@@ -74,7 +74,7 @@ hbars = np.arange(hbar_min + hbar_step, hbar_max + hbar_step, hbar_step)
 bins = np.arange(bins_min, bins_max + bins_step, bins_step)
 
 def calculatePositionDistribution(hbar):
-	print("calculating for hbar=%0.4f" % hbar)
+	print('calculating for hbar=%0.4f' % hbar)
 	# generate objects related to metropolis
 
 	m = Metropolis(init=initial, valWidth=1, initValWidth=initial_random, hbar=hbar, tau=tau, N=N, m=mass, lambda_=0, mu=mu)
