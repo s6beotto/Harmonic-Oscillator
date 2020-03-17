@@ -102,21 +102,26 @@
 		\end{figure}
 		The parameters used for the plot in figure \ref{fig:harmonic_oscillator_track_10010000_gauss_1_fit} were $i=100$, $N=10000$, $m=0.25$, $\mu = 10.0$, $\hbar = 1$.
 		The fits are gaussian distribution functions.
+		\\\\
+		To investigate further the probability distribution, quantile-quantile plots can be created to compare the distribution with a gaussian shape.
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.4\textwidth]{../imgs/harmonic_oscillator_track/track_10010000_qq_1.pdf}
+			\includegraphics[width=0.4\textwidth]{../imgs/harmonic_oscillator_track/track_10010000_qq_10.pdf}
+			\\
+			\includegraphics[width=0.4\textwidth]{../imgs/harmonic_oscillator_track/track_10010000_qq_20.pdf}
+			\includegraphics[width=0.4\textwidth]{../imgs/harmonic_oscillator_track/track_10010000_qq_40.pdf}
+			\\
+			\includegraphics[width=0.4\textwidth]{../imgs/harmonic_oscillator_track/track_10010000_qq_80.pdf}
+			\includegraphics[width=0.4\textwidth]{../imgs/harmonic_oscillator_track/track_10010000_qq_100.pdf}
+			\caption{Thermalisation of the harmonic oscillator from an exited state to the equilibrium.}
+			\label{fig:harmonic_oscillator_track_track_10010000_qqs}
+		\end{figure}
+		In figure \ref{fig:harmonic_oscillator_track_track_10010000_qqs} quantile-quantile plots are shown for the same data and iterations as in figure \ref{fig:harmonic_oscillator_track_10010000_gauss_1_fit}.
+		The experimental distribution function was compared to a gaussian distribution function.
 	\subsection{Measurements}
 	\subsubsection{Ground state energy}
 	\subsubsection{Tunnelling current}
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width=0.4\textwidth]{../imgs/harmonic_oscillator_track/track_10010000_qq_1.pdf}
-		\includegraphics[width=0.4\textwidth]{../imgs/harmonic_oscillator_track/track_10010000_qq_10.pdf}
-		\\
-		\includegraphics[width=0.4\textwidth]{../imgs/harmonic_oscillator_track/track_10010000_qq_20.pdf}
-		\includegraphics[width=0.4\textwidth]{../imgs/harmonic_oscillator_track/track_10010000_qq_40.pdf}
-		\\
-		\includegraphics[width=0.4\textwidth]{../imgs/harmonic_oscillator_track/track_10010000_qq_80.pdf}
-		\includegraphics[width=0.4\textwidth]{../imgs/harmonic_oscillator_track/track_10010000_qq_100.pdf}
-		\caption{Thermalisation of the harmonic oscillator from an exited state to the equilibrium.}
-	\end{figure}
 	\section{Discussion}
 	\subsection{Verification}
 	\subsubsection{Classical limit}
@@ -133,6 +138,13 @@
 		The distribution then moves towards this minimum, leading to a deviation from the gaussian shape for iterations 10 and 20.
 		After 40 iterations the distribution has nearly reached the center of the potential and the distribution becomes again gaussian shaped.
 		The difference between iterations 80 and 100 is negligible, this indicates that the thermalisation of the center of mass is done after 80 metropolis iterations.
+		From theory one would expect the probability density to be gaussian shaped in the ground state.
+		\\\\
+		As previously mentioned, one can confirm that the initial setups is a gaussian distribution with center 5 and width 1.
+		In the qq-plots for iterations 10 and 20 the deviation from a straight line is claerly visible.
+		After the 40th iteration, the center of the distribution has reached 0 and the qq plot matches a straight line, corresponding to a gaussian distribution.
+		\\\\
+		From these verifications I am confident, that my code is correct.
 	\subsection{Measurements}
 	\subsubsection{Ground state energy}
 	\subsubsection{Tunnelling current}
