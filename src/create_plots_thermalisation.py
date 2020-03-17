@@ -2,7 +2,7 @@
 
 # import modules
 from matplotlib import pyplot as plt
-from tools import getRootDirectory, Energy, Kinetic, Potential, autoCorrelationNormalized, getOutputFilename
+from tools import getRootDirectory, Energy, Kinetic, Potential, autoCorrelationNormalized, getOutputFilename, running_mean
 import csv
 import numpy as np
 
@@ -67,10 +67,6 @@ e = Energy(k, p)
 ydata = np.array([e(data[x]) for x in xdata])
 
 # calculate mean energy
-def running_mean(x, N):
-    cumsum = np.cumsum(np.insert(x, 0, 0))
-    return (cumsum[N:] - cumsum[:-N]) / float(N)
-
 d = ydata[:-1] - ydata[1:]
 da = running_mean(d, 10)
 if da[0] > 0:

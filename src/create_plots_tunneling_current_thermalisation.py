@@ -2,7 +2,7 @@
 
 # import modules
 from matplotlib import pyplot as plt
-from tools import getRootDirectory, Energy, Kinetic, Potential, autoCorrelationNormalized, countTransitions, getOutputFilename
+from tools import getRootDirectory, Energy, Kinetic, Potential, autoCorrelationNormalized, countTransitions, getOutputFilename, running_mean
 import csv
 import numpy as np
 
@@ -57,11 +57,6 @@ xdata = list(data.keys())
 ydata = np.array([countTransitions(data[x]) for x in xdata]) / N
 
 # calculate mean energy
-def running_mean(x, N):
-    cumsum = np.cumsum(np.insert(x, 0, 0))
-    return (cumsum[N:] - cumsum[:-N]) / float(N)
-
-
 d = ydata[:-1] - ydata[1:]
 da = running_mean(d, 30)
 print(da)
