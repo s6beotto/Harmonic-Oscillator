@@ -279,7 +279,3 @@ clean:
 	$(RM) -r data/
 	$(RM) -r imgs/
 	$(RM) -r bin/
-
-.PHONY: clean-bib
-clean-bib:
-	$(RM) -r $(build)/*.out
