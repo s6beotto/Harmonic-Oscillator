@@ -69,9 +69,8 @@ while max_time_position < num_time_lattice_positions:
 	# count the transitions of the running mean of the track data
 	number_of_transitions[(min_time_position, max_time_position)] = countTransitions(running_mean(data[iteration_count - 1][min_time_position:max_time_position], 10))
 	min_time_position = max_time_position
-print(number_of_transitions)
+
 min_time_position, max_time_position = max(number_of_transitions, key=number_of_transitions.get)
-print(min_time_position, max_time_position)
 
 plt.figure()
 for iteration in iterations_used:
