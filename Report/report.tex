@@ -60,6 +60,22 @@
 		If the random variable is smaller than the exponential function, the value is accepted, otherwise is is rejected and the position at that time step not updated.
 		This behaviour leads to the tendency to thermalise, but takes care of the quantum behaviour of the particle.
 
+	\subsection{Autocorrelation}
+		Since the Metropolis algorithm produces autocorrelated data, this has to be taken into account.
+		The estimator of the autocorrelation function is defined as
+		\begin{equation}
+			\bar C(t) = \frac 1{N} \sum_{i = 1}^{N} (x_i - \bar x_N)(x_{i + |t|} - \bar x_N)
+			\label{eq:autocorrelation}
+		\end{equation}
+		In this case since I always use periodic boundary conditions, that's why one can sum until $N$.
+		For $i + |t| > N$ one then has to define $x_{i + |t|} = x_{i + |t| - N}$.
+		The normalised autocorrelation function estimator is then defined as:
+		\begin{equation}
+			\bar\Gamma(t) = \frac {\bar C(t)}{\bar C(0)}
+			\label{eq:normalised_autocorrelation}
+		\end{equation}
+		%TODO: error of \Gamma
+
 	\subsection{Implementation}
 		At first I implemented the complete algorithm in \textbf{Python}, which leads to a fairly poor performance.
 		This could mean that one can only get a bad data quality in a given time.
