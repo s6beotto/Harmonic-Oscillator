@@ -2,7 +2,7 @@
 
 # import modules
 from matplotlib import pyplot as plt
-from tools import getRootDirectory, Energy, Kinetic, Potential, autoCorrelationNormalized, getOutputFilename, running_mean
+from tools import getRootDirectory, Energy, Kinetic, Potential, autoCorrelationNormalized, getIntegratedCorrelationTime, getOutputFilename, running_mean, block
 import csv
 import numpy as np
 
@@ -56,7 +56,7 @@ mu = config['DEFAULT'].getfloat('mu', fallback=1.0)
 lambda_ = config['DEFAULT'].getfloat('lambda_', fallback=0)
 
 
-xdata = list(data.keys())
+xdata = np.array(list(data.keys()))
 
 # generate objects to measure the energy
 k = Kinetic(m, tau)
@@ -74,29 +74,40 @@ if da[0] > 0:
 else:
 	start = np.argmax(da > 0) + 10
 
-to_use = ydata[start::30]
-
 
 # filesystem stuff
 out_filename = getOutputFilename(relative_path, 'thermalisation', args.output)
 out_filename_autocorrelation = pathlib.Path('%s_autocorrelation.pdf' %out_filename.with_suffix(''))
 
-# calculate energy
-energy, denergy = np.mean(to_use), np.std(to_use)
 
-xdata_cut = xdata[start::30]
-ydata_cut = autoCorrelationNormalized(ydata[start::30], np.arange(len(xdata_cut)))
+ydata_cut = autoCorrelationNormalized(ydata, np.arange(len(ydata)))
+
+# calculate integrated autocorrelation time
+tint, dtint, w_max = getIntegratedCorrelationTime(ydata_cut, factor=8)
+
+step_size = int(tint * 2 + 1)
+
+xdata_cut = xdata[start::step_size]
+
+# calculate mean over blocked data
+ydata_mean = block(ydata[start:], step_size)
+
+ydata_ac_cut = autoCorrelationNormalized(ydata_mean, np.arange(len(xdata_cut)))
+
+# calculate energy
+energy, denergy = np.mean(ydata_mean), np.std(ydata_mean)
 
 # create autocorrelation plot
 plt.figure()
-plt.errorbar(xdata_cut, ydata_cut)
+plt.errorbar(xdata_cut[:2 * w_max // step_size], ydata_ac_cut[:2 * w_max // step_size], label=r'$\tau_{int} = %0.4f \pm %0.4f$' %(tint, dtint), fmt='.')
 plt.xlabel('Sample')
 plt.ylabel('Autocorrelation')
+plt.legend()
 plt.savefig(out_filename_autocorrelation)
 
 # plot
 plt.figure()
-plt.errorbar(xdata[:max_iteration], ydata[:max_iteration], label=r'energy $\bar{E} = (%.2f \pm %.2f) \cdot 10^3$' %(energy / 1000, denergy / 1000))
+plt.errorbar(block(xdata[:max_iteration], step_size), block(ydata[:max_iteration], step_size), label=r'energy $\bar{E} = (%.2f \pm %.2f) \cdot 10^3$' %(energy / 1000, denergy / 1000), fmt='.')
 plt.xlabel('Number')
 plt.ylabel('Energy')
 if args.log:
