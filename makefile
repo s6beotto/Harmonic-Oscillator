@@ -78,6 +78,12 @@ plots = imgs/harmonic_oscillator_track/track_100100_track_1.pdf \
 
 all: $(out) $(out_slides)
 
+.PHONY: report
+report: $(out)
+
+.PHONY: slides
+slides: $(out_slides)
+
 
 imgs/%_track_1.pdf: data/%.csv src/create_plots_track.py
 	@python3 src/create_plots_track.py data/$*.csv -i 1 10 20 40 80 100 -o $@
