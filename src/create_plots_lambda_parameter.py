@@ -24,7 +24,7 @@ if not full_path.exists() or full_path.is_dir():
 
 relative_path = full_path.relative_to(root_path / 'data')
 
-print('[Lambda parameter] Computing file %s ... ' %relative_path, end='')
+print('\033[1m[Lambda Parameter]\033[0m Computing file %s ... ' %relative_path, end='')
 
 # read csv file
 with full_path.open('r') as csvfile:

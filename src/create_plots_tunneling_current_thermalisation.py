@@ -29,7 +29,7 @@ if not full_path.exists() or full_path.is_dir():
 
 relative_path = full_path.relative_to(root_path / 'data')
 
-print('[Track tunneling current] Computing file %s ... ' %relative_path, end='')
+print('\033[1m[Track tunneling current]\033[0m[Track tunneling current] Computing file %s ... ' %relative_path, end='')
 
 data = {}
 

@@ -18,7 +18,7 @@ root_path = getRootDirectory()
 mu = 10 if args.harmonic else -1
 d = 0 if args.harmonic else args.distance
 
-print('[Potential] Computing ... ', end='')
+print('\033[1m[Potential]\033[0m Computing ... ', end='')
 
 xvalues = np.arange(-5-d / 2, 5+d / 2, 0.01)
 if args.anharmonic:

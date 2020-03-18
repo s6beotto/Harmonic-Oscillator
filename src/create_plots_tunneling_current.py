@@ -26,7 +26,7 @@ if not full_path.exists() or full_path.is_dir():
 
 relative_path = full_path.relative_to(root_path / 'data')
 
-print('[Tunneling current] Computing file %s ... ' %relative_path, end='')
+print('\033[1m[Tunnelling current]\033[0m Computing file %s ... ' %relative_path, end='')
 
 distances = []
 transitions = []
