@@ -91,6 +91,10 @@ def running_mean(x, N):
     cumsum = np.cumsum(np.insert(x, 0, 0))
     return (cumsum[N:] - cumsum[:-N]) / float(N)
 
+def block(data, l):
+	# calculate the mean over blocks of length l
+	return np.mean(data[:int(len(data) / l) * l].reshape(-1, l), axis = 1)
+
 def Potential(mu, lambda_):
 	# Potential Energy with parameters
 	def wrapper(x, mu=mu, lambda_=lambda_):
