@@ -237,7 +237,7 @@ $(PRE)%1001000_bad.csv: src/anharmonic_oscillator_lambda_parameter.py
 $(tex_): $(build) $(tex)
 	cp $(tex) $(tex_)
 
-$(build)/packages.tex: $(build)
+$(build)/packages.tex: $(build) Report/packages.tex
 	cp Report/packages.tex $(build)/packages.tex
 
 $(out): $(tex_) $(build) $(plots) $(build)/packages.tex
