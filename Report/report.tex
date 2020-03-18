@@ -76,6 +76,19 @@
 		\end{equation}
 		%TODO: error of \Gamma
 
+		% integrated autocorrelation time
+		To determine how many effective samples one can get from the Metropolis samples, one has to calculate the integrated autocorrelation time.
+		It is defined as follows:
+		\begin{equation}
+			\bar \tau_{int} = \frac 12 \sum_{t = -W_{max}}^{t = W_{max}} \frac {\bar C(t)}{\bar C(0)} = \frac 12 + \sum_{t = 1}^{W_{max}} \frac {\bar C(t)}{\bar C(0)}
+			\label{eq:integrated_autocorrelation}
+		\end{equation}
+		There are different methods to determine the cutoff $W$.
+		One possibility is to sum until the first element of $\Gamma(t)$ gets compatible with zero within its error.
+		I will use the condition $W_{max} > f \cdot \tau_{int}(W_{max})$ to stop the summation, with f defaulting to $5$.
+		The second equality sign is valid, since the first term $\frac {\bar C(0)}{\bar C(0)} = 1$ and is only counted once.
+		All other terms are counted twice, since the autocorrelation function is symmetrical around 0.
+
 	\subsection{Implementation}
 		At first I implemented the complete algorithm in \textbf{Python}, which leads to a fairly poor performance.
 		This could mean that one can only get a bad data quality in a given time.
