@@ -51,13 +51,13 @@ def autoCorrelationNormalized(data, xdata):
 
 def getIntegratedCorrelationTime(data, factor = 5):
 	# computes the integrated correlation time
-	tint = data[0]
+	tint = data[0] / 2
 	num = 0
 	while num < factor * tint and not num >= len(data):
 		num += 1
 		tint += data[num]
 
-	return tint / 2
+	return tint
 
 colors_raw = ['1f77b4', 'ff7f0e', '2ca02c', 'd62728', '9467bd', '8c564b', 'e377c2', '7f7f7f', 'bcbd22', '17becf']
 
