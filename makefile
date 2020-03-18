@@ -250,11 +250,11 @@ $(out): $(tex_) $(build) $(plots) $(build)/packages.tex
 	cd $$(dirname $@) && $(latexrun) $$(basename $<)
 
 
-$(build)/%.tex: $(build)
-	cp presentation/$*.tex $@
+$(build)/slides.tex: $(build) presentation/slides.tex
+	cp presentation/slides.tex $@
 
 requirements = $(build)/slides.tex $(build)/packages_slides.tex $(build)/template.tex $(build)/tikz_settings.tex
-$(build)/slides.pdf: $(requirements) $(plots)
+$(out_slides): $(requirements) $(plots) presentation/slides.tex
 	cd $$(dirname $@) && $(latexrun) $$(basename $<)
 
 $(build):
