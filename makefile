@@ -60,6 +60,7 @@ plots = imgs/harmonic_oscillator_track/track_100100_track_1.pdf \
 		imgs/harmonic_oscillator_classical_limit/harmonic_oscillator_10_classical_limit.pdf \
 		imgs/harmonic_oscillator_classical_limit/harmonic_oscillator_1_classical_limit.pdf \
 		imgs/harmonic_oscillator_classical_limit/harmonic_oscillator_100_classical_limit.pdf \
+		imgs/harmonic_oscillator_classical_limit_energy/harmonic_oscillator_10_classical_limit_energy.pdf \
 		imgs/anharmonic_oscillator_classical_limit/anharmonic_oscillator_classical_limit.pdf \
 		imgs/harmonic_oscillator_track/track_100100_step_thermalisation.pdf \
 		imgs/harmonic_oscillator_track/track_100100_step_thermalisation_log.pdf \
@@ -148,6 +149,9 @@ imgs/%_track_shifted_2.pdf: data/%.csv src/create_plots_track_shifted.py
 imgs/%_classical_limit.pdf: data/%.csv src/create_plots_classical_limit.py
 	@python3 src/create_plots_classical_limit.py data/$*.csv -o $@
 
+imgs/%_classical_limit_energy.pdf: data/%.csv src/create_plots_classical_limit_energy.py
+	@python3 src/create_plots_classical_limit_energy.py data/$*.csv -o $@
+
 imgs/%_thermalisation.pdf: data/%.csv src/create_plots_thermalisation.py
 	@python3 src/create_plots_thermalisation.py data/$*.csv -o $@
 
@@ -179,6 +183,7 @@ $(PRE)%rack_10010000.csv: src/harmonic_oscillator.py
 $(PRE)track_100100_step.csv: src/harmonic_oscillator.py
 	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 100 -N 100 --step -o $@
 
+
 # harmonic oscillator classical limit
 PRE := data/harmonic_oscillator_classical_limit/
 $(PRE)harmonic_oscillator_10.csv: src/harmonic_oscillator_classical_limit.py
@@ -189,6 +194,13 @@ $(PRE)harmonic_oscillator_1.csv: src/harmonic_oscillator_classical_limit.py
 
 $(PRE)harmonic_oscillator_100.csv: src/harmonic_oscillator_classical_limit.py
 	@python3 src/harmonic_oscillator_classical_limit.py  -m 0.25 --mu 100 -init 0 -ir 5 -i 1000 -N 1000 -o $@
+
+
+# harmonic oscillator classical limit energy
+PRE := data/harmonic_oscillator_classical_limit_energy/
+$(PRE)harmonic_oscillator_10.csv: src/harmonic_oscillator_classical_limit.py
+	@python3 src/harmonic_oscillator_classical_limit_energy.py  -m 0.25 --mu 10 -init 0 -ir 5 -i 1000 -N 1000 -o $@
+
 
 # anharmonic oscillator
 PRE := data/anharmonic_oscillator_track/
