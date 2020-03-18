@@ -57,7 +57,9 @@ plots = imgs/harmonic_oscillator_track/track_100100_track_1.pdf \
 		imgs/harmonic_oscillator_track/track_100100_step_track_shifted_2.pdf \
 		imgs/harmonic_oscillator_track/track_100100_step_track_shifted_5.pdf \
 		imgs/harmonic_oscillator_track/track_100100_step_track_shifted_double.pdf \
-		imgs/harmonic_oscillator_classical_limit/harmonic_oscillator_classical_limit.pdf \
+		imgs/harmonic_oscillator_classical_limit/harmonic_oscillator_10_classical_limit.pdf \
+		imgs/harmonic_oscillator_classical_limit/harmonic_oscillator_1_classical_limit.pdf \
+		imgs/harmonic_oscillator_classical_limit/harmonic_oscillator_100_classical_limit.pdf \
 		imgs/anharmonic_oscillator_classical_limit/anharmonic_oscillator_classical_limit.pdf \
 		imgs/harmonic_oscillator_track/track_100100_step_thermalisation.pdf \
 		imgs/harmonic_oscillator_track/track_100100_step_thermalisation_log.pdf \
@@ -179,8 +181,14 @@ $(PRE)track_100100_step.csv: src/harmonic_oscillator.py
 
 # harmonic oscillator classical limit
 PRE := data/harmonic_oscillator_classical_limit/
-$(PRE)%.csv: src/harmonic_oscillator_classical_limit.py
-	@python3 src/harmonic_oscillator_classical_limit.py  -m 0.25 -init 0 -ir 5 -i 100 -N 1000 -o $@
+$(PRE)harmonic_oscillator_10.csv: src/harmonic_oscillator_classical_limit.py
+	@python3 src/harmonic_oscillator_classical_limit.py  -m 0.25 --mu 10 -init 0 -ir 5 -i 1000 -N 1000 -o $@
+
+$(PRE)harmonic_oscillator_1.csv: src/harmonic_oscillator_classical_limit.py
+	@python3 src/harmonic_oscillator_classical_limit.py  -m 0.25 --mu 1  -init 0 -ir 5 -i 1000 -N 1000 -o $@
+
+$(PRE)harmonic_oscillator_100.csv: src/harmonic_oscillator_classical_limit.py
+	@python3 src/harmonic_oscillator_classical_limit.py  -m 0.25 --mu 100 -init 0 -ir 5 -i 1000 -N 1000 -o $@
 
 # anharmonic oscillator
 PRE := data/anharmonic_oscillator_track/
