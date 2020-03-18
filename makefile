@@ -76,7 +76,7 @@ plots = imgs/harmonic_oscillator_track/track_100100_track_1.pdf \
 		imgs/anharmonic_oscillator_lambda_parameter/track_100001000_tunneling_current.pdf \
 
 
-all: $(out)# $(out_slides)
+all: $(out) $(out_slides)
 
 
 imgs/%_track_1.pdf: data/%.csv src/create_plots_track.py
