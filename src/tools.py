@@ -57,7 +57,9 @@ def getIntegratedCorrelationTime(data, factor = 5):
 		num += 1
 		tint += data[num]
 
-	return tint
+	dtint = np.sqrt(2 * (2 * num + 1) / len(data) * tint ** 2)
+
+	return tint, dtint, num
 
 colors_raw = ['1f77b4', 'ff7f0e', '2ca02c', 'd62728', '9467bd', '8c564b', 'e377c2', '7f7f7f', 'bcbd22', '17becf']
 
