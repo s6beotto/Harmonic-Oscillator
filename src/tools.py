@@ -87,6 +87,7 @@ def countTransitions(values):
 	return sum(values[1:] / values[:-1] < 0)
 
 def running_mean(x, N):
+	# return the running mean of x over N samples
     cumsum = np.cumsum(np.insert(x, 0, 0))
     return (cumsum[N:] - cumsum[:-N]) / float(N)
 
