@@ -69,10 +69,10 @@ for iteration in iterations_used:
 		ydata_sum += ydata
 
 	# calculate integrated autocorrelation time
-	tint = getIntegratedCorrelationTime(ydata_sum, factor=8) * tau
-
 	ydata_mean = ydata_sum / len(ydata_sum)
-	plt.errorbar(xdata_times, ydata_mean, label=r'autocorrelation after %d iteration%s, $\tau_{int} = %0.4f$' %(iteration, 's' if iteration > 1 else '', tint), fmt='.', color=color_plot)
+	tint, dtint, w_max = getIntegratedCorrelationTime(ydata_mean, factor=8)
+
+	plt.errorbar(xdata_times, ydata_mean, label=r'autocorrelation after %d iteration%s, $\tau_{int} = %0.4f \pm %0.4f$' %(iteration, 's' if iteration > 1 else '', tint, dtint), fmt='.', color=color_plot)
 	# plot and fit
 
 plt.xlabel('Time t')

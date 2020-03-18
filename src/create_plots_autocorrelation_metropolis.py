@@ -74,11 +74,11 @@ config.read(full_path.with_suffix('.cfg'))
 tau = config['DEFAULT'].getfloat('tau', fallback=0.1)
 
 # calculate integrated autocorrelation time
-tint = getIntegratedCorrelationTime(ydata_sum, factor=8) * tau
+ydata_mean = ydata_sum / data.shape[1]
+tint, dtint, w_max = getIntegratedCorrelationTime(ydata_mean, factor=8)
 
 # plot and fit
-ydata_mean = ydata_sum / data.shape[1]
-plt.errorbar(xdata, ydata_mean, label=r'Autocorrelation function, $\tau_{int} = %0.2f$' %(tint), fmt='.', color=color_plot)
+plt.errorbar(xdata[:w_max * 2], ydata_mean[:w_max * 2], label=r'Autocorrelation function, $\tau_{int} = %0.2f \pm %0.2f$' %(tint, dtint), fmt='.', color=color_plot)
 if args.fit:
 	xdata, ydata_mean = xdata[xdata < 50], ydata_mean[xdata < 50]
 	xdata, ydata_mean = xdata[ydata_mean > 0], ydata_mean[ydata_mean > 0]
@@ -92,9 +92,6 @@ plt.xlabel('Metropolis iteration')
 plt.ylabel('$\Gamma(t)$')
 plt.yscale('log')
 plt.legend()
-
-plt.xlim(min(xdata), max(xdata))
-
 
 # filesystem stuff
 out_filename = getOutputFilename(relative_path, 'autocorrelation_metropolis', args.output)
