@@ -20,11 +20,14 @@
 		To verify my code I used the classical limit corresponding to $\hbar \rightarrow 0$.
 	\end{abstract}
 	\section{Introduction}
-
+		The \textbf{Principle of stationary Action} is a well-known principle in classical mechanics.
+		The quantum mechanical generalisation is known as the \textbf{Path integral method}.
+		This generalisation does not only take the path with the least action into account, but uses the interference of all possible paths leading to the same final state.
+		The implementation of such a system on a computer leads to problems due to infinite dimensional integrals over infinite boundaries of a quantity with constant modulus.
+		Therefore the Euclidean time is used, which is a substitution $t \rightarrow i t$ into imaginary time direction.
+		This leads to a rapid decay of paths of little significance.
 
 	\section{Theoretical Basis}
-		It corresponds to the generalisation of the principle of the least action in classical mechanics.
-		%However the solution in quantum mechanics does not yield a defined path, rather 
 		\begin{equation}
 			K(a, b) = \int_a^b e^{iS/\hbar} \mathcal Dx(t)
 			\label{eq:path_integral}
