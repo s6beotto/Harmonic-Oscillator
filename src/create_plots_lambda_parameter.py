@@ -32,17 +32,19 @@ with full_path.open('r') as csvfile:
 	distances = []
 	datas = []
 	transitions = []
+	dtransitions = []
 	for i, row in enumerate(reader):
 		if i == 0:
-			header_min = [float(v) for v in row[1:-1]]
+			header_min = [float(v) for v in row[1:-2]]
 		elif i == 1:
-			header_max = [float(v) for v in row[1:-1]]
+			header_max = [float(v) for v in row[1:-2]]
 		else:
 			distance = float(row[0])
-			data = [int(v) for v in row[1:-1]]
+			data = [int(v) for v in row[1:-2]]
 			distances.append(distance)
 			datas.append(data)
-			transitions.append(int(row[-1]))
+			transitions.append(float(row[-2]))
+			dtransitions.append(float(row[-1]))
 
 
 fig, ax = plt.subplots(figsize=(6,6))
@@ -55,8 +57,8 @@ cbar.ax.minorticks_off()
 plt.plot([+d / 2 for d in distances], distances, color='black', label='Classical Minima')
 plt.plot([-d / 2 for d in distances], distances, color='black')
 
-x0,x1 = ax.get_xlim()
-y0,y1 = ax.get_ylim()
+x0, x1 = ax.get_xlim()
+y0, y1 = ax.get_ylim()
 ax.set_aspect(abs(x1-x0)/abs(y1-y0))
 
 plt.xlabel('position')
