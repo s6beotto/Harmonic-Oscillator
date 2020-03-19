@@ -91,9 +91,9 @@ def running_mean(x, N):
     cumsum = np.cumsum(np.insert(x, 0, 0))
     return (cumsum[N:] - cumsum[:-N]) / float(N)
 
-def block(data, l):
+def block(data, l, func=np.mean):
 	# calculate the mean over blocks of length l, using non-overlapping blocking
-	return np.mean(data[:int(len(data) / l) * l].reshape(-1, l), axis = 1)
+	return func(data[:int(len(data) / l) * l].reshape(-1, l), axis = 1)
 
 def Potential(mu, lambda_):
 	# Potential Energy with parameters
