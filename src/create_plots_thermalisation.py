@@ -107,7 +107,7 @@ plt.savefig(out_filename_autocorrelation)
 
 # plot
 plt.figure()
-plt.errorbar(block(xdata[:max_iteration], step_size), block(ydata[:max_iteration], step_size), label=r'energy $\bar{E} = (%.2f \pm %.2f) \cdot 10^3$' %(energy / 1000, denergy / 1000), fmt='.')
+plt.errorbar(block(xdata[:max_iteration], step_size), block(ydata[:max_iteration], step_size), yerr=block(ydata[:max_iteration], step_size, func=np.std), label=r'energy $\bar{E} = (%.2f \pm %.2f) \cdot 10^3$' %(energy / 1000, denergy / 1000), fmt='.')
 plt.xlabel('Number')
 plt.ylabel('Energy')
 if args.log:
