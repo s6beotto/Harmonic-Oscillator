@@ -109,7 +109,7 @@
 
 	\subsubsection{Classical limit}
 		One of these consistency checks is the classical limit.
-			\begin{figure}[H]
+		\begin{figure}[H]
 			\centering
 				\includegraphics[width=0.6\textwidth]{../imgs/harmonic_oscillator_classical_limit/harmonic_oscillator_10_classical_limit.pdf}
 			\caption{Classical limit of the harmonic oscillator.}
@@ -187,13 +187,39 @@
 		The parameters used for the plot were $i=1000$, $N=1000$ but cut to $N=100$, $m=0.25$, $\mu = -10.0$, $\hbar = 1$, $\lambda = -0.08$, corresponding to a position of the minima at $\pm 2.5$.
 
 	\subsection{Measurements}
-	\subsubsection{Ground state energy}
+	\subsubsection{Classical limit energy}
+		\begin{figure}[H]
+			\centering
+				\includegraphics[width=0.6\textwidth]{../imgs/harmonic_oscillator_classical_limit_energy/harmonic_oscillator_10_classical_limit_energy.pdf}
+			\caption{Classical limit energy of the harmonic oscillator.}
+			\label{fig:harmonic_oscillator_classical_limit_energy}
+		\end{figure}
+		For plot \ref{fig:harmonic_oscillator_classical_limit_energy} the energy of the harmonic oscillator has been measured depending on the value of $\hbar$.
+		The position of the thermalisation has been determined by finding the first sign change of the running mean of the slope of the energy.
+		Starting from this position the integrated autocorrelation time has been calculated.
+		Then the data has been blocked into blocks of at least $2 \cdot \tau_{int}$, using the upper bound of the error interval, rounded to the next higher integer, from which the energy and standard deviation of the energy has been measured.
+		\\\\
+		An example is shown for $\hbar = 1$ in figure \ref{fig:harmonic_oscillator_energy_measurement}.
+
+		\begin{figure}[H]
+			\centering
+				\begin{subfigure}[c]{0.49\textwidth}
+					\includegraphics[width=\textwidth]{../imgs/harmonic_oscillator_track/track_10001000_thermalisation_log.pdf}
+					\subcaption{Blocked energy measurements}
+				\end{subfigure}
+				\begin{subfigure}[c]{0.49\textwidth}
+					\includegraphics[width=\textwidth]{../imgs/harmonic_oscillator_track/track_10001000_thermalisation_log_autocorrelation.pdf}
+					\subcaption{Autocorrelation of the enery measurements}
+				\end{subfigure}
+			\caption{Measurement of the energy: thermalisation and autocorrelation.}
+			\label{fig:harmonic_oscillator_energy_measurement}
+		\end{figure}
+
 
 	\subsubsection{Tunnelling current}
 
 	\section{Discussion}
 	\subsection{Verification}
-
 	\subsubsection{Classical limit}
 		As shown in figure \ref{fig:harmonic_oscillator_classical_limit}, for $\hbar \rightarrow 0$ the probability density collapses into the minimum of the potential, as one would expect from the classical ground state.
 		As visible in figure \ref{fig:anharmonic_oscillator_classical_limit}, the behaviour is similar to the harmonic oscillator, such that in the classical limit the probability density only has a significant contribution near the minima of the potential.
@@ -225,7 +251,7 @@
 		One can clearly see the instants of time when a tunnelling event occurs.
 
 	\subsection{Measurements}
-	\subsubsection{Ground state energy}
+	\subsubsection{Classical limit energy}
 
 	\subsubsection{Tunnelling current}
 
