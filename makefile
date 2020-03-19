@@ -198,7 +198,7 @@ $(PRE)harmonic_oscillator_100.csv: src/harmonic_oscillator_classical_limit.py
 
 # harmonic oscillator classical limit energy
 PRE := data/harmonic_oscillator_classical_limit_energy/
-$(PRE)harmonic_oscillator_10.csv: src/harmonic_oscillator_classical_limit.py
+$(PRE)harmonic_oscillator_10.csv: src/harmonic_oscillator_classical_limit_energy.py
 	@python3 src/harmonic_oscillator_classical_limit_energy.py  -m 0.25 --mu 10 -init 0 -ir 5 -i 1000 -N 1000 -o $@
 
 
