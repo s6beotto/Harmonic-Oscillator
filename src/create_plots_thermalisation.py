@@ -85,7 +85,7 @@ ydata_cut = autoCorrelationNormalized(ydata, np.arange(len(ydata)))
 # calculate integrated autocorrelation time
 tint, dtint, w_max = getIntegratedCorrelationTime(ydata_cut, factor=8)
 
-step_size = int(tint * 2 + 1)
+step_size = int((tint + dtint) * 2 + 1)
 
 xdata_cut = xdata[start::step_size]
 

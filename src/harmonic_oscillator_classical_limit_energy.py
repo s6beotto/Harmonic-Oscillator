@@ -101,7 +101,7 @@ def calculateEnergy(hbar):
 	# calculate integrated autocorrelation time
 	tint, dtint, w_max = getIntegratedCorrelationTime(energies_cut_ac, factor=10)
 
-	step_size = int(tint * 2 + 1)
+	step_size = int((tint + dtint) * 2 + 1)
 
 	energies_blocked = block(energies_cut, step_size)
 	energy, denergy = np.mean(energies_blocked), np.std(energies_blocked)
