@@ -49,7 +49,6 @@ with full_path.open('r') as csvfile:
 config = configparser.ConfigParser()
 config.read(full_path.with_suffix('.cfg'))
 
-print(12)
 # read config from respective file
 m = config['DEFAULT'].getfloat('mass', fallback=1.0)
 tau = config['DEFAULT'].getfloat('tau', fallback=1.0)
@@ -63,12 +62,8 @@ k = Kinetic(m, tau)
 
 p = Potential(mu, lambda_)
 
-print(123)
-
-kineticE = np.array([getTotalKineticEnergy(data[x], k) for x in xdata[::100]])
-potentialE = np.array([getTotalPotentialEnergy(data[x], p) for x in xdata[::100]])
-
-print(1234)
+kineticE = np.array([getTotalKineticEnergy(data[x], k) for x in xdata[::10]])
+potentialE = np.array([getTotalPotentialEnergy(data[x], p) for x in xdata[::10]])
 
 for i in range(0, len(xdata) // 10):
 	print(kineticE[i], potentialE[i])
