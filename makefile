@@ -75,6 +75,8 @@ plots = imgs/harmonic_oscillator_track/track_100100_track_1.pdf \
 		imgs/anharmonic_oscillator_lambda_parameter/track_1001000_tunneling_current.pdf \
 		imgs/anharmonic_oscillator_lambda_parameter/track_10010000_lambda_parameter.pdf \
 		imgs/anharmonic_oscillator_lambda_parameter/track_10010000_tunneling_current.pdf \
+		imgs/anharmonic_oscillator_lambda_parameter/track_10001000_lambda_parameter.pdf \
+		imgs/anharmonic_oscillator_lambda_parameter/track_10001000_tunneling_current.pdf \
 		imgs/anharmonic_oscillator_lambda_parameter/track_100001000_lambda_parameter.pdf \
 		imgs/anharmonic_oscillator_lambda_parameter/track_100001000_tunneling_current.pdf \
 
