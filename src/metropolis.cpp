@@ -9,6 +9,36 @@ double potential(double x, double mu, double lambda)
 		return mu * (x * x + lambda * pow(x, 4));
 	}
 
+double kinetic(double pos1, double pos2, double m, double tau)
+	{
+		return m / 2 * pow((pos1 - pos2) / tau, 2);
+	}
+
+double total_potential(double *positions, int len, double mu, double lambda)
+	{
+		double result = 0;
+		for (int i=0; i < len; i++)
+			{
+			result += potential(positions[i], mu, lambda);
+			}
+		return result;
+	}
+
+double total_kinetic(double *positions, int len, double m, double tau)
+	{
+		double result = 0;
+		for (int i=0; i < len - 1; i++)
+			{
+			result += kinetic(positions[i], positions[i + 1], m, tau);
+			}
+		return result;
+	}
+
+double total_energy(double *positions, int len, double m, double tau, double mu, double lambda)
+	{
+		return total_potential(positions, len, mu, lambda) + total_kinetic(positions, len, m, tau);
+	}
+
 // difference of the energy if x_old is changed to x_new
 double delta_energy(double left, double right, double x_new, double x_old, double m, double tau, double mu, double lambda)
 	{
