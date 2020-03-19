@@ -30,6 +30,7 @@ print('\033[1m[Tunnelling current]\033[0m Computing file %s ... ' %relative_path
 
 distances = []
 transitions = []
+dtransitions = []
 
 # read csv file
 with full_path.open('r') as csvfile:
@@ -38,10 +39,12 @@ with full_path.open('r') as csvfile:
 		if i < 2:
 			continue
 		distances.append(float(row[0]))
-		transitions.append(int(row[-1]))
+		transitions.append(float(row[-2]))
+		dtransitions.append(float(row[-1]))
 
 distances = np.array(distances)
 transitions = np.array(transitions)
+dtransitions = np.array(dtransitions)
 
 # read config from respective file
 config = configparser.ConfigParser()
@@ -52,7 +55,7 @@ N = config['DEFAULT'].getfloat('n', fallback=100)
 # plot
 plt.figure()
 
-plt.errorbar(distances, transitions / N, fmt='.')
+plt.errorbar(distances, transitions / N, yerr = dtransitions / N, fmt='.')
 plt.xlabel('Distance')
 plt.ylabel('Tunneling rate')
 
