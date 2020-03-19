@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
 # import modules
-from tools import Potential, Kinetic, deltaEnergy, Metropolis, getRootDirectory, distanceToParameter, countTransitions
+from tools import Potential, Kinetic, deltaEnergy, Metropolis, getRootDirectory, distanceToParameter, countTransitions, autoCorrelationNormalized, getIntegratedCorrelationTime
 import numpy as np
 from multiprocessing import Pool
 import csv
-from itertools import islice
+from itertools import islice, chain
 from configparser import ConfigParser
 import argparse
 import pathlib
@@ -86,9 +86,36 @@ def calculatePositionDistribution(distance):
 
 	m = Metropolis(init=init, valWidth=1, initValWidth=initial_random, hbar=hbar, tau=tau, N=N, m=mass, lambda_=lambda_, mu=mu)
 
-	vals = next(islice(m, iteration, iteration + 1))			# get iterations th metropolis iteration
-	transitions = countTransitions(vals[0])
-	return list(np.histogram(vals[0], bins)[0]), vals[1], transitions
+	# start after 50 samples
+	values = np.array([next(m) for _ in range(iteration)])[50:,]
+
+	data = np.row_stack([v[0] for v in values])
+	accept_ratios = values[:, 1]
+
+	xdata = np.arange(data.shape[0])
+
+	tint_max = 0
+
+	# calculate worst case integrated autocorrelation time
+	# leads to inhomogeneous distribution along hbar, tint is thus fixed
+	"""
+	for i in range(0, data.shape[1], data.shape[1] // 50):
+		ydata = autoCorrelationNormalized(data[:,i], xdata)
+		tint, dtint, w_max = getIntegratedCorrelationTime(ydata)
+		if tint_max < tint + dtint:
+			tint_max = tint + dtint
+	"""
+
+	tint_max = 15.0
+
+	# step size between uncorrelated samples
+	step_size = int(tint_max * 2 + 1)
+
+	data_use = data[::step_size]
+
+	transitions = [countTransitions(v) for v in data_use]
+
+	return list(np.histogram(data_use, bins)[0]), np.mean(accept_ratios), np.mean(transitions), np.std(transitions)
 
 # use a multiprocessing pool to generate data in a parallel manner
 p = Pool()
@@ -98,10 +125,10 @@ accept_ratio = np.mean([r[1] for r in results])
 # save csv
 with file_.open('w', newline='') as file:
 	writer = csv.writer(file)
-	writer.writerow(['distance'] + list(bins[:-1]) + ['transitions'])
-	writer.writerow(['distance'] + list(bins[1:]) + ['transitions'])
+	writer.writerow(['distance'] + list(bins[:-1]) + ['transitions', 'dtransitions'])
+	writer.writerow(['distance'] + list(bins[1:]) + ['transitions', 'dtransitions'])
 	for i, distance in enumerate(distances):
-		writer.writerow([distance] + results[i][0] + [results[i][2]])
+		writer.writerow([distance] + results[i][0] + [results[i][2], results[i][3]])
 
 config['DEFAULT']['accept_ratio'] = str(accept_ratio)
 
