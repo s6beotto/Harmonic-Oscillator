@@ -106,6 +106,13 @@
 		The complete source code, including all files related to this project are available under the public github repository \cite{github}.
 		To verify that the \textbf{C++} code behaves exactly like the Python version, I created some tests, stored in the branch \verb!verify_C!.
 		A short manual is given in the \verb!README.md! file.
+		\\\\
+		A very important quantity is the \textbf{accept-ratio}.
+		It measures how what ratio of changes proposed have been accepted.
+		To keep the performance high enough, the accept ratio should be as high as possible, but lower than around 65\%.
+		This condition is fulfilled for every dataset that is generated.
+		\\\\
+		The data is stored as \verb!csv! (comma-separated-values) file, a corresponding \verb!cfg! (config) file is generated to store the parameters used and the accept-ratio.
 
 	\section{Results}
 	\subsection{Verification}
