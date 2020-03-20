@@ -63,12 +63,8 @@ plots = imgs/harmonic_oscillator_track/track_1000100_track_1.pdf \
 		imgs/harmonic_oscillator_classical_limit/harmonic_oscillator_100_classical_limit.pdf \
 		imgs/harmonic_oscillator_classical_limit_energy/harmonic_oscillator_10_classical_limit_energy.pdf \
 		imgs/anharmonic_oscillator_classical_limit/anharmonic_oscillator_classical_limit.pdf \
-		imgs/harmonic_oscillator_track/track_100100_step_thermalisation.pdf \
-		imgs/harmonic_oscillator_track/track_100100_step_thermalisation_log.pdf \
 		imgs/harmonic_oscillator_track/track_10001000_thermalisation.pdf \
 		imgs/harmonic_oscillator_track/track_10001000_thermalisation_log.pdf \
-		imgs/anharmonic_oscillator_track/track_10010010_thermalisation.pdf \
-		imgs/anharmonic_oscillator_track/track_10010010_thermalisation_log.pdf \
 		imgs/anharmonic_oscillator_lambda_parameter/track_1001000_lambda_parameter.pdf \
 		imgs/anharmonic_oscillator_lambda_parameter/track_1001000_tunneling_current.pdf \
 		imgs/anharmonic_oscillator_lambda_parameter/track_1001000_bad_lambda_parameter.pdf \
