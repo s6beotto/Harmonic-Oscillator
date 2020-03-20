@@ -2,7 +2,7 @@
 
 # import modules
 from matplotlib import pyplot as plt
-from tools import getRootDirectory, Energy, Kinetic, Potential, autoCorrelationNormalized, getIntegratedCorrelationTime, getOutputFilename, running_mean, block
+from tools import getRootDirectory, Energy, Kinetic, Potential, autoCorrelationNormalized, autoCorrelationNormalizedError, getIntegratedCorrelationTime, getOutputFilename, running_mean, block
 import csv
 import numpy as np
 
@@ -93,13 +93,14 @@ xdata_cut = xdata[start::step_size]
 ydata_mean = block(ydata[start:], step_size)
 
 ydata_ac_cut = autoCorrelationNormalized(ydata_mean, np.arange(len(xdata_cut)))
+ydata_ac_cut_err = autoCorrelationNormalizedError(ydata_ac_cut, len(ydata_mean), 10)
 
 # calculate energy
 energy, denergy = np.mean(ydata_mean), np.std(ydata_mean)
 
 # create autocorrelation plot
 plt.figure()
-plt.errorbar(xdata_cut[:2 * w_max // step_size], ydata_ac_cut[:2 * w_max // step_size], label=r'$\tau_{int} = %0.4f \pm %0.4f$' %(tint, dtint), fmt='.')
+plt.errorbar(xdata_cut[:2 * w_max // step_size], ydata_ac_cut[:2 * w_max // step_size], yerr=ydata_ac_cut_err[:2 * w_max // step_size], label=r'$\tau_{int} = %0.4f \pm %0.4f$' %(tint, dtint), fmt='.')
 plt.xlabel('Sample')
 plt.ylabel('Autocorrelation')
 plt.legend()
