@@ -15,8 +15,8 @@ out := $(build)/report.pdf
 
 out_slides := $(build)/slides.pdf
 
-plots = imgs/harmonic_oscillator_track/track_100100_track_1.pdf \
-		imgs/harmonic_oscillator_track/track_100100_track_100.pdf \
+plots = imgs/harmonic_oscillator_track/track_1000100_track_1.pdf \
+		imgs/harmonic_oscillator_track/track_1000100_track_1000.pdf \
 		imgs/harmonic_oscillator_track/track_1000100_heavy_track_1000.pdf \
 		imgs/harmonic_oscillator_track/track_10001000_track_1.pdf \
 		imgs/harmonic_oscillator_track/track_10001000_gauss_1_fit.pdf \
@@ -175,6 +175,9 @@ imgs/%_tunneling_current.pdf: data/%.csv src/create_plots_tunneling_current.py
 PRE := data/harmonic_oscillator_track/
 $(PRE)%rack_100100.csv: src/harmonic_oscillator.py
 	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 100 -N 100 -o $@
+
+$(PRE)%rack_1000100.csv: src/harmonic_oscillator.py
+	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 1000 -N 100 -o $@
 
 $(PRE)%rack_1000100_heavy.csv: src/harmonic_oscillator.py
 	@python3 src/harmonic_oscillator.py  -m 10 -init 0 -ir 0.1 -i 1000 -N 100 -o $@
