@@ -49,6 +49,11 @@ def autoCorrelationNormalized(data, xdata):
 	correlation = autoCorrelation(data, xdata)
 	return correlation / correlation[0]
 
+def autoCorrelationNormalizedError(data, N, wmax, Lambda=5):
+	# returns the standard deviation of the normalised autocorrelation
+	val = np.array([0] + [sum([(data[i + t] + data[abs(i - t)] - 2 * data[i] * data[t]) ** 2 for i in range(1, t + Lambda)]) for t in range(1, wmax)])
+	return np.sqrt(val / N)
+
 def getIntegratedCorrelationTime(data, factor = 5):
 	# computes the integrated correlation time
 	tint = data[0] / 2
