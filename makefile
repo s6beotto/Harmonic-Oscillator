@@ -305,6 +305,9 @@ bin/libmetropolis.so: bin src/metropolis.cpp
 	g++ -c -fPIC src/metropolis.cpp -o bin/metropolis.o
 	g++ -shared -Wl,-soname,libmetropolis.so -o bin/libmetropolis.so bin/metropolis.o -lm
 
+.PHONY: verify
+verify:
+	python3 verify.py
 
 .PHONY: compile
 compile: bin/libmetropolis.so
