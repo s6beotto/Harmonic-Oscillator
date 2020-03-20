@@ -21,7 +21,7 @@ parser.add_argument('-u', '--mu', type=float, default=10,
 parser.add_argument('-t', '--tau', type=float, default=0.1,
                     help='Time step size')
 parser.add_argument('-hb', '--hbar', type=float, default=1,
-                    help='Value of the reduces Plancks constant')
+                    help='Value of the reduced Plancks constant')
 parser.add_argument('-init', '--initial', type=float, default=0,
                     help='Initial values for the path')
 parser.add_argument('-ir', '--initial-random', type=float, default=0,

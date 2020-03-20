@@ -23,7 +23,7 @@ parser.add_argument('-u', '--mu', type=float, default=10,
 parser.add_argument('-t', '--tau', type=float, default=0.1,
                     help='Time step size')
 parser.add_argument('-hb', '--hbar', type=str, default='0:2:0.01',
-                    help='Values of the reduces Plancks constant')
+                    help='Values of the reduced Plancks constant')
 parser.add_argument('-b', '--bins', type=str, default='-5:5:0.1',
                     help='Range of the used bins')
 parser.add_argument('-init', '--initial', type=float, default=0,
