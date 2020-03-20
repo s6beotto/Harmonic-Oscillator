@@ -104,7 +104,13 @@
 			\bar\Gamma(t) = \frac {\bar C(t)}{\bar C(0)}
 			\label{eq:normalised_autocorrelation}
 		\end{equation}
-		%TODO: error of \Gamma
+		The error of the autocorrelation function estimator is given as:
+		\begin{equation}
+			\var(\bar\Gamma(t)) = \frac 1N \sum_{i=1}^{t + \Lambda}\left[\bar\Gamma(i + t) + \bar\Gamma(i - t) - 2 \bar\Gamma(i)\bar\Gamma(t)\right]^2
+			\label{eq:normalised_autocorrelation_error}
+		\end{equation}
+		$\Lambda$ is in this case a cut-off value, in the following analysis $\Lambda = 5$ is used.
+		The error of the lag 0 value $\bar\Gamma(0)$ is defined as 0, because of the normalisation.
 
 		% integrated autocorrelation time
 		To determine how many effective samples one can get from the Metropolis samples, one has to calculate the integrated autocorrelation time.
