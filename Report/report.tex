@@ -23,9 +23,6 @@
 		The \textbf{Principle of stationary Action} is a well-known principle in classical mechanics.
 		The quantum mechanical generalisation is known as the \textbf{Path integral method}.
 		This generalisation does not only take the path with the least action into account, but uses the interference of all possible paths leading to the same final state.
-		The implementation of such a system on a computer leads to problems due to infinite dimensional integrals over infinite boundaries of a quantity with constant modulus.
-		Therefore the Euclidean time is used, which is a substitution $t \rightarrow i t$ into imaginary time direction.
-		This leads to a rapid decay of paths of little significance.
 		\\\\
 		The harmonic and simple anharmonic oscillators are theoretically well-understood, the harmonic oscillator is one of the few cases that is analytically solvable.
 		The systems used in this work can thus be used to cross-check the validity of algorithms used.
@@ -36,11 +33,15 @@
 		%TODO: add reference
 
 	\section{Theoretical Basis}
+		The path integral is given as follows:
 		\begin{equation}
 			K(a, b) = \int_a^b e^{iS/\hbar} \mathcal Dx(t)
 			\label{eq:path_integral}
 		\end{equation}
-		In equation \ref{eq:path_integral} the integral is performed over the path from point $a$ to $b$.
+		In equation \ref{eq:path_integral} the integral is performed over all possible paths from point $a$ to $b$, where the quantity $K(a, b)$ corresponds to the probability for this transition.
+		The implementation of such a system on a computer leads to problems due to infinite dimensional integrals over infinite boundaries of a quantity with constant modulus.
+		Therefore the Euclidean time is used, which is a substitution $t \rightarrow i t$ into imaginary time direction.
+		This leads to a rapid decay of paths of little significance.
 		\\
 		The total action is given by equation \ref{eq:total_action}.
 		\begin{equation}
