@@ -177,7 +177,7 @@ class MetropolisPython:
 
 				# reject
 		self.values[0] = self.values[-1]
-		return self.values, accepted / (stop - start)
+		return self.values, accepted / self.N
 
 	def __iter__(self):
 		return self
