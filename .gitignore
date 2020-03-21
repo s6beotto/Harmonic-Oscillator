@@ -18,6 +18,9 @@
 *.o
 *.so
 
+# ignore literature directory
+Material/literature/*
+
 # ignore output directories
 data/*
 imgs/*
