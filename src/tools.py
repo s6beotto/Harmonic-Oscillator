@@ -136,20 +136,18 @@ class MetropolisPython:
 	'''
 	Metropolis algorithm using the pure python
 	'''
-	def __init__(self, init=0, initValWidth=1, valWidth=1, periodic=True, N=100, hbar=1, tau=0.1, m=1.0, lambda_=0, mu = 1.0):
+	def __init__(self, init=0, initValWidth=1, valWidth=1, N=100, hbar=1, tau=0.1, m=1.0, lambda_=0, mu = 1.0):
 		if type(init) in [float, int, np.float64]:
 			self.values = np.random.normal(size=N, loc=init, scale=initValWidth)
 		else:
 			self.values = np.array(init)
 			N = len(self.values)
-		if periodic:
-			self.values[-1] = self.values[0]
+		self.values[-1] = self.values[0]
 
 		self.potential = Potential(mu, lambda_)
 
 		self.deltaEnergy = deltaEnergy(self.potential, m, tau)
 		self.valWidth = valWidth
-		self.periodic = periodic
 		self.N = N
 		self.hbar = hbar
 		self.tau = tau
@@ -159,14 +157,12 @@ class MetropolisPython:
 
 	def __next__(self):
 		# compute the next Metropolis iteration
-		start = 1 if self.periodic else 0
-		stop = self.N
 		accepted = 0
 
 		# precalculate random variables
 		rand_vals = np.random.rand(self.N)
 		newvalues = np.random.normal(size=self.N, loc=0, scale=self.valWidth)
-		for i in range(start, stop):
+		for i in range(1, self.N):
 			newvalue = newvalues[i] + self.values[i]
 			deltaEnergy = self.deltaEnergy(self.values, self.values[i], newvalue, i)
 			if deltaEnergy < 0:
@@ -180,8 +176,7 @@ class MetropolisPython:
 				# accept it
 
 				# reject
-		if self.periodic:
-			self.values[0] = self.values[-1]
+		self.values[0] = self.values[-1]
 		return self.values, accepted / (stop - start)
 
 	def __iter__(self):
@@ -191,17 +186,15 @@ class MetropolisC:
 	'''
 	Metropolis algorithm using the C function from metropolis.cpp, performance around 10 x that of the python version
 	'''
-	def __init__(self, init=0, initValWidth=1, valWidth=1, periodic=True, N=100, hbar=1, tau=0.1, m=1.0, lambda_=0, mu = 1.0):
+	def __init__(self, init=0, initValWidth=1, valWidth=1, N=100, hbar=1, tau=0.1, m=1.0, lambda_=0, mu = 1.0):
 		if type(init) in [float, int, np.float64]:
 			self.values = np.random.normal(size=N, loc=init, scale=initValWidth)
 		else:
 			self.values = np.array(init)
 			N = len(self.values)
-		if periodic:
-			self.values[0] = self.values[-1]
+		self.values[0] = self.values[-1]
 
 		self.valWidth = valWidth
-		self.periodic = periodic
 		self.N = N
 		self.hbar = hbar
 		self.tau = tau
@@ -214,7 +207,7 @@ class MetropolisC:
 		num_numbers = len(self.values)
 		array_type = ctypes.c_double * num_numbers
 		# use the C++ version of the central metropolis loop
-		result = libmetropolis.metropolis(ctypes.c_int(num_numbers), array_type(*self.values), ctypes.c_double(self.valWidth), ctypes.c_double(self.mass), ctypes.c_double(self.tau), ctypes.c_double(self.mu), ctypes.c_double(self.lambda_), ctypes.c_double(self.hbar), ctypes.c_bool(self.periodic))
+		result = libmetropolis.metropolis(ctypes.c_int(num_numbers), array_type(*self.values), ctypes.c_double(self.valWidth), ctypes.c_double(self.mass), ctypes.c_double(self.tau), ctypes.c_double(self.mu), ctypes.c_double(self.lambda_), ctypes.c_double(self.hbar))
 		accept_ratio = libmetropolis.get_accept_ratio()
 		libmetropolis.reset_ratio()
 		self.values = np.ctypeslib.as_array(result, shape=(num_numbers, ))
