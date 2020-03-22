@@ -18,6 +18,10 @@ out_slides := $(build)/slides.pdf
 plots = imgs/harmonic_oscillator_track/track_1000100_track_1.pdf \
 		imgs/harmonic_oscillator_track/track_1000100_track_1000.pdf \
 		imgs/harmonic_oscillator_track/track_1000100_heavy_track_1000.pdf \
+		imgs/harmonic_oscillator_track/track_1000100_virial.pdf \
+		imgs/harmonic_oscillator_track/track_1000100_heavy_virial.pdf \
+		imgs/harmonic_oscillator_track/track_1000100_virial_log.pdf \
+		imgs/harmonic_oscillator_track/track_1000100_heavy_virial_log.pdf \
 		imgs/harmonic_oscillator_track/track_10001000_track_1.pdf \
 		imgs/harmonic_oscillator_track/track_10001000_gauss_1_fit.pdf \
 		imgs/harmonic_oscillator_track/track_10001000_gauss_2_fit.pdf \
@@ -170,6 +174,13 @@ imgs/%_lambda_parameter.pdf: data/%.csv src/create_plots_lambda_parameter.py
 
 imgs/%_tunneling_current.pdf: data/%.csv src/create_plots_tunneling_current.py
 	@python3 src/create_plots_tunneling_current.py data/$*.csv -o $@
+
+
+imgs/%_virial.pdf: data/%.csv src/create_plots_virial.py
+	@python3 src/create_plots_virial.py data/$*.csv -o $@
+
+imgs/%_virial_log.pdf: data/%.csv src/create_plots_virial.py
+	@python3 src/create_plots_virial.py data/$*.csv -l -o $@
 
 
 # harmonic oscillator
