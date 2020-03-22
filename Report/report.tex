@@ -141,7 +141,7 @@
 		This leads to an improvement of data quality due to the higher output rate of around one order of magnitude.
 		The complete source code, including all files related to this project are available under the public github repository \cite{github}.
 		To verify that the \textbf{C++} code behaves exactly like the Python version, I created some tests, stored in the branch \verb!verify_C!.
-		A short manual is given in the \verb!README.md! file.
+		A short manual is given in the \verb!README.md! file, the directory structure is shown in appendix \ref{sec:directory_structure}.
 		\\\\
 		A very important quantity is the \textbf{accept-ratio}.
 		It measures what ratio of changes that were proposed has been accepted.
@@ -423,6 +423,7 @@
 	\appendix
 
 	\section{Directory structure}
+	\label{sec:directory_structure}
 	\subsection{Data generation}
 	\begin{figure}[H]
 		\centering
@@ -474,4 +475,5 @@
 		\label{fig:scheme_dirs_report_generation}
 	\end{figure}
 	The file \verb!latexrun.py! is taken from \cite{latexrun}.
+	Every process in the generation of this report is controlled by a makefile.
 \end{document}
