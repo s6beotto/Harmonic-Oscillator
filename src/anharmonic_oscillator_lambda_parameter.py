@@ -30,6 +30,8 @@ parser.add_argument('-init', '--initial', type=float, default=None,
                     help='Initial values for the path')
 parser.add_argument('-ir', '--initial-random', type=float, default=0,
                     help='Use random distribution around initial value')
+parser.add_argument('-rw', '--random-width', type=float, default=1,
+                    help='Width of the gaussian distribution to use to get the next iteration')
 parser.add_argument('-s', '--step', action='store_true',
                     help='Use a step function as initial state')
 parser.add_argument('-d', '--distance', type=str, default='0:10:0.1',
@@ -48,6 +50,7 @@ hbar = args.hbar
 bins_min, bins_max, bins_step = (float(b) for b in args.bins.split(':'))
 initial = args.initial
 initial_random = args.initial_random
+random_width = args.random_width
 step = args.step
 distance_min, distance_max, distance_step = (float(d) for d in args.distance.split(':'))
 output = args.output
@@ -55,7 +58,7 @@ output = args.output
 parameters = [
 			'iteration', 'N', 'mass', 'mu', 'tau', 'hbar',
 			'bins_min', 'bins_max',	'bins_step',
-			'initial', 'initial_random', 'step',
+			'initial', 'initial_random', 'random_width', 'step',
 			'distance_min', 'distance_max', 'distance_step',
 			]
 
@@ -84,7 +87,7 @@ def calculatePositionDistribution(distance):
 
 	init = initial if initial != None else -distance
 
-	m = Metropolis(init=init, valWidth=1, initValWidth=initial_random, hbar=hbar, tau=tau, N=N, m=mass, lambda_=lambda_, mu=mu)
+	m = Metropolis(init=init, valWidth=random_width, initValWidth=initial_random, hbar=hbar, tau=tau, N=N, m=mass, lambda_=lambda_, mu=mu)
 
 	# start after 50 samples
 	values = np.array([next(m) for _ in range(iteration)])[50:,]

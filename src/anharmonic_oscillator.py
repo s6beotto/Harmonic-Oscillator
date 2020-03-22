@@ -26,6 +26,8 @@ parser.add_argument('-init', '--initial', type=float, default=0,
                     help='Initial values for the path')
 parser.add_argument('-ir', '--initial-random', type=float, default=0,
                     help='Use random distribution around initial value')
+parser.add_argument('-rw', '--random-width', type=float, default=1,
+                    help='Width of the gaussian distribution to use to get the next iteration')
 parser.add_argument('-d', '--distance', type=float, default=10,
                     help='Distance of the minima')
 parser.add_argument('-o', '--output', type=pathlib.Path,
@@ -42,18 +44,19 @@ tau = args.tau
 hbar = args.hbar
 initial = args.initial
 initial_random = args.initial_random
+random_width = args.random_width
 distance = args.distance
 lambda_ = distanceToParameter(distance)
 output = args.output
 
 parameters = [
 			'iterations', 'N', 'mass', 'mu', 'tau', 'hbar', 'initial', 'initial_random',
-            'distance', 'lambda_',
+            'random_width', 'distance', 'lambda_',
 			]
 
 # generate objects related to metropolis
 
-m = Metropolis(init=initial, valWidth=1, initValWidth=initial_random, hbar=hbar, tau=tau, N=N, m=mass, lambda_=lambda_, mu=mu)
+m = Metropolis(init=initial, valWidth=random_width, initValWidth=initial_random, hbar=hbar, tau=tau, N=N, m=mass, lambda_=lambda_, mu=mu)
 
 # filesystem stuff
 root_path = getRootDirectory()
