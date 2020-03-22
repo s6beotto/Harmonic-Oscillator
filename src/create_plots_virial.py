@@ -2,7 +2,7 @@
 
 # import modules
 from matplotlib import pyplot as plt
-from tools import getRootDirectory, Energy, Kinetic, Potential, autoCorrelationNormalized, getTotalKineticEnergy, getTotalPotentialEnergy, getOutputFilename
+from tools import getRootDirectory, Energy, Kinetic, Potential, autoCorrelationNormalized, getTotalKineticEnergy, getTotalPotentialEnergy, getOutputFilename, block
 import csv
 import numpy as np
 
@@ -29,10 +29,9 @@ if not full_path.exists() or full_path.is_dir():
 
 relative_path = full_path.relative_to(root_path / 'data')
 
-print('[Track] Computing file %s ... ' %relative_path, end='')
+print('\033[1m[Virial]\033[0m Computing file %s ... ' %relative_path, end='')
 
 data = {}
-print(1)
 
 # read csv file
 with full_path.open('r') as csvfile:
@@ -62,36 +61,27 @@ k = Kinetic(m, tau)
 
 p = Potential(mu, lambda_)
 
-kineticE = np.array([getTotalKineticEnergy(data[x], k) for x in xdata[::10]])
-potentialE = np.array([getTotalPotentialEnergy(data[x], p) for x in xdata[::10]])
+block_size = 10
 
-for i in range(0, len(xdata) // 10):
-	print(kineticE[i], potentialE[i])
+xdata_cut = xdata[::block_size]
 
-
-exit(-1)
-
+kineticE = block(np.array([getTotalKineticEnergy(data[x], k) for x in xdata]), block_size)
+potentialE = block(np.array([getTotalPotentialEnergy(data[x], p) for x in xdata]), block_size)
 
 # filesystem stuff
 out_filename = getOutputFilename(relative_path, 'virial', args.output)
-#out_filename_autocorrelation = pathlib.Path('%s_autocorrelation.pdf' %out_filename.with_suffix(''))
 
-# calculate energy
-energy, denergy = np.mean(to_use), np.std(to_use)
-
-xdata_cut = xdata[start::30]
-ydata_cut = autoCorrelationNormalized(ydata[start::30], np.arange(len(xdata_cut)))
-
-# create autocorrelation plot
-plt.figure()
-plt.errorbar(xdata_cut, ydata_cut)
-plt.xlabel('Sample')
-plt.ylabel('Autocorrelation')
-plt.savefig(out_filename_autocorrelation)
+start = 100 // block_size
+potentialE_mean = np.mean(potentialE[start:])
+potentialE_error = np.std(potentialE[start:])
+kineticE_mean = np.mean(kineticE[start:])
+kineticE_error = np.std(kineticE[start:])
 
 # plot
 plt.figure()
-plt.errorbar(xdata[:max_iteration], ydata[:max_iteration], label=r'energy $\bar{E} = (%.2f \pm %.2f) \cdot 10^3$' %(energy / 1000, denergy / 1000))
+plt.fill_between(xdata_cut, potentialE + kineticE, kineticE, alpha=0.75, label=r'potential energy $\bar E = (%0.1f \pm %0.1f)$' %(potentialE_mean, potentialE_error))
+plt.fill_between(xdata_cut, kineticE, alpha=0.75, label=r'kinetic energy $\bar E = (%0.1f \pm %0.1f)$' %(kineticE_mean, kineticE_error))
+
 plt.xlabel('Number')
 plt.ylabel('Energy')
 if args.log:
