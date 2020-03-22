@@ -106,6 +106,7 @@ imgs/%_track_pretty_100.pdf: data/%.csv src/create_plots_track_pretty.py
 imgs/%_track_pretty_1000.pdf: data/%.csv src/create_plots_track_pretty.py
 	@python3 src/create_plots_track_pretty.py data/$*.csv -i 1000 -o $@
 
+
 imgs/%_gauss_1.pdf: data/%.csv src/create_plots_gauss.py
 	@python3 src/create_plots_gauss.py data/$*.csv -i 1 10 20 40 80 100 -o $@
 
@@ -151,8 +152,10 @@ imgs/%_track_shifted_2.pdf: data/%.csv src/create_plots_track_shifted.py
 imgs/%_classical_limit.pdf: data/%.csv src/create_plots_classical_limit.py
 	@python3 src/create_plots_classical_limit.py data/$*.csv -o $@
 
+
 imgs/%_classical_limit_energy.pdf: data/%.csv src/create_plots_classical_limit_energy.py
 	@python3 src/create_plots_classical_limit_energy.py data/$*.csv -o $@
+
 
 imgs/%_thermalisation.pdf: data/%.csv src/create_plots_thermalisation.py
 	@python3 src/create_plots_thermalisation.py data/$*.csv -o $@
@@ -160,8 +163,10 @@ imgs/%_thermalisation.pdf: data/%.csv src/create_plots_thermalisation.py
 imgs/%_thermalisation_log.pdf: data/%.csv src/create_plots_thermalisation.py
 	@python3 src/create_plots_thermalisation.py data/$*.csv --log -o $@
 
+
 imgs/%_lambda_parameter.pdf: data/%.csv src/create_plots_lambda_parameter.py
 	@python3 src/create_plots_lambda_parameter.py data/$*.csv -o $@
+
 
 imgs/%_tunneling_current.pdf: data/%.csv src/create_plots_tunneling_current.py
 	@python3 src/create_plots_tunneling_current.py data/$*.csv -o $@
