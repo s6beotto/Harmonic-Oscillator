@@ -20,7 +20,7 @@ d = 0 if args.harmonic else args.distance
 
 print('\033[1m[Potential]\033[0m Computing ... ', end='')
 
-xvalues = np.arange(-5-d / 2, 5+d / 2, 0.01)
+xvalues = np.arange(-2.5 - d / 2, 2.5 + d / 2, 0.01)
 if args.anharmonic:
 	lambda_ = distanceToParameter(d)
 else:
@@ -28,11 +28,15 @@ else:
 p = Potential(mu, lambda_)
 yvalues = p(xvalues)
 plt.figure()
-plt.errorbar(xvalues, yvalues)
+plt.plot(xvalues, yvalues, label='Potential energy')
 plt.xlabel('Distance')
 plt.ylabel('Potential energy')
+plt.plot(xvalues, np.zeros_like(xvalues), color='black', linewidth=0.5)
+plt.xlim(min(xvalues), max(xvalues))
 
-out_filename = root_path / ('imgs/potential/%s_%f.pdf' %('harm' if args.harmonic else 'anharm', d))
+plt.legend()
+
+out_filename = root_path / ('imgs/potential/%s_%0.1f.pdf' %('harm' if args.harmonic else 'anharm', d))
 
 if args.output:
 	out_filename = args.output
