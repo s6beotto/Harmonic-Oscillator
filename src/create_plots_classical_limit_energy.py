@@ -75,6 +75,11 @@ plt.legend()
 # filesystem stuff
 out_filename = getOutputFilename(relative_path, '', args.output)
 
+out_filename_slope = pathlib.Path('%s_slope.tex' %out_filename.with_suffix(''))
+with open(out_filename_slope, 'w') as f:
+	f.write(r'$\frac\omega2=\SI{%0.1f +- %0.1f}{}$' %(parameters[0], parameters_error[0]))
+
+
 # write to disk
 plt.savefig(out_filename)
 print('done')
