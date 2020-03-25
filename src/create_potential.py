@@ -36,7 +36,7 @@ plt.xlim(min(xvalues), max(xvalues))
 
 plt.legend()
 
-out_filename = root_path / ('imgs/potential/%s_%0.1f.pdf' %('harm' if args.harmonic else 'anharm', d))
+out_filename = root_path / ('imgs/potential/%s_%s.pdf' %('harm' if args.harmonic else 'anharm', ("%0.1f" % d).replace('.', '_')))
 
 if args.output:
 	out_filename = args.output

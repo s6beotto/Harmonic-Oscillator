@@ -80,10 +80,10 @@ plots = imgs/harmonic_oscillator_track/track_1000100_track_1.pdf \
 		imgs/anharmonic_oscillator_lambda_parameter/track_10001000_tunneling_current.pdf \
 		imgs/anharmonic_oscillator_lambda_parameter/track_100001000_lambda_parameter.pdf \
 		imgs/anharmonic_oscillator_lambda_parameter/track_100001000_tunneling_current.pdf \
-		imgs/potential/harm_0.0.pdf \
-		imgs/potential/anharm_1.0.pdf \
-		imgs/potential/anharm_5.0.pdf \
-		imgs/potential/anharm_10.0.pdf \
+		imgs/potential/harm_0_0.pdf \
+		imgs/potential/anharm_1_0.pdf \
+		imgs/potential/anharm_5_0.pdf \
+		imgs/potential/anharm_10_0.pdf \
 
 
 all: $(out) $(out_slides)
@@ -186,16 +186,16 @@ imgs/%_virial.pdf: data/%.csv src/create_plots_virial.py
 imgs/%_virial_log.pdf: data/%.csv src/create_plots_virial.py
 	@python3 src/create_plots_virial.py data/$*.csv -l -o $@
 
-imgs/potential/harm_0.0.pdf: src/create_potential.py
+imgs/potential/harm_0_0.pdf: src/create_potential.py
 	@python3 src/create_potential.py -H
 
-imgs/potential/anharm_1.0.pdf: src/create_potential.py
+imgs/potential/anharm_1_0.pdf: src/create_potential.py
 	@python3 src/create_potential.py -a -d 1.0
 
-imgs/potential/anharm_5.0.pdf: src/create_potential.py
+imgs/potential/anharm_5_0.pdf: src/create_potential.py
 	@python3 src/create_potential.py -a -d 5.0
 
-imgs/potential/anharm_10.0.pdf: src/create_potential.py
+imgs/potential/anharm_10_0.pdf: src/create_potential.py
 	@python3 src/create_potential.py -a -d 10.0
 
 # harmonic oscillator
