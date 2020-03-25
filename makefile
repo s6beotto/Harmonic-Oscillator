@@ -313,7 +313,7 @@ bin:
 	mkdir -p bin
 
 # compile c library
-bin/libmetropolis.so: bin src/metropolis.cpp
+bin/libmetropolis.so: bin src/metropolis.cpp src/metropolis.h
 	g++ -c -fPIC src/metropolis.cpp -o bin/metropolis.o
 	g++ -shared -Wl,-soname,libmetropolis.so -o bin/libmetropolis.so bin/metropolis.o -lm
 
