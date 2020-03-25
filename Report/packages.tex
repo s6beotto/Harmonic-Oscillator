@@ -24,6 +24,27 @@
 \usepackage{bbm}
 \usepackage{siunitx}
 \usepackage{hyperref}
+
+% change link style
+\hypersetup{
+	breaklinks=false,
+	colorlinks=true,
+	pdfauthor={Benedikt Otto},
+}
+
+% define some colors
+\colorlet{darkred}{red!70!black}
+\colorlet{darkblue}{blue!70!black}
+\colorlet{darkgreen}{green!40!black}
+
+% use special colors for links
+\hypersetup{
+	citecolor=darkgreen,
+	linkcolor=darkblue,
+	menucolor=black,
+	urlcolor=darkblue,
+}
+
 \makeatletter
 \renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
 	{-2.5ex\@plus -1ex \@minus -.25ex}%
