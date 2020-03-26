@@ -4,10 +4,3 @@
 \usetikzlibrary{decorations.pathmorphing}
 \usetikzlibrary{decorations.markings}
 \usetikzlibrary{positioning, shapes, snakes, arrows}
-
-
-\tikzset{
-	quark/.style={postaction={decorate},
-		decoration={markings,mark=at position .5 with {\arrow[#1]{latex}}}},
-	boson/.style={-latex,decorate, decoration={snake, segment length=4pt, amplitude=1.8pt, pre length=.1cm, post length=.05cm}},
-}
