@@ -55,7 +55,9 @@
 	\begin{itemize}
 		\item $S = \tau \sum_i {V(x_i) + T(x_i, x_{i+1})}$
 		\item only $\Delta S$ is important $\Rightarrow$ complete recalculation is not necessary
-		\item $\Delta S = \tau \left(V(x_{i;new}) - V(x_{i;old}) + T(x_{i;new}, x_{i+1}) - T(x_{i;old}, x_{i+1})\right)$
+		\item $\Delta S = \tau (V(x_{i;new}) - V(x_{i;old}) + $\\$ + T(x_{i-1}, x_{i;new}) + T(x_{i;new}, x_{i+1}) - T(x_{i-1}, x_{i;old}) - T(x_{i;old}, x_{i+1}))$
+		\item Potential energy: $V(x) = \mu x^2 + \lambda x^4$
+		\item Kinetic energy: $T(x_1, x_2) = \frac m2 \frac{(x_1 - x_2)^2}{\tau^2}$
 	\end{itemize}
 \end{frame}
 
