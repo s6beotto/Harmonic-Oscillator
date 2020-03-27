@@ -323,6 +323,31 @@
 \end{frame}
 
 
+\begin{frame}
+	\frametitle{Measurements: Virial theorem}
+	\vspace{-10px}
+	\begin{figure}[H]
+		\centering
+			\begin{subfigure}[c]{0.49\textwidth}
+				\includegraphics[width=\textwidth]{../imgs/harmonic_oscillator_track/track_1000100_heavy_virial_log.pdf}
+				\subcaption{Using $m = 10$.}
+				\label{fig:track_1000100_heavy_virial_log}
+			\end{subfigure}
+			\begin{subfigure}[c]{0.49\textwidth}
+				\includegraphics[width=\textwidth]{../imgs/harmonic_oscillator_track/track_1000100_virial_log.pdf}
+				\subcaption{Using $m = 0.25$.}
+				\label{fig:track_1000100_virial_log}
+			\end{subfigure}
+		%\caption{Distribution of the total energy into potential and kinetic part.}
+		\label{fig:track_1000100_virial}
+	\end{figure}
+	\begin{itemize}
+		\item Energy is not distributed evenly between kinetic and potential part
+		\item Virial theorem does not hold for the produced data
+	\end{itemize}
+\end{frame}
+
+
 \section{Summary}
 \begin{frame}
 	\frametitle{Summary}
@@ -331,6 +356,7 @@
 		\item Metropolis-algorithm produces gaussian shaped distributions
 		\item Linear relation between $E$ and $\hbar$ could be confirmed
 		\item Tunnelling current could be measured depending on the difference of the minima
+		\item The Virial theorem does not apply for the simulated data
 	\end{itemize}
 \end{frame}
 
