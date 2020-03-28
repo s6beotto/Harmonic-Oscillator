@@ -32,11 +32,12 @@ For this one can use the makefile as following
 make compile
 ```
 The `C` version of the central algorithm is roughly 8 times faster than the `Python` version.
-To explicitly use the `Python` version, the comment in the last line has to be removed, a compile is thus not necessary.
+To explicitly use the `Python` version, the comment in the last line of `tools.py` has to be removed, a compile is thus not necessary.
+This makes sure that the software runs on every system where `Python3` is present.
 
 To run the software simply use
 ```bash
-make
+make plots
 ```
 This generates firstly all data file in the `data` directory, then generates plots in the `imgs` directory and finally assembles the final report in the `build` directory.
 
