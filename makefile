@@ -287,6 +287,9 @@ PRE := data/anharmonic_oscillator_lambda_parameter/
 $(PRE)%1001000.csv: src/anharmonic_oscillator_lambda_parameter.py
 	@python3 src/anharmonic_oscillator_lambda_parameter.py -ir 2 -i 100 -N 1000 -o $@
 
+$(PRE)%10001000.csv: src/anharmonic_oscillator_lambda_parameter.py
+	@python3 src/anharmonic_oscillator_lambda_parameter.py -ir 2 -i 1000 -N 1000 -o $@
+
 $(PRE)%10010000.csv: src/anharmonic_oscillator_lambda_parameter.py
 	@python3 src/anharmonic_oscillator_lambda_parameter.py -ir 2 -i 100 -N 10000 -o $@
 
