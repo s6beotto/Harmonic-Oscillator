@@ -302,6 +302,9 @@ $(PRE)%10020000.csv: src/anharmonic_oscillator_lambda_parameter.py
 $(PRE)%1001000_bad.csv: src/anharmonic_oscillator_lambda_parameter.py
 	@python3 src/anharmonic_oscillator_lambda_parameter.py -init 0 -ir 10 -i 100 -N 1000 -o $@
 
+.PHONY: plots
+plots: $(plots)
+
 $(tex_): $(build) $(tex)
 	cp $(tex) $(tex_)
 
