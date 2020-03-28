@@ -76,17 +76,19 @@ def calculateEnergy(hbar):
 	print('calculating for hbar=%0.4f' % hbar)
 	m = Metropolis(init=initial, valWidth=random_width, initValWidth=initial_random, hbar=hbar, tau=tau, N=N, m=mass, lambda_=0, mu=mu)
 
-	data = []
-	accept_ratios = []
-	for _ in range(iterations):
-		d, a = m.__next__()
-		data.append(d)
-		accept_ratios.append(a)
-
 	k = Kinetic(mass, tau)
 	p = Potential(mu, 0)
 	e = Energy(k, p)
-	energies = np.array([e(d) for d in data])
+
+	accept_ratios = []
+	energies = []
+
+	for _ in range(iterations):
+		d, a = m.__next__()
+		accept_ratios.append(a)
+		energies.append(e(d))
+
+	energies = np.array(energies)
 
 	# calculate mean energy
 	d = energies[:-1] - energies[1:]
