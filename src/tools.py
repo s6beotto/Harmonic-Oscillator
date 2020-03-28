@@ -13,6 +13,8 @@ def getRootDirectory():
 libmetropolis = cdll.LoadLibrary(getRootDirectory() / 'bin' / 'libmetropolis.so')
 libmetropolis.metropolis.argtypes = (ctypes.c_int, ctypes.POINTER(ctypes.c_double), ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double)
 libmetropolis.metropolis.restype = ctypes.POINTER(ctypes.c_double)
+libmetropolis.allocate_memory.argtypes = ctypes.c_int,
+libmetropolis.allocate_memory.restype = None
 
 libmetropolis.get_accept_ratio.argtypes = ()
 libmetropolis.get_accept_ratio.restype = ctypes.c_double
@@ -193,6 +195,9 @@ class MetropolisC:
 			self.values = np.array(init)
 			N = len(self.values)
 		self.values[0] = self.values[-1]
+
+		# allocate memory in C++
+		libmetropolis.allocate_memory(N)
 
 		self.valWidth = valWidth
 		self.N = N
