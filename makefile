@@ -312,11 +312,18 @@ $(out): $(tex_) $(build) $(plots) $(build)/packages.tex
 	cd $$(dirname $@) && $(latexrun) $$(basename $<)
 
 
+# files related to slide generation
 $(build)/slides.tex: $(build) presentation/slides.tex
 	cp presentation/slides.tex $@
 
 $(build)/packages_slides.tex: $(build) presentation/packages_slides.tex
 	cp presentation/packages_slides.tex $@
+
+$(build)/template.tex: $(build) presentation/template.tex
+	cp presentation/template.tex $@
+
+$(build)/tikz_settings.tex: $(build) presentation/tikz_settings.tex
+	cp presentation/tikz_settings.tex $@
 
 requirements = $(build)/slides.tex $(build)/packages_slides.tex $(build)/template.tex $(build)/tikz_settings.tex
 $(out_slides): $(requirements) $(plots) presentation/slides.tex
