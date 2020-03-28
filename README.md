@@ -40,17 +40,12 @@ make
 ```
 This generates firstly all data file in the `data` directory, then generates plots in the `imgs` directory and finally assembles the final report in the `build` directory.
 
-Since many of the required steps are independent, one can use the multi processing feature of make as:
+Since many of the required steps are independent, one can use the multi processing feature of make as.
+But because many of the executed scripts already use multiprocessing, this only has a very small influence, but greatly increases RAM usage.
 ```bash
 make -j
 ```
-This causes make to run with many processes in parallel, depending on the number of logical CPU cores. On my quad-core processor (Intel i7-4770) this process took around 2.5 minutes and used a peak of around 7GB of RAM and 100% CPU load.
-To reduce this one can reduce the number of processes by adding an argument as follows:
-
-```bash
-make -j <num_processes>
-```
-This should reduce the CPU load and the peak RAM usage.
+This causes make to run with many processes in parallel, depending on the number of logical CPU cores. On my quad-core processor (Intel i7-4770) this process took around 5 minutes and used a peak of around 1GB of RAM and 100% CPU load.
 
 To clean up the directory simply type
 ```bash
