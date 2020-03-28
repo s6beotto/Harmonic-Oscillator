@@ -67,8 +67,11 @@ void reset_ratio(void)
 unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 std::default_random_engine generator(seed);
 
-
 double * result;
+
+void allocate_memory(int maxlength) {
+	result = (double *) malloc(maxlength * sizeof (double));
+}
 
 // loop function of the metropolis algorithm implemented in C++
 double * metropolis(int num_numbers, double *numbers, double val_width, double m, double tau, double mu, double lambda, double hbar) {
@@ -76,7 +79,7 @@ double * metropolis(int num_numbers, double *numbers, double val_width, double m
 	std::uniform_real_distribution<double> lin_distribution(0, 1);
 
 	// allocate space to fit the result
-	result = (double *) malloc(num_numbers * sizeof (double));
+	//result = (double *) malloc(num_numbers * sizeof (double));
 
 	numbers[num_numbers - 1] = numbers[0];
 
