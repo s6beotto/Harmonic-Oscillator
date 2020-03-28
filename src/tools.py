@@ -58,7 +58,7 @@ def getIntegratedCorrelationTime(data, factor = 5):
 	# computes the integrated correlation time
 	tint = data[0] / 2
 	num = 0
-	while num < factor * tint and not num >= len(data):
+	while num < factor * tint and not num >= len(data) - 1:
 		num += 1
 		tint += data[num]
 
