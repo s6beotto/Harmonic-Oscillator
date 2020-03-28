@@ -39,7 +39,13 @@ To run the software simply use
 ```bash
 make plots
 ```
-This generates firstly all data file in the `data` directory, then generates plots in the `imgs` directory and finally assembles the final report in the `build` directory.
+This generates firstly all data file in the `data` directory, then generates plots in the `imgs` directory.
+
+If the report and the slides should be generated, the command
+```bash
+make
+```
+is used, which first generates all requisite files, if they are not present and then assembles the pdf files.
 
 Since many of the required steps are independent, one can use the multi processing feature of make as.
 But because many of the executed scripts already use multiprocessing, this only has a very small influence, but greatly increases RAM usage.
