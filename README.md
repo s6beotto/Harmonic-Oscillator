@@ -24,6 +24,11 @@ pip3 install numpy scipy pathlib configparser statsmodels cycler
 
 The libraries basically have corresponding functions in `R`. Every function that is present in `R`, but not in `Python` has been programmed manually in `tools.py`.
 
+If the software should assemble the final pdf files, the required packages can be installed using
+```bash
+sudo apt install texlive texlive-science texlive-latex-recommended texlive-latex-extra texlive-fonts-extra
+```
+
 ## Usage
 When all the dependencies are installed one can start the software.
 First of all, the `C` library has to be compiled.
@@ -46,6 +51,7 @@ If the report and the slides should be generated, the command
 make
 ```
 is used, which first generates all requisite files, if they are not present and then assembles the pdf files.
+For this the latex-related packages above have to be present.
 
 Since many of the required steps are independent, one can use the multi processing feature of make as.
 But because many of the executed scripts already use multiprocessing, this only has a very small influence, but greatly increases RAM usage.
