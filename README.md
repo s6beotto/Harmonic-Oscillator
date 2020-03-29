@@ -73,7 +73,7 @@ to get the accepted parameters.
 
 The scripts used to produce the plots have a similar interface:
 ```bash
-python3 create_plots_*.py -i <input-file> [-o <output-file>]
+python3 create_plot_*.py -i <input-file> [-o <output-file>]
 ```
 
 ## Acknowledgement
