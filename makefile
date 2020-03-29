@@ -9,7 +9,7 @@ latexrun := python3 ../latexrun.py --bibtex-cmd biber
 .PRECIOUS:
 
 
-tex := Report/report.tex
+tex := report/report.tex
 tex_ := $(build)/report.tex
 out := $(build)/report.pdf
 
@@ -329,8 +329,8 @@ plots: $(plots)
 $(tex_): $(build) $(tex)
 	cp $(tex) $(tex_)
 
-$(build)/packages.tex: $(build) Report/packages.tex
-	cp Report/packages.tex $(build)/packages.tex
+$(build)/packages.tex: $(build) report/packages.tex
+	cp report/packages.tex $(build)/packages.tex
 
 $(out): $(tex_) $(build) $(plots) $(build)/packages.tex
 	cd $$(dirname $@) && $(latexrun) $$(basename $<)
