@@ -65,6 +65,17 @@ To clean up the directory simply type
 make clean
 ```
 
+Every script can be run separately by using the commandline
+```bash
+python3 (an)harmonic_oscillator*.py --help
+```
+to get the accepted parameters.
+
+The scripts used to produce the plots have a similar interface:
+```bash
+python3 create_plots_*.py -i <input-file> [-o <output-file>]
+```
+
 ## Acknowledgement
 Note:
 Commits done by my former project partner have been undone, I only use content that I created myself and code that I reference.
