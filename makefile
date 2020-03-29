@@ -97,6 +97,7 @@ report: $(out)
 slides: $(out_slides)
 
 
+# images showing the tracks
 imgs/%_track_1.pdf: data/%.csv src/create_plots_track.py
 	@python3 src/create_plots_track.py data/$*.csv -i 1 10 20 40 80 100 -o $@
 
@@ -107,6 +108,7 @@ imgs/%_track_1000.pdf: data/%.csv src/create_plots_track.py
 	@python3 src/create_plots_track.py data/$*.csv -i 1000 -o $@
 
 
+# images showing the most interesting part of the track
 imgs/%_track_pretty_1.pdf: data/%.csv src/create_plots_track_pretty.py
 	@python3 src/create_plots_track_pretty.py data/$*.csv -i 1 10 20 40 80 100 -o $@
 
@@ -117,6 +119,7 @@ imgs/%_track_pretty_1000.pdf: data/%.csv src/create_plots_track_pretty.py
 	@python3 src/create_plots_track_pretty.py data/$*.csv -i 1000 -o $@
 
 
+# images compairing the distribution with gaussian ones
 imgs/%_gauss_1.pdf: data/%.csv src/create_plots_gauss.py
 	@python3 src/create_plots_gauss.py data/$*.csv -i 1 10 20 40 80 100 -o $@
 
@@ -127,6 +130,7 @@ imgs/%_gauss_2_fit.pdf: data/%.csv src/create_plots_gauss.py
 	@python3 src/create_plots_gauss.py data/$*.csv -i 10 20 40 80 100 -f -o $@
 
 
+# images compairing the distribution with gaussian ones using qq-plots
 imgs/%_qq_1.pdf: data/%.csv src/create_plots_qq.py
 	@python3 src/create_plots_qq.py data/$*.csv -i 1 -o $@
 
@@ -146,6 +150,7 @@ imgs/%_qq_100.pdf: data/%.csv src/create_plots_qq.py
 	@python3 src/create_plots_qq.py data/$*.csv -i 100 -o $@
 
 
+# images showing the tracks but shifted to seperate them clearly
 imgs/%_track_shifted_double.pdf: data/%.csv src/create_plots_track_shifted.py
 	@python3 src/create_plots_track_shifted.py data/$*.csv -i 1 10 20 40 80 100 -o $@
 
@@ -159,14 +164,17 @@ imgs/%_track_shifted_2.pdf: data/%.csv src/create_plots_track_shifted.py
 	@python3 src/create_plots_track_shifted.py data/$*.csv -i 1 3 5 7 9 11 13 15 -o $@
 
 
+# images showing the classical limit probability distribution
 imgs/%_classical_limit.pdf: data/%.csv src/create_plots_classical_limit.py
 	@python3 src/create_plots_classical_limit.py data/$*.csv -o $@
 
 
+# images showing the classical limit energy
 imgs/%_classical_limit_energy.pdf: data/%.csv src/create_plots_classical_limit_energy.py
 	@python3 src/create_plots_classical_limit_energy.py data/$*.csv -o $@
 
 
+# images showing the thermalisation
 imgs/%_thermalisation.pdf: data/%.csv src/create_plots_thermalisation.py
 	@python3 src/create_plots_thermalisation.py data/$*.csv -o $@
 
@@ -174,10 +182,12 @@ imgs/%_thermalisation_log.pdf: data/%.csv src/create_plots_thermalisation.py
 	@python3 src/create_plots_thermalisation.py data/$*.csv --log -o $@
 
 
+# images showing the probability distribution depending on the lambda parameter
 imgs/%_lambda_parameter.pdf: data/%.csv src/create_plots_lambda_parameter.py
 	@python3 src/create_plots_lambda_parameter.py data/$*.csv -o $@
 
 
+# images showing the tunneling current depending on the lambda parameter
 imgs/%_tunneling_current.pdf: data/%.csv src/create_plots_tunneling_current.py
 	@python3 src/create_plots_tunneling_current.py data/$*.csv -o $@
 
@@ -188,12 +198,15 @@ imgs/%_tunneling_current_log_fit.pdf: data/%.csv src/create_plots_tunneling_curr
 	@python3 src/create_plots_tunneling_current.py data/$*.csv --log --fit 7.0 -o $@
 
 
+# images showing the distribution of the energy into potential and kinetic part
 imgs/%_virial.pdf: data/%.csv src/create_plots_virial.py
 	@python3 src/create_plots_virial.py data/$*.csv -o $@
 
 imgs/%_virial_log.pdf: data/%.csv src/create_plots_virial.py
 	@python3 src/create_plots_virial.py data/$*.csv -l -o $@
 
+
+# images showing the used potentials
 imgs/potential/harm_0_0.pdf: src/create_potential.py
 	@python3 src/create_potential.py -H
 
