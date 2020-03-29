@@ -29,7 +29,7 @@ if not full_path.exists() or full_path.is_dir():
 
 relative_path = full_path.relative_to(root_path / 'data')
 
-print('\033[1m[Track tunneling current]\033[0m[Track tunneling current] Computing file %s ... ' %relative_path, end='')
+print('\033[1m[Track tunnelling current]\033[0m[Track tunnelling current] Computing file %s ... ' %relative_path, end='')
 
 data = {}
 
@@ -71,12 +71,12 @@ to_use = ydata[start::30]
 
 
 # filesystem stuff
-out_filename = getOutputFilename(relative_path, 'tunneling_current_thermalisation', args.output)
+out_filename = getOutputFilename(relative_path, 'tunnelling_current_thermalisation', args.output)
 out_filename_autocorrelation = pathlib.Path('%s_autocorrelation.pdf' %out_filename.with_suffix(''))
 
-# calculate tunneling current
-tunneling_current, dtunneling_current = np.mean(to_use), np.std(to_use)
-print(tunneling_current, dtunneling_current)
+# calculate tunnelling current
+tunnelling_current, dtunnelling_current = np.mean(to_use), np.std(to_use)
+print(tunnelling_current, dtunnelling_current)
 
 xdata_cut = xdata[start::30]
 ydata_cut = autoCorrelationNormalized(ydata[start::30], np.arange(len(xdata_cut)))
@@ -90,9 +90,9 @@ plt.savefig(out_filename_autocorrelation)
 
 # plot
 plt.figure()
-plt.errorbar(xdata[:max_iteration], ydata[:max_iteration], label=r'tunneling rate = $%.2f \pm %.2f$' %(tunneling_current, dtunneling_current))
+plt.errorbar(xdata[:max_iteration], ydata[:max_iteration], label=r'tunnelling rate = $%.2f \pm %.2f$' %(tunnelling_current, dtunnelling_current))
 plt.xlabel('Number')
-plt.ylabel('tunneling current')
+plt.ylabel('tunnelling current')
 if args.log:
 	plt.yscale('log')
 plt.legend()

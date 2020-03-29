@@ -63,7 +63,7 @@ color_plot, color_fit = next(color_iterator)['color']
 
 plt.errorbar(distances, transitions / N, yerr = dtransitions / N, fmt='.', color=color_plot)
 plt.xlabel('Distance')
-plt.ylabel('Tunneling rate')
+plt.ylabel('tunnelling rate')
 if args.log:
 	plt.yscale('log')
 
@@ -86,7 +86,7 @@ if args.fit:
 
 
 # filesystem stuff
-out_filename = getOutputFilename(relative_path, 'tunneling_current', args.output)
+out_filename = getOutputFilename(relative_path, 'tunnelling_current', args.output)
 
 # write to disk
 plt.savefig(out_filename)
