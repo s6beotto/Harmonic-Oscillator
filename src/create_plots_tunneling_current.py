@@ -13,6 +13,7 @@ import configparser
 # parse CLI arguments
 parser = argparse.ArgumentParser(description='Plot the energy depending on the metropolis sample.')
 parser.add_argument('filename', type=pathlib.Path, help='Input filename')
+parser.add_argument('-l', '--log', action='store_true')
 parser.add_argument('-o', '--output', type=pathlib.Path, help='Output filename')
 args = parser.parse_args()
 
@@ -58,6 +59,8 @@ plt.figure()
 plt.errorbar(distances, transitions / N, yerr = dtransitions / N, fmt='.')
 plt.xlabel('Distance')
 plt.ylabel('Tunneling rate')
+if args.log:
+	plt.yscale('log')
 
 
 # filesystem stuff
