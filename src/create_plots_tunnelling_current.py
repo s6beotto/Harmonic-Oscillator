@@ -67,6 +67,9 @@ plt.ylabel('tunnelling rate')
 if args.log:
 	plt.yscale('log')
 
+# filesystem stuff
+out_filename = getOutputFilename(relative_path, 'tunnelling_current', args.output)
+
 if args.fit:
 	def exp_decay(x, *p):
 		A, c = p
@@ -84,9 +87,10 @@ if args.fit:
 	plt.plot(xdata_fit, ydata_fit, scaley=False, label='$f(x) = A \cdot \exp(-x / b)$\n$A = (%.0f \pm %.0f)$\n$b = (%.2f \pm %.2f)$' %(parameters[0], parameters_error[0], parameters[1], parameters_error[1]), color=color_fit)
 	plt.legend()
 
-
-# filesystem stuff
-out_filename = getOutputFilename(relative_path, 'tunnelling_current', args.output)
+	# save slope of the fit
+	out_filename_slope = pathlib.Path('%s_slope.tex' %out_filename.with_suffix(''))
+	with open(out_filename_slope, 'w') as f:
+		f.write(r'$b=\SI{%0.2f +- %0.2f}{}$' %(parameters[1], parameters_error[1]))
 
 # write to disk
 plt.savefig(out_filename)
