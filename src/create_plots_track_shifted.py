@@ -46,7 +46,7 @@ plt.figure()
 for num, iteration in enumerate(iterations_used):
 	iteration = int(iteration)
 	# plot
-	plt.errorbar(numbers, data[iteration - 1] - num, label='path after %d iteration%s' %(iteration, 's' if iteration > 1 else ''))
+	plt.errorbar(numbers, data[iteration - 1] - num, label='after %d iteration%s' %(iteration, 's' if iteration > 1 else ''))
 	plt.xlabel('Number')
 	plt.ylabel('Position $- n$')
 plt.legend()
