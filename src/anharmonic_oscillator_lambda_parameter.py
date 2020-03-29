@@ -89,19 +89,22 @@ def calculatePositionDistribution(distance):
 
 	m = Metropolis(init=init, valWidth=random_width, initValWidth=initial_random, hbar=hbar, tau=tau, N=N, m=mass, lambda_=lambda_, mu=mu)
 
+	values = []
+	accept_ratios = []
 	# start after 50 samples
-	values = np.array([next(m) for _ in range(iteration)])[50:,]
+	for _ in range(iteration):
+		vals, accept_ratio = next(m)
+		values.append(vals.copy())		# important!
+		accept_ratios.append(accept_ratio)
 
-	data = np.row_stack([v[0] for v in values])
-	accept_ratios = values[:, 1]
-
-	xdata = np.arange(data.shape[0])
-
+	values = values[50:]
+	accept_ratios = accept_ratios[50:]
 	tint_max = 0
 
 	# calculate worst case integrated autocorrelation time
 	# leads to inhomogeneous distribution along hbar, tint is thus fixed
 	"""
+	xdata = np.arange(data.shape[0])
 	for i in range(0, data.shape[1], data.shape[1] // 50):
 		ydata = autoCorrelationNormalized(data[:,i], xdata)
 		tint, dtint, w_max = getIntegratedCorrelationTime(ydata)
@@ -114,7 +117,7 @@ def calculatePositionDistribution(distance):
 	# step size between uncorrelated samples
 	step_size = int(tint_max * 2 + 1)
 
-	data_use = data[::step_size]
+	data_use = values[::step_size]
 
 	transitions = [countTransitions(v) for v in data_use]
 
