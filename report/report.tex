@@ -368,7 +368,7 @@
 
 	\subsubsection{Virial theorem}
 		It can be shown, that the expectation value of the mean kinetic energy should be equal to the mean potential energy, for the harmonic oscillator, shown in equation \ref{eq:virial}.
-		Therefore I checked, if that is the case in this simulation.
+		In order this theorem different simulations have been carried out varying the mass parameter $m$.
 		\begin{figure}[H]
 			\centering
 				\begin{subfigure}[c]{0.32\textwidth}
@@ -389,6 +389,8 @@
 			\caption{Distribution of the total energy into potential and kinetic part.}
 			\label{fig:track_1000100_virial}
 		\end{figure}
+		The plots in figure \ref{fig:track_1000100_virial} show the kinetic and potential energy separately.
+		Due to my findings the ratio between the energies was very heavily dependent on the parameters mass $m$ and the time step size $\tau$.
 
 	\section{Discussion}
 	\subsection{Verification}
@@ -454,15 +456,13 @@
 		Additionally, it is clearly visible, that the particle was prepared initially in the left minimum.
 
 	\subsubsection{Virial theorem}
-		I intended to check the validity of the \textbf{Virial theorem}.
-		For this I have measured the kinetic and potential energy separately.
-		However, I could not reproduce the prediction from the Virial theorem, mentioned in equation \ref{eq:virial}.
-		Due to my finding the ratio between the energies was very heavily depending on the parameters mass $m$ and the time step size $\tau$.
-		Two examples are shown in figure \ref{fig:track_1000100_virial}.
-		The ratio between the two parts should be around 1, but the ratios are dependent on the mass.
-		The ratios shown in figure \ref{fig:track_1000100_virial} are within error boundaries equal to $10.0$, $1.0$ and $0.05$.
-		The deviation from the expected ratio of 1 is therefore very significant.
-		Thus this ratio is heavily dependent on the exact parameters, which should not be the case.
+		According to equation \ref{eq:virial} the ratio between kinetic and potential energy is expected to be equal.
+		The ratio between the two parts should therefore be around 1.
+		However, this could not be reproduced by the simulation, since the ratios are dependent on the mass.
+		\\
+		The measured ratios are within error boundaries equal to $10.0$, $1.0$ and $0.05$ respectively.
+		This deviation from the expected ratio of 1 has to be therefore assessed as very significant.
+		The scope of this project did not allow further examinations on this very item.
 
 	\section{Summary and Outlook}
 		The simulation results meet the theoretical expectations to a high extend.
@@ -470,11 +470,13 @@
 		Furthermore, the probability density follows a gaussian distribution as predicted and the variation of parameters as the mass $m$ have shown the expected behaviour.
 		The results of section \ref{sec:measurements} validate, that the energy of the harmonic oscillator is linearly dependent on $\hbar$.
 		Additionally, the tunnelling current decays rapidly with increasing distance between the minima, as expected.
+		\\
 		The harmonic and anharmonic oscillators served well as toy models to investigate interesting quantum mechanical phenomena like the tunnelling effect.
-		Further investigations are recommended to determine the reasons that the Virial theorem is not fulfilled by this software, which is beyond the scope of this project.
+		\\
+		Further investigations are recommended to determine the reasons why the Virial theorem is not fulfilled for every set of parameters.
 		\\
 		The Metropolis-Hastings algorithm is in principle easily applicable to systems of higher dimensions, for example the effort to implement the H$_2^+$-ion in this way would be not that large.
-		My software can serve as a framework for such applications, only small changes have to be done.
+		The software provided with this project could serve as a framework for such applications with only minor changes required.
 		\\\\\\\\\\\\
 	\section{Acknowledgements}
 		I would like to thank Matthias Fischer for the very helpful support and Simon Schlepphorst for helping setting up the makefile.
@@ -565,6 +567,6 @@
 				\label{fig:harmonic_oscillator_100_classical_limit_continued}
 			\end{subfigure}
 		\caption{Classical limit of the harmonic oscillator, continued.}
-		\label{fig:track_1000100_virial}
+		\label{fig:harmonic_oscillator_classical_limit_continued}
 	\end{figure}
 \end{document}
