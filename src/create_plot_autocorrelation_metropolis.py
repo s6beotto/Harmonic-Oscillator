@@ -96,6 +96,6 @@ plt.legend()
 # filesystem stuff
 out_filename = getOutputFilename(relative_path, 'autocorrelation_metropolis', args.output)
 
-# write to diskydata_sum
+# write to disk
 plt.savefig(out_filename)
 print('done')
