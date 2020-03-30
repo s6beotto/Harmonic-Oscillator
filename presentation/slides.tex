@@ -407,37 +407,37 @@
 \appendix
 
 \section{Directory structure}
-%\subsection{Data generation}
-%\begin{frame}
-%\frametitle{Data generation}
-%	\begin{figure}[H]
-%		\centering
-%		\begin{tikzpicture}[scale=0.8]
-%			\draw[color=black, thick]
-%			node[draw,minimum width=2cm,minimum height=1cm,label=root,rounded corners=0.25cm] (root) at (0, 0){Harmonic-Oscillator}
-%			node[draw,minimum width=2cm,minimum height=1cm,rounded corners=0.25cm] (bin) at (-7.5, -2){bin/}
-%			node[draw,minimum width=2cm,minimum height=1cm,rounded corners=0.25cm] (bin_metropolis) at (-7.5, -4){metropolis.so}
-%			node[draw,minimum width=2cm,minimum height=1cm,rounded corners=0.25cm] (src) at (-2, -2){src/}
-%			node[draw,minimum width=2cm,minimum height=1cm,rounded corners=0.25cm] (src_create) at (-4, -4){(an)harmonic*.py}
-%			node[draw,minimum width=2cm,minimum height=1cm,rounded corners=0.25cm] (src_plot) at (0, -4){create\_plots*.py}
-%			node[draw,minimum width=2cm,minimum height=1cm,rounded corners=0.25cm] (data) at (2, -2){data/}
-%			node[draw,minimum width=2cm,minimum height=1cm,rounded corners=0.25cm] (imgs) at (6, -2){imgs/};
-%			\draw [->] (root) -- (bin);
-%				\draw [->] (bin) -- (bin_metropolis);
-%			\draw [->] (root) -- (src);
-%				\draw [->] (src) -- (src_create);
-%				\draw [->] (src) -- (src_plot);
-%			\draw [->] (root) -- (data);
-%			\draw [->] (root) -- (imgs);
-%			\draw [<->, thick, blue] (bin_metropolis) -- (src_create) node[midway,above=12] {C++ library};
-%			\draw [->, very thick, red] (src_create.east) -| ++(0.5, 1) -| (data) node[midway,below] {metropolis generation};
-%			\draw [->, very thick, red] (data) -- (imgs) node[midway,above] {plotting};
-%			\draw [->, thick, blue] (src_plot.east) -| (4, -2);
-%		\end{tikzpicture}
-%		\caption{Directory structure of the project for data generation.}
-%		\label{fig:scheme_dirs_data_generation}
-%	\end{figure}
-%\end{frame}
+\subsection{Data generation}
+\begin{frame}
+\frametitle{Data generation}
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}[scale=0.8, every node/.style={scale=0.8}]
+			\draw[color=black, thick]
+			node[draw,minimum width=2cm,minimum height=1cm,label=root,rounded corners=0.25cm] (root) at (0, 0){Harmonic-Oscillator}
+			node[draw,minimum width=2cm,minimum height=1cm,rounded corners=0.25cm] (bin) at (-7.5, -2){bin/}
+			node[draw,minimum width=2cm,minimum height=1cm,rounded corners=0.25cm] (bin_metropolis) at (-7.5, -4){metropolis.so}
+			node[draw,minimum width=2cm,minimum height=1cm,rounded corners=0.25cm] (src) at (-2, -2){src/}
+			node[draw,minimum width=2cm,minimum height=1cm,rounded corners=0.25cm] (src_create) at (-4, -4){(an)harmonic*.py}
+			node[draw,minimum width=2cm,minimum height=1cm,rounded corners=0.25cm] (src_plot) at (0, -4){create\_plots*.py}
+			node[draw,minimum width=2cm,minimum height=1cm,rounded corners=0.25cm] (data) at (2, -2){data/}
+			node[draw,minimum width=2cm,minimum height=1cm,rounded corners=0.25cm] (imgs) at (6, -2){imgs/};
+			\draw [->] (root) -- (bin);
+				\draw [->] (bin) -- (bin_metropolis);
+			\draw [->] (root) -- (src);
+				\draw [->] (src) -- (src_create);
+				\draw [->] (src) -- (src_plot);
+			\draw [->] (root) -- (data);
+			\draw [->] (root) -- (imgs);
+			\draw [<->, thick, blue] (bin_metropolis) -- (src_create) node[midway,above=0.35] {C++ library};
+			\draw [->, very thick, red] (src_create.east) -| ++(0.5, 1) -| (data) node[midway,below] {metropolis generation};
+			\draw [->, very thick, red] (data) -- (imgs) node[midway,above] {plotting};
+			\draw [->, thick, blue] (src_plot.east) -| (4, -2);
+		\end{tikzpicture}
+		\caption{Directory structure of the project for data generation.}
+		\label{fig:scheme_dirs_data_generation}
+	\end{figure}
+\end{frame}
 
 
 \subsection{Report generation}
