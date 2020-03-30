@@ -19,8 +19,12 @@ plots = imgs/harmonic_oscillator_track/track_1000100_track_1.pdf \
 		imgs/harmonic_oscillator_track/track_1000100_track_1000.pdf \
 		imgs/harmonic_oscillator_track/track_1000100_heavy_track_1000.pdf \
 		imgs/harmonic_oscillator_track/track_1000100_virial.pdf \
+		imgs/harmonic_oscillator_track/track_1000100_light_virial.pdf \
+		imgs/harmonic_oscillator_track/track_1000100_working_virial.pdf \
 		imgs/harmonic_oscillator_track/track_1000100_heavy_virial.pdf \
 		imgs/harmonic_oscillator_track/track_1000100_virial_log.pdf \
+		imgs/harmonic_oscillator_track/track_1000100_light_virial_log.pdf \
+		imgs/harmonic_oscillator_track/track_1000100_working_virial_log.pdf \
 		imgs/harmonic_oscillator_track/track_1000100_heavy_virial_log.pdf \
 		imgs/harmonic_oscillator_track/track_10001000_track_1.pdf \
 		imgs/harmonic_oscillator_track/track_10001000_gauss_1_fit.pdf \
@@ -221,8 +225,14 @@ $(PRE)%rack_100100.csv: src/harmonic_oscillator.py
 $(PRE)%rack_1000100.csv: src/harmonic_oscillator.py
 	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 1000 -N 100 -o $@
 
+$(PRE)%rack_1000100_working.csv: src/harmonic_oscillator.py
+	@python3 src/harmonic_oscillator.py  -m 0.125 -init 0 -ir 1 -i 1000 -N 100 -o $@
+
 $(PRE)%rack_1000100_heavy.csv: src/harmonic_oscillator.py
-	@python3 src/harmonic_oscillator.py  -m 10 -init 0 -ir 0.1 -i 1000 -N 100 -o $@
+	@python3 src/harmonic_oscillator.py  -m 10 -init 0 -ir 1 -i 1000 -N 100 -o $@
+
+$(PRE)%rack_1000100_light.csv: src/harmonic_oscillator.py
+	@python3 src/harmonic_oscillator.py  -m 0.01 -init 0 -ir 1 -i 1000 -N 100 -o $@
 
 $(PRE)%rack_10001000.csv: src/harmonic_oscillator.py
 	@python3 src/harmonic_oscillator.py  -m 0.25 -init 5 -ir 1 -i 1000 -N 1000 -o $@

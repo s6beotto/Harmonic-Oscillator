@@ -63,10 +63,10 @@ p = Potential(mu, lambda_)
 
 block_size = 10
 
-xdata_cut = xdata[::block_size]
+xdata_cut = xdata[50::block_size]
 
-kineticE = block(np.array([getTotalKineticEnergy(data[x], k) for x in xdata]), block_size)
-potentialE = block(np.array([getTotalPotentialEnergy(data[x], p) for x in xdata]), block_size)
+kineticE = block(np.array([getTotalKineticEnergy(data[x], k) for x in xdata[50:]]), block_size)
+potentialE = block(np.array([getTotalPotentialEnergy(data[x], p) for x in xdata[50:]]), block_size)
 
 # filesystem stuff
 out_filename = getOutputFilename(relative_path, 'virial', args.output)
