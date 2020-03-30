@@ -102,6 +102,8 @@
 		Otherwise, a linearly distributed random value is drawn in the range from 0 to 1 and compared to the exponent of the difference in the \textbf{action}, divided by $\hbar$.
 		If the random variable is smaller than the exponential function, the value is accepted, otherwise it is rejected and the position at that time step is not updated.
 		This behaviour leads to the tendency to thermalise, but takes care of the quantum behaviour of the particle \cite{creutz_freedman, rodgers_raes}.
+		The uncertainty obtained from data that was generated using this algorithm is heavily dependent on the number of lattice sites and the number of Metropolis iterations that were used.
+		To minimise these uncertainties, the largest values possible were used, while keeping the computation time within reasonable borders of around \SI{5}{\minute}.
 
 	\subsection{Autocorrelation}
 		Since the Metropolis algorithm produces autocorrelated data, this has to be taken into account.
