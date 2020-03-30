@@ -138,6 +138,11 @@
 		The second equality sign is valid, since the first term $\frac {\bar C(0)}{\bar C(0)} = 1$ and is only counted once.
 		All other terms are counted twice, since the autocorrelation function is symmetrical around 0.
 
+	\subsection{Fit}
+		To fit perform fits of function to the data, the method of least squares is used.
+		The algorithm varies the parameters of the fit function to minimise the sum of the squared residuals.
+		This functionality is provided by the module \verb!scipy!.
+
 	\subsection{Implementation}
 		At first I implemented the complete algorithm in \textbf{Python}, which leads to a fairly poor performance.
 		This could mean that one can only get a bad data quality in a given time.
