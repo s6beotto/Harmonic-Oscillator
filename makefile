@@ -26,12 +26,6 @@ plots = imgs/harmonic_oscillator_track/track_1000100_track_1.pdf \
 		imgs/harmonic_oscillator_track/track_10001000_gauss_1_fit.pdf \
 		imgs/harmonic_oscillator_track/track_10001000_gauss_2_fit.pdf \
 		imgs/harmonic_oscillator_track/track_10001000_gauss_2_fit.pdf \
-		imgs/harmonic_oscillator_track/track_10001000_qq_1.pdf \
-		imgs/harmonic_oscillator_track/track_10001000_qq_10.pdf \
-		imgs/harmonic_oscillator_track/track_10001000_qq_20.pdf \
-		imgs/harmonic_oscillator_track/track_10001000_qq_40.pdf \
-		imgs/harmonic_oscillator_track/track_10001000_qq_80.pdf \
-		imgs/harmonic_oscillator_track/track_10001000_qq_100.pdf \
 		imgs/harmonic_oscillator_track/track_10010000_track_1.pdf \
 		imgs/harmonic_oscillator_track/track_10010000_gauss_1_fit.pdf \
 		imgs/harmonic_oscillator_track/track_10010000_gauss_2_fit.pdf \
