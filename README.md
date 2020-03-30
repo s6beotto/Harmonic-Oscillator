@@ -66,6 +66,7 @@ To clean up the directory simply type
 ```bash
 make clean
 ```
+After a clean up, the C++ library has to be recompiled.
 
 Every script can be run separately by using the commandline
 ```bash
