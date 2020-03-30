@@ -449,28 +449,30 @@
 		Additionally, it is clearly visible, that the particle was prepared initially in the left minimum.
 
 	\subsubsection{Virial theorem}
-		I intended to check the validity if the \textbf{Virial theorem}.
+		I intended to check the validity of the \textbf{Virial theorem}.
 		For this I have measured the kinetic and potential energy separately.
 		However, I could not reproduce the prediction from the Virial theorem, mentioned in equation \ref{eq:virial}.
 		Due to my finding the ratio between the energies was very heavily depending on the parameters mass $m$ and the time step size $\tau$.
 		Two examples are shown in figure \ref{fig:track_1000100_virial}.
 		The ratio between the two parts should be around 1, but the ratios are dependent on the mass and around $17$ and $1.6$, the deviation from the expected ratio of 1 is therefore very significant.
+
 		%Therefore I think that there is an error in the software.
 		%This contradicts all other verifications that I performed in section \ref{sec:verification}. %TODO
 
 	\section{Summary and Outlook}
-		In section \ref{sec:verification} it was shown, that the programs are valid.
-		The produced data does behave as expected when using the classical limit, the probability density follows a gaussian distribution as predicted.
-		Variation of parameters as the mass $m$ showed the expected behaviour.
-		In section \ref{sec:measurements} it was shown, that the energy of the harmonic oscillator does follow the expected linear dependence of the parameter $\hbar$.
-		The tunnelling current decays rapidly with increasing distance between the minima, as expected.
-		Further investigations are needed to determine the reasons that the Virial theorem is not fulfilled by this software, which is beyond the scope of this project.
+		The simulation results meet the theoretical expectations to a high extend.
+		As presented in section \ref{sec:verification}, the produced data do behave as expected when using the classical limit.
+		Furthermore, the probability density follows a gaussian distribution as predicted and the variation of parameters as the mass $m$ have shown the expected behaviour.
+		The results of section \ref{sec:measurements} validate, that the energy of the harmonic oscillator is linearly dependent on $\hbar$.
+		Additionally, the tunnelling current decays rapidly with increasing distance between the minima, as expected.
 		The harmonic and anharmonic oscillators served well as toy models to investigate interesting quantum mechanical phenomena like the tunnelling effect.
+		Further investigations are recommended to determine the reasons that the Virial theorem is not fulfilled by this software, which is beyond the scope of this project.%TODO
 		\\
 		The Metropolis-Hastings algorithm is in principle easily applicable to systems of higher dimensions, for example the effort to implement the H$_2^+$-ion in this way would be not that large.
+		My software can serve as a framework for such applications, only small changes have to be done.
 		\\\\\\\\\\\\
 	\section{Acknowledgements}
-		I want to thank Matthias Fischer for the very helpful support and Simon Schlepphorst for help with setting up the makefile.
+		I would like to thank Matthias Fischer for the very helpful support and Simon Schlepphorst for helping setting up the makefile.
 
 	\newpage
 	\begin{thebibliography}{widestlabel}
