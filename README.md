@@ -52,13 +52,15 @@ make
 ```
 is used, which first generates all requisite files, if they are not present and then assembles the pdf files.
 For this the latex-related packages above have to be present.
+On my quad-core processor (Intel i7-4770) this process took around 5 minutes and used a peak of around 1GB of RAM and 100% CPU load.
+On a Raspberry Pi 4 with 2GB RAM the execution took around 25 minutes.
 
 Since many of the required steps are independent, one can use the multi processing feature of make as.
 But because many of the executed scripts already use multiprocessing, this only has a very small influence, but greatly increases RAM usage.
 ```bash
 make -j
 ```
-This causes make to run with many processes in parallel, depending on the number of logical CPU cores. On my quad-core processor (Intel i7-4770) this process took around 5 minutes and used a peak of around 1GB of RAM and 100% CPU load.
+This causes ```make``` to run with many processes in parallel, depending on the number of logical CPU cores.
 
 To clean up the directory simply type
 ```bash
