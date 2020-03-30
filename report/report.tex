@@ -20,7 +20,7 @@
 		To evaluate the behaviour of a quantum particle in a certain potential the path-integral method can be used, evaluated using Monte Carlo simulation.
 		In this project I investigated the behaviour of particles in a one-dimensional harmonic and anharmonic potential.
 		I measured the ground state energy and the corresponding autocorrelation.
-		Additionally I examined the tunnelling behaviour of the anharmonic oscillator for different distances of the minima.
+		Additionally, I examined the tunnelling behaviour of the anharmonic oscillator for different distances of the minima.
 		To verify my code I used the classical limit corresponding to $\hbar \rightarrow 0$.
 	\end{abstract}
 
@@ -30,12 +30,12 @@
 		This generalisation does not only take the path with the least action into account, but uses the interference of all possible paths leading to the same final state.
 		\\\\
 		The harmonic and simple anharmonic oscillators are theoretically well-understood \cite{bender}, the harmonic oscillator is one of the few cases that is analytically solvable \cite{rushka_freericks}.
-		These systems can thus be used to cross-check the validity of the used algorithms.
-		Additionally these systems serve as toy models for easy quantum mechanical effects, for example the tunnelling effect.
+		Thus, these systems can be used to cross-check the validity of the used algorithms.
+		Additionally, these systems serve as toy models for easy quantum mechanical effects, for example the tunnelling effect.
 		\\\\
 		The methods used to investigate the harmonic and anharmonic oscillators are the basis for algorithms that are used to examine systems in the QCD.
 		More complicated systems, as the quartic interaction $\Phi^4$ and the second quantisation have a similar structure.
-		The Metropolis algorithm, which is a variant of Monte Carlo simulation, that is used in this project is well suited for this type of problem \cite{creutz_freedman, rodgers_raes}.
+		The Metropolis algorithm, which is a variant of Monte Carlo simulation, that is used in this project, is well suited for this type of problem \cite{creutz_freedman, rodgers_raes}.
 		\\\\
 		The aim of this project is to investigate the behaviour of the ground state energy and the probability density depending on the value of $\hbar$ and the tunnelling current depending on the distance between the minima.
 
@@ -56,7 +56,7 @@
 			S = \epsilon \sum_{i=0}^{N - 1} \left(\frac{m(x_{i+1} - x_i)^2}{2\tau^2} + V(x_i)\right)
 			\label{eq:total_action}
 		\end{equation}
-		Because the analysis is more convenient, often periodic boundary conditions are used.
+		In order to facilitate the analysis, periodic boundary conditions are used.
 		In this case one can define $x_0 = x_N$, so the right neighbour of $x_{N-1}$ is $x_0$.
 		The left part of the equation corresponds to the kinetic energy.
 		The velocity used is the average velocity, when the particle moves from site $x_i$ to $x_{i+1}$.
@@ -96,14 +96,14 @@
 	\subsection{Metropolis-Hastings algorithm}
 		To generate the track data the \textbf{Metropolis} algorithm is used:
 
-		At first the positions of the particle at every time step is initialised to a random distribution.
-		Then for every time step a new position is drawn from a random distribution, in this case from a gaussian distribution.
+		At first the positions of the particle at every time step are initialised to a random distribution.
+		Then, for every time step a new position is drawn from a random distribution, in this case from a gaussian distribution.
 		If this change lowers the total \textbf{action}, calculated over all the time lattice points, the change is accepted.
 		Otherwise, a linearly distributed random value is drawn in the range from 0 to 1 and compared to the exponent of the difference in the \textbf{action}, divided by $\hbar$.
 		If the random variable is smaller than the exponential function, the value is accepted, otherwise it is rejected and the position at that time step is not updated.
 		This behaviour leads to the tendency to thermalise, but takes care of the quantum behaviour of the particle \cite{creutz_freedman, rodgers_raes}.
 		The uncertainty obtained from data that was generated using this algorithm is heavily dependent on the number of lattice sites and the number of Metropolis iterations that were used.
-		To minimise these uncertainties, the largest values possible were used, while keeping the computation time within reasonable borders of around \SI{5}{\minute}.
+		To minimise these uncertainties, the largest values possible were used, while keeping the computation time within reasonable limits of around \SI{5}{\minute}.
 
 	\subsection{Autocorrelation}
 		Since the Metropolis algorithm produces autocorrelated data, this has to be taken into account.
@@ -112,7 +112,7 @@
 			\bar C(t) = \frac 1{N} \sum_{i = 1}^{N} (x_i - \bar x_N)(x_{i + |t|} - \bar x_N)
 			\label{eq:autocorrelation}
 		\end{equation}
-		In this case since I always use periodic boundary conditions, that's why one can sum until $N$.
+		Due to the usage of periodic boundary conditions, the right hand side is summed up to $N$.
 		For $i + |t| > N$ one then has to define $x_{i + |t|} = x_{i + |t| - N}$.
 		The normalised autocorrelation function estimator is then defined as:
 		\begin{equation}
@@ -141,7 +141,7 @@
 		All other terms are counted twice, since the autocorrelation function is symmetrical around 0.
 
 	\subsection{Fit}
-		To fit perform fits of function to the data, the method of least squares is used.
+		To fit functions to the data, the method of least squares is used.
 		The algorithm varies the parameters of the fit function to minimise the sum of the squared residuals.
 		This functionality is provided by the module \verb!scipy!.
 
@@ -155,13 +155,13 @@
 		This change improved the total performance, including the still in Python performed generation of the plots, by a factor of around 8.
 		This leads to an improvement of data quality due to the higher output rate of around one order of magnitude.
 		The complete source code, including all files related to this project are available under the public github repository \cite{github}.
-		To verify that the \textbf{C++} code behaves exactly like the Python version, I created some tests, stored in the branch \verb!verify_C!.
+		To verify that the \textbf{C++} code behaves exactly like the Python version, I have created some tests, stored in the branch \verb!verify_C!.
 		A short manual is given in the \verb!README.md! file, the directory structure is shown in appendix \ref{sec:directory_structure}.
 		\\\\
 		A very important quantity is the \textbf{accept-ratio}.
 		It measures what ratio of changes that were proposed has been accepted.
 		To keep the performance high enough, the accept ratio should be as high as possible, but lower than around 65\%.
-		This condition is fulfilled for every dataset that is generated.
+		This condition is fulfilled for every dataset that has been generated.
 		\\\\
 		The data is stored as \verb!csv! (comma-separated-values) file, a corresponding \verb!cfg! (config) file is generated to store the parameters used and the accept-ratio.
 
@@ -390,10 +390,10 @@
 	\subsubsection{Classical limit}
 		As shown in figure \ref{fig:harmonic_oscillator_classical_limit}, for $\hbar \rightarrow 0$ the probability density collapses into the minimum of the potential, as one would expect from the classical ground state.
 		As visible in figure \ref{fig:anharmonic_oscillator_classical_limit}, showing the same plot for the anharmonic oscillator, the behaviour is similar to the harmonic oscillator, such that in the classical limit the probability density only has a significant contribution near the minima of the potential.
-		Additionally one observes that there is no significant contribution on the right minimum for $\hbar < 0.3$.
+		Additionally, one observes that there is no significant contribution on the right minimum for $\hbar < 0.3$.
 		This is the behaviour one would expect:
 		A classical particle in the ground state in potentials used here should state at one of the minima in this case at the left minimum where it was initially prepared.
-		Additionally one would expect that the probability for tunnelling tends to zero, which is observable too.
+		Additionally, one would expect that the probability for tunnelling tends to zero, which is observable too.
 
 	\subsubsection{Probability density}
 		As shown in figure \ref{fig:harmonic_oscillator_track_10010000_gauss_1_fit}, the initial setup was a gaussian shape, centred around the value 5 with a width of 1, visible in the blue curve.
@@ -433,7 +433,7 @@
 		But comparing the zero value $E_0$ to the typical energy at the \enquote{real} value for $\hbar$, the deviation from zero is very small.
 
 	\subsubsection{Tunnelling current}
-		Plot \ref{fig:anharmonic_oscillator_tunnelling_current} shows the rate of tunnelling events divided by the number of possible tunnelling events. %TODO: change
+		Plot \ref{fig:anharmonic_oscillator_tunnelling_current} shows the rate of tunnelling events divided by the number of opportunities for tunnelling.
 		As visible in figure \ref{fig:anharmonic_oscillator_lambda_parameter} real tunnelling only occurs for distances of the minima greater than around 5.
 		For smaller distances, the minima of the potential are not clearly separated and transitions are easily possible.
 		The corresponding potentials are shown in figure \ref{fig:potentials}, especially in figure \ref{fig:potential_anharm5}.
