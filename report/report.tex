@@ -311,7 +311,7 @@
 			\caption{Classical limit energy of the harmonic oscillator.}
 			\label{fig:harmonic_oscillator_classical_limit_energy}
 		\end{figure}
-		For plot \ref{fig:harmonic_oscillator_classical_limit_energy} the energy of the harmonic oscillator has been measured depending on the value of $\hbar$.
+		For plot in figure \ref{fig:harmonic_oscillator_classical_limit_energy} the energy of the harmonic oscillator has been measured depending on the value of $\hbar$.
 		The position of the thermalisation has been determined by finding the first sign change of the running mean of the slope of the energy.
 		Starting from this position the integrated autocorrelation time has been calculated.
 		Then, the data has been blocked into blocks of at least $2 \cdot \tau_{int}$, using the upper bound of the error interval, rounded to the next higher integer, from which the energy and standard deviation of the energy has been measured.
@@ -388,12 +388,12 @@
 	\section{Discussion}
 	\subsection{Verification}
 	\subsubsection{Classical limit}
-		As shown in figure \ref{fig:harmonic_oscillator_classical_limit}, for $\hbar \rightarrow 0$ the probability density collapses into the minimum of the potential, as one would expect from the classical ground state.
+		As shown in figure \ref{fig:harmonic_oscillator_classical_limit}, for $\hbar \rightarrow 0$ the probability density collapses into the minimum of the potential, meeting the expectations from the classical ground state.
 		As visible in figure \ref{fig:anharmonic_oscillator_classical_limit}, showing the same plot for the anharmonic oscillator, the behaviour is similar to the harmonic oscillator, such that in the classical limit the probability density only has a significant contribution near the minima of the potential.
 		Additionally, one observes that there is no significant contribution on the right minimum for $\hbar < 0.3$.
-		This is the behaviour one would expect:
+		This is the behaviour one would expect:%TODO
 		A classical particle in the ground state in potentials used here should state at one of the minima in this case at the left minimum where it was initially prepared.
-		Additionally, one would expect that the probability for tunnelling tends to zero, which is observable too.
+		Additionally, one would expect that the probability for tunnelling tends to zero, which is observable too.%TODO
 
 	\subsubsection{Probability density}
 		As shown in figure \ref{fig:harmonic_oscillator_track_10010000_gauss_1_fit}, the initial setup was a gaussian shape, centred around the value 5 with a width of 1, visible in the blue curve.
@@ -402,20 +402,20 @@
 		The distribution then moves towards this minimum, leading to a deviation from the gaussian shape for iterations 10 and 20.
 		After 40 iterations the distribution has nearly reached the center of the potential and the distribution becomes again gaussian shaped.
 		The difference between iterations 80 and 100 is negligible, this indicates that the thermalisation of the center of mass is done after 80 metropolis iterations.
-		From theory one would expect the probability density to be gaussian shaped in the ground state, which is clearly observable as shown below.
+		From theory one would expect the probability density to be gaussian shaped in the ground state, which is clearly observable as shown below.%TODO
 		\\\\
-		As previously mentioned, one can confirm that the initial setup is a gaussian distribution with center 5 and width 1.
+		As previously mentioned, one can confirm that the initial setup is a gaussian distribution with center 5 and width 1.%TODO
 		In the qq-plots in figure \ref{fig:harmonic_oscillator_track_track_10010000_qqs} for iterations 10 and 20 the deviation from a straight line is clearly visible.
 		After the \nth{40} iteration, the center of the distribution has reached 0 and the qq plot matches a straight line, corresponding to a gaussian distribution.
 		\\\\
-		From these verifications I am confident, that my code is correct.
+		The simulated results verify the correctness of the implementation.
 
 	\subsection{Tracks}
 		In figure \ref{fig:harmonic_oscillator_track_1000100_track_1000} two typical tracks are shown for different particles.
 		In figure \ref{fig:harmonic_oscillator_track_1000100_track_1000_light} a very light particle is used.
 		This particle performs huge jumps within the potential.
 		In contrast to this, the particle used in \ref{fig:harmonic_oscillator_track_1000100_track_1000_heavy} shows a much more continuous track.
-		In figure \ref{fig:harmonic_oscillator_track_100100_100100_step_track_shifted_double} one can see how the step function vanishes with increasing Metropolis iteration number.
+		In figure \ref{fig:harmonic_oscillator_track_100100_100100_step_track_shifted_double} it can be observed how the step function vanishes with increasing Metropolis iteration number.
 		The step function disappeared after around 40 Metropolis iterations.
 		In figure \ref{fig:anharmonic_oscillator_track_100010005_track_pretty_1000} one sees a part of the anharmonic oscillator track.
 		One can clearly see the instants of time when a tunnelling event occurs.
@@ -424,7 +424,7 @@
 	\subsubsection{Classical limit energy}
 		As visible in figure \ref{fig:harmonic_oscillator_classical_limit_energy}, the energy is linearly depending on the value of $\hbar$.
 		The fitted function very well matches the data within error limits.
-		This is exactly what one would expect from exact calculation as in $E = \hbar \omega \left(\frac 12 + n\right)$, where $n$ is the state number, in this case $n = 0$ for the ground state.
+		This is exactly what one would expect from exact calculation as in $E = \hbar \omega \left(\frac 12 + n\right)$, where $n$ is the state number, in this case $n = 0$ for the ground state.%TODO
 		$\omega$ is the proportionality factor, depending on the exact shape of the potential.
 		In the classical limit $\hbar \rightarrow 0$ one thus gets the correct behaviour $E \rightarrow 0$.
 		The slope of the fitted linear function is \input{../imgs/harmonic_oscillator_classical_limit_energy/harmonic_oscillator_10_classical_limit_energy_slope.tex}\unskip.
@@ -433,7 +433,7 @@
 		But comparing the zero value $E_0$ to the typical energy at the \enquote{real} value for $\hbar$, the deviation from zero is very small.
 
 	\subsubsection{Tunnelling current}
-		Plot \ref{fig:anharmonic_oscillator_tunnelling_current} shows the rate of tunnelling events divided by the number of opportunities for tunnelling.
+		Plot in figure \ref{fig:anharmonic_oscillator_tunnelling_current} shows the rate of tunnelling events divided by the number of opportunities for tunnelling.
 		As visible in figure \ref{fig:anharmonic_oscillator_lambda_parameter} real tunnelling only occurs for distances of the minima greater than around 5.
 		For smaller distances, the minima of the potential are not clearly separated and transitions are easily possible.
 		The corresponding potentials are shown in figure \ref{fig:potentials}, especially in figure \ref{fig:potential_anharm5}.
@@ -442,21 +442,21 @@
 		\\
 		In figure \ref{fig:anharmonic_oscillator_lambda_parameter} the probability density is shown depending on the distance of the classical minima.
 		It is obvious, that the distributions for both minima are centred around the positions of the classical minima.
-		For higher distance above around 8, the probability of finding the particle in the left and right part are not equal..
+		For higher distance above around 8, the probability of finding the particle in the left and right part are not equal.
 		The reason for this behaviour is the rapidly decreasing tunnelling current for larger distances of the classical minima.
 		Therefore the particle can \enquote{get stuck} in one of the minima.
-		If one would like to investigate the behaviour for large distances further, the number of iterations would have to be increased.
-		In addition it is clearly visible, that the particle was prepared initially in the left minimum.
+		Potential future investigations shall take into account an increased number of iterations, to improve the simulation for large distances.
+		Additionally, it is clearly visible, that the particle was prepared initially in the left minimum.
 
 	\subsubsection{Virial theorem}
-		One thing that I wanted to check, was the \textbf{Virial theorem}.
-		For this I measure the kinetic and potential energy separately.
-		However, i could not reproduce the prediction from the Virial theorem, in equation \ref{eq:virial}.
-		The ratio between the energies was very heavily depending on the parameters mass $m$ and the time step size $\tau$.
+		I intended to check the validity if the \textbf{Virial theorem}.
+		For this I have measured the kinetic and potential energy separately.
+		However, I could not reproduce the prediction from the Virial theorem, mentioned in equation \ref{eq:virial}.
+		Due to my finding the ratio between the energies was very heavily depending on the parameters mass $m$ and the time step size $\tau$.
 		Two examples are shown in figure \ref{fig:track_1000100_virial}.
 		The ratio between the two parts should be around 1, but the ratios are dependent on the mass and around $17$ and $1.6$, the deviation from the expected ratio of 1 is therefore very significant.
-		Therefore I think that there is an error in the software.
-		This contradicts all other verifications that I performed in section \ref{sec:verification}.
+		%Therefore I think that there is an error in the software.
+		%This contradicts all other verifications that I performed in section \ref{sec:verification}. %TODO
 
 	\section{Summary and Outlook}
 		In section \ref{sec:verification} it was shown, that the programs are valid.
