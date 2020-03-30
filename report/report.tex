@@ -61,14 +61,12 @@
 		The left part of the equation corresponds to the kinetic energy.
 		The velocity used is the average velocity, when the particle moves from site $x_i$ to $x_{i+1}$.
 		Because every change only affects three terms, it is not necessary to recalculate the complete action for every change.
-		\begin{equation}
-			\begin{split}
-				\Delta S(x_{i-1}, x_i, x'_i, x_{i+1}) =\\
-				\tau\left(V(x_i) - V(x'_i) + m\frac{(x_{i-1} - x_i)^2 + (x_i - x_{i+1})^2 - (x_{i-1} - x'_i)^2 - (x'_i - x_{i+1})^2}{2\tau^2}\right)
-			\end{split}
+		\begin{align}
+			&\Delta S(x_{i-1}, x_i, x'_i, x_{i+1}) =\nonumber\\
+			&\tau\left(V(x_i) - V(x'_i) + m\frac{(x_{i-1} - x_i)^2 + (x_i - x_{i+1})^2 - (x_{i-1} - x'_i)^2 - (x'_i - x_{i+1})^2}{2\tau^2}\right)
 			\label{eq:delta_total_action}
-		\end{equation}
-		This rewrite reduces the complexity of the problem and improves performance.
+		\end{align}
+		This rewrite reduces the complexity of the problem and improves performance, which can further be improved by simplifying the squares.
 		The time complexity per Metropolis iteration is thus reduced from $\mathcal O(N^2)$ to $\mathcal O(N)$, where $N$ corresponds to the number of lattice sites.
 
 		The following parameters will be used and if not otherwise denoted default to the given values:
