@@ -2,7 +2,7 @@
 
 # import modules
 from matplotlib import pyplot as plt
-import scipy.optimize as op
+import scipy.odr as sodr
 from tools import getRootDirectory, getOutputFilename, getColorIterator
 import csv
 import numpy as np
@@ -56,18 +56,26 @@ plt.errorbar(hbars, energies, yerr=denergies, fmt='.', label='data', color=color
 plt.xlabel(r'$\hbar$')
 plt.ylabel('energy')
 
-def linear(x, *p):
+def linear(p, x):
 	a, b = p
 	return a * x + b
 
 
 initvals = [1, 0]
-parameters, parameters_error = op.curve_fit(linear, hbars, energies, p0=initvals, sigma=denergies)
 
-parameters_error = np.sqrt(np.diag(parameters_error))
+model = sodr.Model(linear)
+
+fit_data = sodr.RealData(hbars, energies, sy=denergies)
+
+odr = sodr.ODR(fit_data, model, beta0=initvals)
+out = odr.run()
+
+parameters = out.beta
+parameters_error = out.sd_beta
+
 
 xdata_fit = np.linspace(min(hbars), max(hbars), 1000)
-ydata_fit = linear(xdata_fit, *parameters)
+ydata_fit = linear(parameters, xdata_fit)
 plt.plot(xdata_fit, ydata_fit, label=r'fit: $E=(%.1f \pm %.1f) \cdot \hbar + (%.1f \pm %.1f)$' %(parameters[0], parameters_error[0], parameters[1], parameters_error[1]), color=color_fit)
 plt.legend()
 
@@ -79,6 +87,9 @@ out_filename_slope = pathlib.Path('%s_slope.tex' %out_filename.with_suffix(''))
 with open(out_filename_slope, 'w') as f:
 	f.write(r'$\frac\omega2=\SI{%0.1f +- %0.1f}{}$' %(parameters[0], parameters_error[0]))
 
+out_filename_offset = pathlib.Path('%s_offset.tex' %out_filename.with_suffix(''))
+with open(out_filename_offset, 'w') as f:
+	f.write(r'$E_0=\SI{%0.1f +- %0.1f}{}$' %(parameters[1], parameters_error[1]))
 
 # write to disk
 plt.savefig(out_filename)
