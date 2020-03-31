@@ -82,7 +82,7 @@ plt.figure()
 plt.fill_between(xdata_cut, potentialE + kineticE, kineticE, alpha=0.75, label=r'potential energy $\bar E = (%0.1f \pm %0.1f)$' %(potentialE_mean, potentialE_error))
 plt.fill_between(xdata_cut, kineticE, alpha=0.75, label=r'kinetic energy $\bar E = (%0.1f \pm %0.1f)$' %(kineticE_mean, kineticE_error))
 
-plt.xlabel('Number')
+plt.xlabel('Iteration Number')
 plt.ylabel('Energy')
 if args.log:
 	plt.yscale('log')
