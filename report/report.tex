@@ -34,7 +34,7 @@
 		\\\\
 		The harmonic and simple anharmonic oscillators are theoretically well-understood \cite{bender}, the harmonic oscillator is one of the few cases that is analytically solvable \cite{rushka_freericks}.
 		Thus, these systems can be utilised to cross-check the validity of the used algorithms.
-		Additionally, these systems serve as toy models for easy quantum mechanical effects, for example the tunnelling effect.
+		Additionally, these systems serve as toy models for quantum mechanical effects, for example the tunnelling effect.
 		\\\\
 		The methods used to investigate the harmonic and anharmonic oscillators are the basis for algorithms that are used to examine systems in the QCD.
 		More complicated systems, as the quartic interaction $\Phi^4$ and the second quantisation have a similar structure.
@@ -51,11 +51,11 @@
 		In equation \ref{eq:path_integral} the integral is performed over all possible paths from point $a$ to $b$, where the quantity $K(a, b)$ corresponds to the probability for this transition.
 		The implementation of such a system on a computer leads to problems due to infinite dimensional integrals over infinite boundaries of a quantity with constant modulus.
 		Therefore the Euclidean time is utilised, which is the result of the inverse \textbf{Wick}-rotation \cite{wick}.
-		This leads to a rapid decay of paths of little significance and the value of $\hbar$ acts as a temperature.
+		This leads to a rapid decay of probability for paths of little significance and the value of $\hbar$ acts as a temperature.
 		\\
 		The quantity $S$ is the total action corresponding to one path and is given in equation \ref{eq:total_action}.
 		In this project the forward derivative is used.
-		The constants used in this equation are defined in table \ref{eq:parameters}.
+		The constants introduced in this equation are defined in table \ref{eq:parameters}.
 		\begin{equation}
 			S = \epsilon \sum_{i=0}^{N - 1} \left(\frac{m(x_{i+1} - x_i)^2}{2\tau^2} + V(x_i)\right)
 			\label{eq:total_action}
@@ -73,7 +73,7 @@
 		This rewrite reduces the complexity of the problem and improves performance, which can further be improved by simplifying the squares.
 		The time complexity per Metropolis iteration is thus reduced from $\mathcal O(N^2)$ to $\mathcal O(N)$, where $N$ corresponds to the number of lattice sites.
 
-		The following parameters will be used and if not otherwise denoted default to the given values:
+		The following parameters will be used and, if not otherwise denoted, default to the given values:
 		\begin{table}[H]
 			\centering
 			\begin{tabular}{c|l|c}
@@ -117,8 +117,8 @@
 			\label{eq:autocorrelation}
 		\end{equation}
 		Due to the usage of periodic boundary conditions, the right hand side is summed up to $N$.
-		For $i + |t| > N$ one then has to define $x_{i + |t|} = x_{i + |t| - N}$.
-		The normalised autocorrelation function estimator is then defined as:
+		For $i + |t| > N$ one has to define $x_{i + |t|} = x_{i + |t| - N}$.
+		The normalised autocorrelation function estimator is given as:
 		\begin{equation}
 			\bar\Gamma(t) = \frac {\bar C(t)}{\bar C(0)}
 			\label{eq:normalised_autocorrelation}
@@ -141,7 +141,7 @@
 		There are different methods to determine the cutoff $W$.
 		One possibility is to sum until the first element of $\Gamma(t)$ gets compatible with zero within its error.
 		I will utilise the condition $W_{max} > f \cdot \tau_{int}(W_{max})$ to stop the summation, with $f$ defaulting to $5$.
-		The second equality sign is valid, since the first term $\frac {\bar C(0)}{\bar C(0)} = 1$ and is only counted once.
+		The second equality sign in equation \ref{eq:integrated_autocorrelation} is valid, since the first term $\frac {\bar C(0)}{\bar C(0)} = 1$ and is only counted once.
 		All other terms are counted twice, since the autocorrelation function is symmetrical around 0.
 
 	\subsection{Fit}
@@ -174,7 +174,7 @@
 		To keep the performance high enough, the accept ratio should be as high as possible, but lower than around 65\%.
 		This condition is fulfilled for every dataset that has been generated.
 		\\\\
-		The data is stored as \verb!csv! (comma-separated-values) file, a corresponding \verb!cfg! (config) file is generated to store the parameters used and the accept-ratio.
+		The data is stored as \verb!csv! (comma-separated-values) files, a corresponding \verb!cfg! (config) file is generated to store the parameters and the accept-ratio.
 
 	\section{Results}
 	\subsection{Potential}
@@ -359,7 +359,7 @@
 				\subcaption{Plotted logarithmically with fit.}
 				\label{fig:anharmonic_oscillator_tunnelling_current_b}
 			\end{subfigure}
-			\caption{Tunnelling current depending on the distance of the classical minima.}
+			\caption{Tunnelling rate depending on the distance of the classical minima.}
 			\label{fig:anharmonic_oscillator_tunnelling_current}
 		\end{figure}
 
@@ -401,8 +401,8 @@
 			\caption{Distribution of the total energy into potential and kinetic part.}
 			\label{fig:track_1000100_virial}
 		\end{figure}
-		The plots in figure \ref{fig:track_1000100_virial} show the kinetic and potential energy separately.
-		Due to my findings the ratio between the energies was very heavily dependent on the parameters mass $m$ and the time step size $\tau$.
+		The plots in figure \ref{fig:track_1000100_virial} show the development of the  kinetic and potential energy separately.
+		Due to my findings the ratio between the energies was heavily dependent on the parameters mass $m$ and the time step size $\tau$.
 
 	\section{Discussion}
 	\subsection{Verification}
@@ -423,7 +423,7 @@
 		The difference between iterations 80 and 100 is negligible, this indicates that the thermalisation of the centre of mass is done after 80 metropolis iterations.
 		From theory it is expected that the probability density is gaussian shaped in the ground state, which is clearly observable as shown below.
 		\\\\
-		As previously mentioned, it is clearly visible that the initial setup is a gaussian distribution with centre 5 and width 1.
+		As previously mentioned, it can be seen that the initial setup is a gaussian distribution with centre 5 and width 1.
 		In the qq-plots in figure \ref{fig:harmonic_oscillator_track_track_10010000_qqs} for iterations 10 and 20 the deviation from a straight line is clearly visible.
 		After the \nth{40} iteration, the centre of the distribution has reached 0 and the qq plot matches a straight line, corresponding to a gaussian distribution.
 		\\\\
@@ -437,7 +437,7 @@
 		In figure \ref{fig:harmonic_oscillator_track_100100_100100_step_track_shifted_double} it can be observed how the step function vanishes with increasing Metropolis iteration number.
 		The step function disappeared after around 40 Metropolis iterations.
 		In figure \ref{fig:anharmonic_oscillator_track_100010005_track_pretty_1000} part of the anharmonic oscillator track can be seen.
-		It can be clearly seen the instants of time when a tunnelling event occurs.
+		The instants of time when a tunnelling event occurs can be observed.
 
 	\subsection{Measurements performed on the simulated data}
 	\subsubsection{Classical limit energy}
