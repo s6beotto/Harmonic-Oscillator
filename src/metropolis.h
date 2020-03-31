@@ -30,6 +30,7 @@
 
 extern "C" DLL_PUBLIC double get_accept_ratio(void);
 extern "C" DLL_PUBLIC void reset_ratio(void);
+extern "C" DLL_PUBLIC void allocate_memory(int maxlength);
 extern "C" DLL_PUBLIC double * metropolis(int num_numbers, double *numbers, double val_width, double m, double tau, double mu, double lambda, double hbar, bool periodic);
 extern "C" DLL_PUBLIC double * metropolis_Random(int num_numbers, double *numbers, double *random_gauss, double *random_uniform, double val_width, double m, double tau, double mu, double lambda, double hbar, bool periodic);
 extern "C" DLL_PUBLIC double * potential_check(int num_numbers, double start, double stop, double mu, double lambda);
