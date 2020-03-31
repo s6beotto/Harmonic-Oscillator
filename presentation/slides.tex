@@ -43,10 +43,10 @@
 		\item $\mathcal Dx(t)$ means integration over all paths starting at $a$ and resulting in $b$.
 		\begin{itemize}
 			\item Fast oscillations of the phase
-			\item Infinite dimensional integral oven infinite boundaries
+			\item Infinite dimensional integral over infinite boundaries
 			\\ $\Rightarrow$ analytically generally not solvable
 		\end{itemize}
-		\item transition into \textbf{Euclidean} time $t \rightarrow it$
+		\item transition into \textbf{Euclidean} time $t \rightarrow it$, called \textbf{Wick}-rotation
 	\end{itemize}
 \end{frame}
 
@@ -70,7 +70,7 @@
 		\item Iterate repeatedly over all lattice sites
 		\item Draw a new value for current lattice site
 		\item Evaluate $\Delta S < 0$ $\Rightarrow$ accept change
-		\item Else: Accept if $e^{-\Delta S / \hbar} > x$ for $x \in [0, 1]$ evenly
+		\item Else: Accept if $e^{-\Delta S / \hbar} > x$ for $x \in [0, 1]$ evenly distributed
 	\end{itemize}
 \end{frame}
 
@@ -176,7 +176,7 @@
 		\begin{column}{0.39\textwidth}
 			\begin{itemize}
 				\item Starting with a gaussian initial distribution
-				\item Strong deviation from the gaussian shape after 10 and 20 iterations
+				\item Strong deviation from the gaussian shape after 20 iterations
 				\item Thermalisation: resume to gaussian shape after 100 iterations
 			\end{itemize}
 		\end{column}
