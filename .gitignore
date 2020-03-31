@@ -21,8 +21,5 @@
 # ignore literature directory
 Material/literature/*
 
-# ignore output directories
-data/*
-imgs/*
+# do not ignore output directories on brach data_used
 bin/*
-build/*
