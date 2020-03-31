@@ -31,7 +31,9 @@ values_C = np.ctypeslib.as_array(result, shape=(num + 1, ))
 pot = Potential(mu, lambda_)
 values_P = pot(np.linspace(start, stop, num + 1))
 
-print(min((values_C + 0.00001) / (values_P + 0.00001)), max((values_C + 0.00001) / (values_P + 0.00001)))
+print('Calculate the ratio between the data obtained with Python and C++\n if they are equal (within discretisation error) the minimum and maximum values should be near 1.0:')
+
+print('min: %0.8f, max: %0.8f' %(min((values_C + 0.00001) / (values_P + 0.00001)), max((values_C + 0.00001) / (values_P + 0.00001))))
 
 
 mu = 1.0
@@ -59,7 +61,7 @@ values_P = np.array(values_P)
 values_C = np.array(values_C)
 
 
-print(min((values_C + 0.00001) / (values_P + 0.00001)), max((values_C + 0.00001) / (values_P + 0.00001)))
+print('min: %0.8f, max: %0.8f' %(min((values_C + 0.00001) / (values_P + 0.00001)), max((values_C + 0.00001) / (values_P + 0.00001))))
 
 values = np.random.normal(loc=0.0, scale=10.0, size=1000)
 
@@ -79,4 +81,4 @@ newvalues_C = np.ctypeslib.as_array(result, shape=(N, ))
 #print(newvalues_C)
 
 
-print(min((newvalues_C + 0.00001) / (newvalues_P + 0.00001)), max((newvalues_C + 0.00001) / (newvalues_P + 0.00001)))
+print('min: %0.8f, max: %0.8f' %(min((newvalues_C + 0.00001) / (newvalues_P + 0.00001)), max((newvalues_C + 0.00001) / (newvalues_P + 0.00001))))
