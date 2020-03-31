@@ -44,7 +44,7 @@ with full_path.open('r') as csvfile:
 
 # plot
 fig, ax = plt.subplots(figsize=(6,6))
-cs = ax.imshow(datas, extent=[min(header_min), max(header_max), max(hbars), min(hbars)], norm=LogNorm())
+cs = ax.imshow(datas, extent=[min(header_min), max(header_max), 2.0, 0.0], norm=LogNorm())
 
 cbar = fig.colorbar(cs)
 cbar.ax.minorticks_off()
