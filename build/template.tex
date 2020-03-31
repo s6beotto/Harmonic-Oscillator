@@ -1,0 +1,87 @@
+%\usetheme{Antibes}
+%\usetheme{Berlin}
+%\usetheme{Bergen}
+%\usetheme{Boadilla}
+\usetheme{Berkeley}	% gut
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Marburg}
+%\usetheme{Hannover}
+%\usetheme{Hannover}
+%\usecolortheme{beetle}
+%\usecolortheme{dolphin}
+%\usecolortheme{seahorse}
+%\usecolortheme{sidebartab}
+%\usecolortheme{whale}
+
+
+\makeatletter
+\beamer@headheight=1.5\baselineskip
+\makeatother		% schmalere Titelzeile
+
+\setbeamertemplate{footline} 
+{ 
+	\leavevmode% 
+	\hbox{% 
+		\begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}% 
+			\usebeamerfont{author in head/foot}Benedikt Otto%\insertshortauthor%~~(\insertshortinstitute) 
+		\end{beamercolorbox}% 
+		\begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}% 
+			\usebeamerfont{title in head/foot}\insertshorttitle
+		\end{beamercolorbox}% 
+		\begin{beamercolorbox}[wd=.15\paperwidth,ht=2.25ex,dp=1ex,center]{date in head/foot}% 
+			\usebeamerfont{date in head/foot}\insertshortdate{}			
+		\end{beamercolorbox}% 
+		\begin{beamercolorbox}[wd=.1\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}% 
+			\usebeamerfont{date in head/foot}
+			\insertframenumber{}\hspace*{2ex} % / \inserttotalframenumber\hspace*{2ex} %\hspace*{2ex} 
+		\end{beamercolorbox}}% 
+	\vskip0pt% 
+}
+
+\newcommand{\appendixstyle}{
+	\setbeamertemplate{footline} 
+	{ 
+		\leavevmode% 
+		\hbox{% 
+			\begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}% 
+				\usebeamerfont{author in head/foot}Benedikt Otto%\insertshortauthor%~~(\insertshortinstitute) 
+			\end{beamercolorbox}% 
+			\begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}% 
+				\usebeamerfont{title in head/foot}\insertshorttitle
+			\end{beamercolorbox}% 
+			\begin{beamercolorbox}[wd=.15\paperwidth,ht=2.25ex,dp=1ex,center]{date in head/foot}% 
+				\usebeamerfont{date in head/foot}\insertshortdate{}			
+			\end{beamercolorbox}% 
+			\begin{beamercolorbox}[wd=.1\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}% 
+				\usebeamerfont{date in head/foot}
+				\insertframenumber{}*\hspace*{2ex} %\hspace*{2ex} 
+		\end{beamercolorbox}}% 
+		\vskip0pt% 
+	}
+}
+
+
+%\lstnewenvironment{TeXlstlisting}{\lstset{language=[LaTeX]TeX}}{}
+\usepackage{appendixnumberbeamer}
+\usepackage{showexpl}
+\usepackage{xcolor}
+\usepackage{capt-of}
+\usepackage{lipsum}
+\usepackage{units}
+
+
+\usepackage{listings}
+
+%\usepackage[square,sort,comma,numbers]{natbib}
+%\setbeamertemplate{bibliography item}{}
+%\let\oldbibliography\thebibliography
+%\renewcommand{\thebibliography}[1]{\vspace{-15px}\oldbibliography{#1}
+%	\setlength{\itemsep}{-12pt}} %Reducing spacing in the bibliography.
+
+%\setlength{\bibsep}{0pt}
+
+%\usepackage{beamerthemesplit}
+
+%\setcounter{tocdepth}{1}
+%\setcounter{tocdepth}

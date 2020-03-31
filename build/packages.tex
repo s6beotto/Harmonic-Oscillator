@@ -1,0 +1,66 @@
+%\documentclass{report}
+\usepackage{braket}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{trsym}
+\usepackage{pifont}
+\usepackage{tcolorbox}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{ae,aecompl}
+\usepackage[english]{babel}
+\usepackage{amsfonts}
+\usepackage[super]{nth}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{geometry}
+\usepackage{csquotes}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usepackage{listings}
+\usepackage{bbm}
+\usepackage{siunitx}
+\usepackage{hyperref}
+
+% change link style
+\hypersetup{
+	breaklinks=false,
+	colorlinks=true,
+	pdfauthor={Benedikt Otto},
+}
+
+% define some colors
+\colorlet{darkred}{red!70!black}
+\colorlet{darkblue}{blue!70!black}
+\colorlet{darkgreen}{green!40!black}
+
+% use special colors for links
+\hypersetup{
+	citecolor=darkgreen,
+	linkcolor=darkblue,
+	menucolor=black,
+	urlcolor=darkblue,
+}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+	{-2.5ex\@plus -1ex \@minus -.25ex}%
+	{1.25ex \@plus .25ex}%
+	{\normalfont\normalsize\bfseries}}
+\makeatother
+\setcounter{secnumdepth}{4} % how many sectioning levels to assign numbers to
+\setcounter{tocdepth}{4}    % how many sectioning levels to show in ToC
+\usetikzlibrary{decorations.pathmorphing}
+\geometry{
+	a4paper,
+	total={150mm,237mm},
+	left=30mm,
+	top=25mm,
+}
+
+\graphicspath{{imgs/}}
+
+\DeclareMathOperator{\var}{Var}
