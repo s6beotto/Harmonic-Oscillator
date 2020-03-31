@@ -146,6 +146,12 @@
 		The algorithm varies the parameters of the fit function to minimise the sum of the squared residuals.
 		This functionality is provided by the module \verb!scipy!.
 
+	\subsection{QQ-plots}
+		Quantile-quantile plots are a handy tool to compare two distributions.
+		To achieve this the inverse of the cumulative distribution functions (CDF) of the distributions that should be compared are plotted against each other.
+		A straight line indicates, that the distributions are of the same kind, for example gaussian distributions.
+		This functionality is provided by the module \verb!statsmodels!.
+
 	\subsection{Implementation}
 		At first I implemented the complete algorithm in \textbf{Python}, which leads to a fairly poor performance.
 		This could mean that one can only get a bad data quality in a given time.
